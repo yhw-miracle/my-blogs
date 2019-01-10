@@ -1,0 +1,161 @@
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    <title>python之IO编程 - 痛点就是起点</title>
+    <link href="/images/fav.png" rel="shortcut icon">
+<link href="/atom.xml" rel="alternate" type="application/rss+xml">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
+
+
+  </head>
+  <body>
+    <header>
+  <a id="go-back-home" href="/"><img src="/images/logo.jpg" alt="Home" width="53" height="59"></a>
+  <p>痛点就是起点</p>
+  <p>Speaking is as important as doing!</p>
+</header>
+
+    <div id="container">
+      <div class="block">
+  
+    <a class="main" href="/">Home</a>
+  
+    <a class="main" href="/ToYou">ToYou</a>
+  
+    <a class="main" href="/categories">Categories</a>
+  
+    <a class="main" href="/atom.xml">RSS</a>
+  
+</div>
+
+      <section class="paging">
+  
+    <div class="left">
+      <a href="/2018/07/31/python之进程/">
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class="right">
+      <a href="/2018/07/22/Ubuntu16-04系统安装PyCharm/">
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class="content">
+        <section class="post">
+          <h1>
+            <div class="date">2018-07-30</div>
+            python之IO编程
+          </h1>
+          <p>IO 在计算机中指的是 Input/Output，也就是输入和输出。凡是用到数据交换的地方，都会涉及到 IO 编程。在 IO 编程中，Stream（流）是一种很重要的概念，分为输入流（Input Stream）和输出流（Output Stream）对于流的概念，我们可以这样理解，流相当于一个水管，数据相当于水管中的水，但是只能单向流动，所以数据传输过程中需要架设连个两个水管，一个负责输入，一个负责输出，这样读写就可以实现读写同步了。</p>
+<h3 id="1-文件读写"><a href="#1-文件读写" class="headerlink" title="1. 文件读写"></a>1. 文件读写</h3><h4 id="1-1-文件打开"><a href="#1-1-文件打开" class="headerlink" title="1.1 文件打开"></a>1.1 文件打开</h4><p>Python 内置了读写文件的函数，方便了文件的 IO 操作。在读写文件前，需要打开文件，确定文件的读写模式。打开文件语法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open(name[.mode[.buffering]])</span><br></pre></td></tr></table></figure>
+<p>其中， open 函数必须要给出文件名参数，模式（mode）和缓冲区（buffering）是可选的，默认模式是读模式，默认缓冲是无，若成功打开文件，会返回一个文件对象；若打开文件失败（文件不存在或文件路径错误等），会产生异常。</p>
+<p><img src="/images/2018/Screenshot%20from%202018-07-30%2014-00-41.png" alt=""></p>
+<hr>
+<p><img src="/images/2018/Screenshot%20from%202018-07-30%2014-01-20.png" alt=""></p>
+<h4 id="1-2-文件模式"><a href="#1-2-文件模式" class="headerlink" title="1.2 文件模式"></a>1.2 文件模式</h4><p>open 函数中 mode 参数可以实现对文件不同的操作。其中，mode 参数具体值如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>‘r’</td>
+<td>读模式</td>
+</tr>
+<tr>
+<td>‘w’</td>
+<td>写模式</td>
+</tr>
+<tr>
+<td>‘a’</td>
+<td>追加模式</td>
+</tr>
+<tr>
+<td>‘b’</td>
+<td>二进制模式</td>
+</tr>
+<tr>
+<td>‘+’</td>
+<td>读/写模式</td>
+</tr>
+</tbody>
+</table>
+<p>这里，需要注意以下几点：</p>
+<ol>
+<li>一般在处理一些二进制文件（如，音频，视频，图像文件），需要在模式参数上加上 ‘b’；</li>
+<li>模式 ‘b’ 和 ‘+’ 可以和其他模式共同使用，如，’rb’ 表示读取一个二进制文件；</li>
+<li>‘w’ 模式在写文件时，每运行一次程序，会从头开始写；而 ‘a’ 模式可以以追加的方式每次默认在文件末尾进行读或写文件。</li>
+</ol>
+<h4 id="1-3-文件缓冲区"><a href="#1-3-文件缓冲区" class="headerlink" title="1.3 文件缓冲区"></a>1.3 文件缓冲区</h4><p>open 函数中 buffering 参数控制着文件的缓冲。如果该参数为 0，IO 操作就是无缓冲，数据是直接写到硬盘上；若果该参数是 1，IO 操作是有缓冲的，数据先写到内存里（缓冲区里），只有使用 flush 函数或者 close 函数，数据才会更新到磁盘。</p>
+<p>如果该参数是大于 1 的数字，代表缓冲区的大小（单位为字节），-1 （或者其他任何负数）代表使用默认缓冲区的大小。</p>
+<h4 id="1-4-文件读取"><a href="#1-4-文件读取" class="headerlink" title="1.4 文件读取"></a>1.4 文件读取</h4><p>文件读取主要分为按字节读取和按行读取，先利用 f=open(‘’) 打开文件，如果成功打开文件；接下来利用 f.read() 就可以读取文件了，将文件内容以 str 类型返回；最后需要利用 f.close() 关闭文件。文件使用完毕必须关闭，因为文件对象会占用操作系统资源，影响系统的 IO 操作。</p>
+<p>由于文件操作过程中可能会出现 IO 异常，一旦出现 IO 异常，后面的 close() 方法就不会调用。为了保证程序的健壮性，我们可以使用 try—except—finally 来实现。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    f = open(<span class="string">r'./test.txt'</span>)</span><br><span class="line">    print(f.read())</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    <span class="keyword">if</span> f:</span><br><span class="line">        f.close()</span><br></pre></td></tr></table></figure>
+<p>上面的代码略长， python 提供了一种简单的写法，使用 with语句来代替 try—finally 代码块和 close() 方法，可以这样写。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">r'./test.txt'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> fileReader:</span><br><span class="line">    print(fileReader.read())</span><br></pre></td></tr></table></figure>
+<p>这里，需要注意几点：</p>
+<ol>
+<li>调用 read() 方法是一次将文件内容读到内存中，如果文件过大，将会出现内存不足的问题，一般对于大文件，我们可以对此调用 read(size) 方法来读取，每次读取 size 字节数；</li>
+<li>对于文本文件，可以调用 readline() 函数一次读取一行内容，调用 readlines() 函数一次读取所以内容并按行返回列表。</li>
+</ol>
+<h4 id="1-5-文件写入"><a href="#1-5-文件写入" class="headerlink" title="1.5 文件写入"></a>1.5 文件写入</h4><p>写文件和读文件流程是一样的，区别是在调用 open() 方法时，传入标识符 ‘w’ 或者 ‘wb’ 表示写入文本文件或者写入二进制文件；接下来调用 write() 方法，制定写入内容；最后文件使用完毕后，需要关闭文件，释放文件对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f = open(<span class="string">'./test.txt'</span>,<span class="string">'w'</span>)</span><br><span class="line">f.write(<span class="string">''</span>)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+<p>在使用 write() 方法时，操作系统不会立即将数据写入到文件中，而是先将数据写入内存中的缓冲区里，等到空间时在写入到文件中，最后使用 close() 方法将数据完整地写入文件中，也可以使用 flush() 方法将数据立即写入到文件中。写文件过程可能会出现 IO 异常，我们可以采用 with 语句。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">r'./test.txt'</span>,<span class="string">'w'</span>) <span class="keyword">as</span> fileWriter:</span><br><span class="line">    fileWriter.write(<span class="string">'hello'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="2-序列化操作"><a href="#2-序列化操作" class="headerlink" title="2. 序列化操作"></a>2. 序列化操作</h3><p>序列化，就是将内存中的变量变成可存储或可传输的过程。将内存中的变量序列化之后，可以把序列化的内容写入到磁盘，或者通过网络传输到别的机器上，实现程序状态的保存和共享。反过来，把变量内容从序列化的对象重新读取到内存，成为反序列化。</p>
+<p>在 python 中提供了两个模块（cPickle 和 pickle）来实现序列化，前者是由 c 语言编写的，效率要比后者高很多，但是两个模块的功能是一样的。一般在编写程序时，采取的方案是先导入 cPickle 模块，如果此模块不存在，再导入 pickle 模块。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">import</span> cPickle <span class="keyword">as</span> pickle</span><br><span class="line"><span class="keyword">except</span> ImportError:</span><br><span class="line">    <span class="keyword">import</span> pickle</span><br></pre></td></tr></table></figure>
+<h4 id="2-1-序列化"><a href="#2-1-序列化" class="headerlink" title="2.1 序列化"></a>2.1 序列化</h4><p>pickle 实现序列化主要使用的是 dumps 方法或 dump 方法。dumps 方法可以将任意对象序列化成一个 str，然后可以将这个 str 写入到文件中保存（需额外操作）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d = dict(url=<span class="string">'index.html'</span>, tilte=<span class="string">'firstPage'</span>, content=<span class="string">'firstPage'</span>)</span><br><span class="line"><span class="keyword">print</span> pickle.dumps(d)</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2018/Screenshot%20from%202018-07-30%2015-20-24.png" alt=""></p>
+<p>如果使用 dump 方法，可以将序列化后的对象直接写入到文件中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d = dict(url=<span class="string">'index.html'</span>, tilte=<span class="string">'firstPage'</span>, content=<span class="string">'firstPage'</span>)</span><br><span class="line">f = open(<span class="string">'./dump.txt'</span>, <span class="string">'wb'</span>)</span><br><span class="line">pickle.dump(d, f)</span><br></pre></td></tr></table></figure>
+<center><br><img src="/images/2018/Screenshot%20from%202018-07-30%2015-21-29.png" alt=""><br></center>
+
+<h4 id="2-2-反序列化"><a href="#2-2-反序列化" class="headerlink" title="2.2 反序列化"></a>2.2 反序列化</h4><p>python 实现反序列化使用的是 loads 方法或 load 方法。把序列化后的文件从磁盘上读取为一个 str，然后使用 loads 方法将这个 str 反序列化为对象，或者直接使用 load 方法将文件直接反序列化为对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'./dump.txt'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">print</span> pickle.load(f)</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2018/Screenshot%20from%202018-07-30%2015-28-08.png" alt=""></p>
+
+          <br>
+<p> from yhw-miracle</p>
+<p align="center"><img src="/images/qrcode_for_gh_5efb2780ab44_258.jpg" alt="痛点就是起点"></p>
+<p align="center">算法和代码的世界不仅是学习的痛点，而且是成功的起点。欢迎关注，共同进步！</p>
+
+        </section>
+      </div>
+      
+      <!--<div class="block">
+  
+    <a class="main" href="/">Home</a>
+  
+    <a class="main" href="/ToYou">ToYou</a>
+  
+    <a class="main" href="/categories">Categories</a>
+  
+    <a class="main" href="/atom.xml">RSS</a>
+  
+</div>
+-->
+    </div>
+    <footer>
+  <span class="muted">&copy; 2016 - 2019 yhw-miracle. All Rights Reserved.</span><br>
+  <!--<a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>-->
+  <img src="/images/logo.jpg" width="53" height="59" alt="痛点就是起点">
+</footer>
+
+  </body>
+</html>
