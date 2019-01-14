@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-01-13T09:51:09.000Z</updated>
+  <updated>2019-01-14T08:48:07.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,61 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>提取多媒体文件</title>
+    <link href="http://yoursite.com/2019/01/14/%E6%8F%90%E5%8F%96%E5%A4%9A%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6/"/>
+    <id>http://yoursite.com/2019/01/14/提取多媒体文件/</id>
+    <published>2019-01-13T16:00:00.000Z</published>
+    <updated>2019-01-14T08:48:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>利用 python 爬取多媒体文件，存储它们有两种方式，一是只存储 url 链接，二是将文件下载下来。存储文件链接可以将文件的链接信息存储到 json 文件或 csv 文件；下载文件需要用到 urllib 模块提供的 urlretrieve() 函数，urlretrieve() 函数可以将远程数据下载到本地。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">urlretrieve(url,filename=<span class="keyword">None</span>,reporthook=<span class="keyword">None</span>,data=<span class="keyword">None</span>,context=<span class="keyword">None</span>)</span><br></pre></td></tr></table></figure><p>参数 filename 是指存储的本地路径；reporthook 是一个回调函数，当连接到服务器以及传输完毕相应的数据块，会调用该回调函数，一般用于显示下载进度。</p><p>以爬取天堂网图片为例 <a href="http://www.ivsky.com/tupian/ziranfengguang/" target="_blank" rel="noopener">http://www.ivsky.com/tupian/ziranfengguang/</a>，下载图片的代码如下所示：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">schedule</span><span class="params">(blocknum, blocksize, totalsize)</span>:</span></span><br><span class="line">    per = <span class="number">100.0</span> * blocknum * blocksize / totalsize</span><br><span class="line">    <span class="keyword">if</span> per &gt; <span class="number">100</span>:</span><br><span class="line">        per = <span class="number">100</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">"当前下载进度： %d"</span> % per</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">user_agent = <span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "</span> \</span><br><span class="line">             <span class="string">"Chrome/71.0.3578.98 Safari/537.36"</span></span><br><span class="line">headers = &#123;<span class="string">"User-Agent"</span>: user_agent&#125;</span><br><span class="line">req = requests.get(<span class="string">"http://www.ivsky.com/tupian/ziranfengguang/"</span>, headers=headers)</span><br><span class="line"></span><br><span class="line">html = etree.HTML(req.text)</span><br><span class="line">img_urls = html.xpath(<span class="string">".//img/@src"</span>)</span><br><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> img_url <span class="keyword">in</span> img_urls:</span><br><span class="line">    urllib.urlretrieve(img_url, <span class="string">"./images/img"</span>+str(i)+<span class="string">".jpg"</span>, schedule)</span><br><span class="line">    i += <span class="number">1</span></span><br></pre></td></tr></table></figure><p><img src="/images/2019/Jan/1.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;利用 python 爬取多媒体文件，存储它们有两种方式，一是只存储 url 链接，二是将文件下载下来。存储文件链接可以将文件的链接信息存储到 json 文件或 csv 文件；下载文件需要用到 urllib 模块提供的 urlretrieve() 函数，urlretrieve
+      
+    
+    </summary>
+    
+      <category term="知识总结" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/"/>
+    
+    
+      <category term="多媒体文件" scheme="http://yoursite.com/tags/%E5%A4%9A%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6/"/>
+    
+      <category term="下载" scheme="http://yoursite.com/tags/%E4%B8%8B%E8%BD%BD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据存储为json和csv</title>
+    <link href="http://yoursite.com/2019/01/14/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E4%B8%BAjson%E5%92%8Ccsv/"/>
+    <id>http://yoursite.com/2019/01/14/数据存储为json和csv/</id>
+    <published>2019-01-13T16:00:00.000Z</published>
+    <updated>2019-01-14T08:44:19.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>进行 python 爬虫时，我们需要将数据存储起来。对于小数据量，我们可以存储到 json 文件或 csv 文件。</p><h3 id="json存储"><a href="#json存储" class="headerlink" title="json存储"></a>json存储</h3><p>Python 对 json 文件的操作是通过 JSON 模块实现的，分为编码和解码两个过程。</p><p>编码是指将 python 对象转换为 json 对象，常用的函数是 dump() 和 dumps()，区别是 dump() 将 python 对象转换为 json 对象，并将 json 对象通过文件流写入文件，dumps() 函数是返回字符串。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dumps(obj,skipkeys=<span class="keyword">False</span>,ensure_ascii=<span class="keyword">True</span>,check_circular=<span class="keyword">True</span>,allow_nan=<span class="keyword">True</span>,cls=<span class="keyword">None</span>,indent=<span class="keyword">None</span>,separators=<span class="keyword">None</span>,encoding=<span class="string">'utf-8'</span>,default=<span class="keyword">None</span>,sort_keys=<span class="keyword">False</span>,**kw)</span><br><span class="line">dumps(obj,skipkeys=<span class="keyword">False</span>,ensure_ascii=<span class="keyword">True</span>,check_circular=<span class="keyword">True</span>,allow_nan=<span class="keyword">True</span>,cls=<span class="keyword">None</span>,indent=<span class="keyword">None</span>,separators=<span class="keyword">None</span>,encoding=<span class="string">'utf-8'</span>,default=<span class="keyword">None</span>,sort_keys=<span class="keyword">False</span>,**kw)</span><br></pre></td></tr></table></figure><p>解码是指将 json 对象转换为 python 对象，常用的函数为 load() 和loads()，区别是 load() 是将 json 对象转换为 python 对象，并将 python 对象写入到文件，而 loads() 是返回字符串。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">load(fp,encoding=<span class="keyword">None</span>,cls=<span class="keyword">None</span>,object_hook=<span class="keyword">None</span>,parse_float=<span class="keyword">None</span>,parse_int=<span class="keyword">None</span>,parse_constant=<span class="keyword">None</span>,object_pairs_hook=<span class="keyword">None</span>,**kw)</span><br><span class="line">loads(s,encoding=<span class="keyword">None</span>,cls=<span class="keyword">None</span>,object_hook=<span class="keyword">None</span>,parse_float=<span class="keyword">None</span>,parse_int=<span class="keyword">None</span>,parse_constant=<span class="keyword">None</span>,object_pairs_hook=<span class="keyword">None</span>,**kw)</span><br></pre></td></tr></table></figure><h3 id="csv存储"><a href="#csv存储" class="headerlink" title="csv存储"></a>csv存储</h3><p>CSV(Comma-Separated Values，逗号分隔值，有时也称为字符分隔值)，其文件是以纯文本形式存储表格数据。CSV 文件由任意数目的记录组成，记录间以换行符分隔，每条记录由字段组成，字段间的分隔符是其他字符或字符串，最常见的是逗号和制表符。CSV 文件示例如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ID,Username,Password,Age,Country</span><br><span class="line"></span><br><span class="line">1001,yhw,123456,24,China</span><br><span class="line"></span><br><span class="line">1002,Mary,654321,25,USA</span><br><span class="line"></span><br><span class="line">1003,Jack,123567,22,English</span><br></pre></td></tr></table></figure><p>Python 通过 csv 库来读写 csv 文件。Python 写 csv 文件，需要用到 write 对象，然后按行写每一个记录；</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line">header = (<span class="string">"ID"</span>, <span class="string">"Username"</span>, <span class="string">"Password"</span>, <span class="string">"Age"</span>, <span class="string">"Country"</span>)</span><br><span class="line">rows = [(<span class="number">1001</span>, <span class="string">"yhw"</span>, <span class="string">"123456"</span>, <span class="number">24</span>, <span class="string">"China"</span>),</span><br><span class="line">        (<span class="number">1002</span>, <span class="string">"Mary"</span>, <span class="string">"654321"</span>, <span class="number">25</span>, <span class="string">"USA"</span>),</span><br><span class="line">        (<span class="number">1003</span>, <span class="string">"Jack"</span>, <span class="string">"123567"</span>, <span class="number">22</span>, <span class="string">"English"</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"test3.csv"</span>, <span class="string">"w"</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    fp_csv = csv.writer(fp)</span><br><span class="line">    fp_csv.writerow(header)</span><br><span class="line">    fp_csv.writerows(rows)</span><br></pre></td></tr></table></figure><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line">rows = [&#123;<span class="string">"ID"</span>: <span class="number">1001</span>, <span class="string">"Username"</span>: <span class="string">"yhw"</span>, <span class="string">"Password"</span>: <span class="string">"123456"</span>, <span class="string">"Age"</span>: <span class="number">24</span>, <span class="string">"Country"</span>: <span class="string">"China"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"ID"</span>: <span class="number">1002</span>, <span class="string">"Username"</span>: <span class="string">"Mary"</span>, <span class="string">"Password"</span>: <span class="string">"654321"</span>, <span class="string">"Age"</span>: <span class="number">25</span>, <span class="string">"Country"</span>: <span class="string">"USA"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"ID"</span>: <span class="number">1003</span>, <span class="string">"Username"</span>: <span class="string">"Jack"</span>, <span class="string">"Password"</span>: <span class="string">"123567"</span>, <span class="string">"Age"</span>: <span class="number">22</span>, <span class="string">"Country"</span>: <span class="string">"English"</span>&#125;]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"test3.csv"</span>, <span class="string">"w"</span>) <span class="keyword">as</span> fp:</span><br><span class="line">fp_csv = csv.DictWriter(fp, header)</span><br><span class="line">    fp_csv.writeheader()</span><br><span class="line">    fp_csv.writerows(rows)</span><br></pre></td></tr></table></figure><p>Python 读取 csv 文件需要用到 reader 对象，然后同样是按行读取每一条记录。要读取特定字段信息，python 可以利用索引、命名元祖、字典这三种方式访问。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"test3.csv"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    <span class="comment"># 遍历记录</span></span><br><span class="line">    fp_csv = csv.reader(fp)</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> fp_csv:</span><br><span class="line">        <span class="keyword">print</span> row</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 索引</span></span><br><span class="line">    fp_csv = csv.reader(fp)</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> fp_csv:</span><br><span class="line">        <span class="keyword">print</span> row[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 命名元组</span></span><br><span class="line">    fp_csv = csv.reader(fp)</span><br><span class="line">    header = next(fp_csv)</span><br><span class="line">    Row = namedtuple(<span class="string">"Row"</span>, header)</span><br><span class="line">    <span class="keyword">for</span> r <span class="keyword">in</span> fp_csv:</span><br><span class="line">        row = Row(*r)</span><br><span class="line">        <span class="keyword">print</span> row.Username, row.Password</span><br><span class="line">        <span class="keyword">print</span> row</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 字典</span></span><br><span class="line">    fp_csv = csv.DictReader(fp)</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> fp_csv:</span><br><span class="line">        <span class="keyword">print</span> row.get(<span class="string">"Username"</span>)</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;进行 python 爬虫时，我们需要将数据存储起来。对于小数据量，我们可以存储到 json 文件或 csv 文件。&lt;/p&gt;
+&lt;h3 id=&quot;json存储&quot;&gt;&lt;a href=&quot;#json存储&quot; class=&quot;headerlink&quot; title=&quot;json存储&quot;&gt;&lt;/a&gt;jso
+      
+    
+    </summary>
+    
+      <category term="知识总结" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/"/>
+    
+    
+      <category term="json" scheme="http://yoursite.com/tags/json/"/>
+    
+      <category term="csv" scheme="http://yoursite.com/tags/csv/"/>
+    
+  </entry>
   
   <entry>
     <title>总结BeautifulSoup</title>
@@ -512,68 +567,6 @@
       <category term="ubuntu" scheme="http://yoursite.com/tags/ubuntu/"/>
     
       <category term="pycharm" scheme="http://yoursite.com/tags/pycharm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java基础之变量</title>
-    <link href="http://yoursite.com/2018/06/30/java%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%8F%98%E9%87%8F/"/>
-    <id>http://yoursite.com/2018/06/30/java基础之变量/</id>
-    <published>2018-06-29T16:00:00.000Z</published>
-    <updated>2019-01-09T09:46:49.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1-变量概述"><a href="#1-变量概述" class="headerlink" title="1. 变量概述"></a>1. 变量概述</h3><p>计算机程序中有很多数据，在运行这些程序时，需要将数据“搬运”到内存中，这时需要容器来存储这些数据，变量就是来存储这些数据的。变量是内存中装载数据的容器，程序中可以用它来存取数据。变量就如同生活中装水的杯子，放东西的袋子。</p><h3 id="2-变量在计算机中存储"><a href="#2-变量在计算机中存储" class="headerlink" title="2. 变量在计算机中存储"></a>2. 变量在计算机中存储</h3><p>变量是内存中的容器，用来存储数据。那么计算机内存是怎么存储数据的呢？在计算机存储设备中，如内存和硬盘，存储数据的最小信息单元叫“位（bit）”，我们又称之为“比特位”，通常用小写的字母b表示。而计算机中最小存储单元叫“字节（byte）”，是计算机分配程序存储空间的最小存储单元，通常用大写字母B表示，1个字节是由连续的8个位组成，其换算公式为 1B=8bit。</p><p>为了表示计算机中庞大的数据量，计算机中常用的存储单位有 KB，MB，GB，TB 等，它们的转换关系如下所示。</p><center><br><img src="/images/2018/XvI8oS7e626foZUvFZFN85U2.png" alt=""><br></center><h3 id="3-变量类型"><a href="#3-变量类型" class="headerlink" title="3. 变量类型"></a>3. 变量类型</h3><p>生活中不同容器可以装不同物品，如果混用会弄出很大麻烦。计算机中变量也有不同类型，来存储不同类型的数据。计算机中变量有两大类型，基本数据类型和引用数据类型。</p><ol><li>基本数据类型<br>Java 中基本数据类型一共有四类，展开后有八中类型，分别为 byte，short，int，long，float，double，char，boolean，具体描述如下表所示。Java 中对于数值类型的常量定义同变量，整型数默认为 int，浮点数默认为 double。对于 long 类型的常量需要在数据后面加上“l”或“L”标记，float 类型的常量需要在数据后面加上“f”或“F”标记，double 类型的常量需要在数据后面加上“d”或“D”标记。</li></ol><center><br><img src="/images/2018/47CSgKQtLHfxjZJ-wz7yjtmM.png" alt=""><br></center><ol start="2"><li>引用数据类型<br>Java 中引用数据类型有 string，class，interface，数组等，这些类型出 string 可以存储多个基本数据类型。</li></ol><h3 id="4-定义变量及注意事项"><a href="#4-定义变量及注意事项" class="headerlink" title="4. 定义变量及注意事项"></a>4. 定义变量及注意事项</h3><p>Java 中定义变量正常情况下需要满足变量类型、变量名和变量内容三个部分。有时，在定义变量时可以不包含变量内容，但该变量不能使用。变量定义规范如下图所示。</p><center><br><img src="/images/2018/Pt2829Ah1NkHUOLCZCUvUUjV.png" alt=""><br></center><p>因此，定义变量有如下注意事项。</p><ol><li>变量定义可以不包含变量内容，待需要改变量时在赋值；<br>下图是定义变量没有赋值，编译器会给出警告。</li></ol><center><br><img src="/images/2018/VYghY4Iou48lXGdTXDj-gMn8.png" alt=""><br></center><ol start="2"><li>变量有作用域，使用变量要在作用域内；<br>下图中，变量 i 未在其作用域中使用，编译器报错了。</li></ol><center><br><img src="/images/2018/9Qe2oVGWsl2lZNYgVBlA22KR.png" alt=""><br></center><ol start="3"><li>变量不能重复定义，否则会报错。</li></ol><center><br><img src="/images/2018/UClRdJSYqHy4pueNnZCg2k9-.png" alt=""><br></center><h3 id="5-变量类型转换"><a href="#5-变量类型转换" class="headerlink" title="5. 变量类型转换"></a>5. 变量类型转换</h3><p>不同类型的变量是否可以在一起运算呢？答案是可以的，但要先进行类型转换再运算。在 Java 中，范围小的数据类型值（如byte），可以直接转换为范围大的数据类型值（如int）；范围大的数据类型值（如int），不可以直接转换为范围小的数据类型值（如byte）。各种数据类型按照数据范围从小到大依次列出：byte -&gt; short -&gt; int -&gt; long -&gt; float -&gt; double。Java 中有两种变量类型转换，分别为自动类型转换和强制类型转换。</p><ol><li>自动类型转换<br>表示范围小的数据类型转换成范围大的数据类型，这种方式称为自动类型转换，自动类型转换格式：范围大的数据类型 变量 = 范围小的数据类型值。</li></ol><center><br><img src="/images/2018/WxfnYLVJSye-2NuEZhPuzyk6.png" alt=""><br></center><ol start="2"><li>强制类型转换<br>表示范围大的数据类型转换成范围小的数据类型，这种方式称为强制类型转换，强制类型转换格式：范围小的数据类型 变量 = (范围小的数据类型) 范围大的数据类型值。</li></ol><center><br><img src="/images/2018/8a60ayHyCeMMxJqD3CAtrqkP.png" alt=""><br></center>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1-变量概述&quot;&gt;&lt;a href=&quot;#1-变量概述&quot; class=&quot;headerlink&quot; title=&quot;1. 变量概述&quot;&gt;&lt;/a&gt;1. 变量概述&lt;/h3&gt;&lt;p&gt;计算机程序中有很多数据，在运行这些程序时，需要将数据“搬运”到内存中，这时需要容器来存储这些数据，变量就
-      
-    
-    </summary>
-    
-      <category term="知识总结" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/"/>
-    
-    
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
-      <category term="变量" scheme="http://yoursite.com/tags/%E5%8F%98%E9%87%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java基础之注释、关键字、标识符、数据类型和常量</title>
-    <link href="http://yoursite.com/2018/06/26/java%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%B3%A8%E9%87%8A%E3%80%81%E5%85%B3%E9%94%AE%E5%AD%97%E3%80%81%E6%A0%87%E8%AF%86%E7%AC%A6%E3%80%81%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%B8%B8%E9%87%8F/"/>
-    <id>http://yoursite.com/2018/06/26/java基础之注释、关键字、标识符、数据类型和常量/</id>
-    <published>2018-06-25T16:00:00.000Z</published>
-    <updated>2019-01-09T09:39:10.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1-了解-Java-程序"><a href="#1-了解-Java-程序" class="headerlink" title="1. 了解 Java 程序"></a>1. 了解 Java 程序</h3><p>在学习 java 基础语法之前，我先介绍一下 java 程序如何编译和运行。java 程序在编译时需要 javac.exe 工具。运行时需要 java.exe 工具，这两个工具在 jdk 中有，具体见下图所示。</p><center><br><img src="/images/2018/stWJxc6RceRTsvEoyyMo3d7v.png" alt=""><br></center><h3 id="2-java-程序中的注释"><a href="#2-java-程序中的注释" class="headerlink" title="2. java 程序中的注释"></a>2. java 程序中的注释</h3><p>我们在编写 java 程序时，需要在源代码中添加文字用来对进行代码解释说明，但这些文字并不是Java代码的语法，直接书写会导致编译出错。这时我们可以使用注释来完成这一功能。在编译时，编译器会忽略注释的存在，所以注释并不会导致编译出错，同时注释还方便编写者和其他人阅读源代码，加强对代码的理解。</p><p>Java 中提供了三种注释方式，分别是：</p><ul><li>单行注释 //注释内容</li><li>多行注释 /注释内容/</li><li>文档注释 /*注释内容/</li></ul><p>其中，单行注释一般作为为单行代码解释，书写在被解释代码的上一行位置。</p><center><br><img src="/images/2018/vWGoK_2lTdzWFOS_pJEhPr5W.png" alt=""><br></center><p>多行注释可以书写多行的解释文字，一般用来解释 Java 程序中类的功能或者解释某一段代码，也可以在多行解释中前几行注明开发者姓名和联系方式，便于交流。</p><center><br><img src="/images/2018/ctDtPvnJItCjNCYbrBCmf4Ur.png" alt=""><br></center><p>文档注释与多行注释作用基本相同，唯一的区别是文档注释可以使用 javadoc.exe 命令生成API文档。</p><center><br><img src="/images/2018/B-Ro0y6qGlhuHxS4YQ7CoNdh.png" alt=""><br><img src="/images/2018/zyVDVPupzW0eGqQtnQbeVx0G.png" alt=""><br></center><h3 id="3-关键字"><a href="#3-关键字" class="headerlink" title="3. 关键字"></a>3. 关键字</h3><p>java 中关键字是被赋予特殊含义，具有专门用途。这些单词我们可以随时使用，但是不能用于定义标识符。</p><center><br><img src="/images/2018/K2Tpzxy0QxPS-yFhrU-A5-rc.png" alt=""><br></center><h3 id="4-标识符"><a href="#4-标识符" class="headerlink" title="4. 标识符"></a>4. 标识符</h3><p>Java 语言中，标识符是由英文字母（A-Z，a-z），数字（0-9），下划线（_）和美元符号（$）组成；其中，在定义标识符时，不能以数字开头，不能使用关键字，严格区分大小写；在起名时，要尽量做到见名知意。</p><p>一般，在命名类名时，习惯采用大驼峰命名法，也就是每一个单词第一个字母大写，如：“AddStudentInfo”；在命名方法时，习惯使用小驼峰命名法，就是方法名的第一个单词小写，后面单词的第一个字母大写，如：“addStudentInfo”。</p><h3 id="5-数据类型"><a href="#5-数据类型" class="headerlink" title="5. 数据类型"></a>5. 数据类型</h3><p>Java 语言中数据类型分为基本数据类型和引用数据类型。基本数据类型是 Java 语言中内置的类型，分别是整数类型、小数类型、字符类型、布尔类型。这四类基本类型是最简单、最基础的类型。引用数据类型是强大的数据类型，它是基于基本数据类型创建的，主要有数组、类和接口。</p><center><br><img src="/images/2018/BQrOU_XL27fsaUOBhnKO6djs.png" alt=""><br></center><ol start="6"><li><p>常量<br>Java 语言中常量就是不变的数据量，根据基本数据类型划分，常量有以下类型。</p></li><li><p>整数类型<br>十进制表示法（0-9）；二进制表示法（0和1），以 0b 开头；八进制表示法（0-7），以 0 开头；十六进制表示法（0-9，A-F），以 0x 开头。</p></li><li><p>小数类型</p></li><li><p>布尔类型<br>有 true 和 false 两种形式。</p></li><li><p>字符类型<br>用单引号（‘’）括起来，单引号里只能写一个字符。</p></li><li><p>字符串类型<br>用双引号（“”）括起来，双引号里可以写 0 到任意个字符。</p></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1-了解-Java-程序&quot;&gt;&lt;a href=&quot;#1-了解-Java-程序&quot; class=&quot;headerlink&quot; title=&quot;1. 了解 Java 程序&quot;&gt;&lt;/a&gt;1. 了解 Java 程序&lt;/h3&gt;&lt;p&gt;在学习 java 基础语法之前，我先介绍一下 java 
-      
-    
-    </summary>
-    
-      <category term="知识总结" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/"/>
-    
-    
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
-      <category term="注释" scheme="http://yoursite.com/tags/%E6%B3%A8%E9%87%8A/"/>
-    
-      <category term="关键字" scheme="http://yoursite.com/tags/%E5%85%B3%E9%94%AE%E5%AD%97/"/>
-    
-      <category term="标识符" scheme="http://yoursite.com/tags/%E6%A0%87%E8%AF%86%E7%AC%A6/"/>
-    
-      <category term="数据类型" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
-    
-      <category term="常量" scheme="http://yoursite.com/tags/%E5%B8%B8%E9%87%8F/"/>
     
   </entry>
   
