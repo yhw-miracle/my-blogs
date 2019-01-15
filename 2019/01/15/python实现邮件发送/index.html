@@ -57,7 +57,7 @@
             python实现邮件发送
           </h1>
           <p>在爬虫开发中，爬虫运行过程中遇到异常或服务器遇到问题时，我们可以采用发送邮件，及时报告爬虫程序当前故障问题。</p>
-<p>邮件发送协议是<code>SMTP</code>，<code>python</code>内置对<code>SMTP</code> 的支持，可以发送纯文本邮件、<code>HTML</code> 邮件已经带附件的邮件。<code>python</code>中对<code>SMTP</code>支持有 <code>smtpplib</code>和<code>email</code>模块，<code>email</code> 负责构造邮件，<code>smtplib</code>负责发送邮件。</p>
+<p>邮件发送协议是<code>SMTP</code>，<code>python</code>内置对<code>SMTP</code> 的支持，可以发送纯文本邮件、<code>HTML</code> 邮件以及带附件的邮件。<code>python</code>中对<code>SMTP</code>支持有 <code>smtpplib</code>和<code>email</code>模块，<code>email</code> 负责构造邮件，<code>smtplib</code>负责发送邮件。</p>
 <p>1.以网易的邮件发送服务器为例<code>smtp.163.com</code>，需要开启网易邮箱的<code>smtp</code>功能。</p>
 <p>2.构造纯文本邮件。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</span><br><span class="line">msg = MIMEText(<span class="string">"你好，世界！"</span>, <span class="string">"plain"</span>, <span class="string">"utf-8"</span>)</span><br></pre></td></tr></table></figure></p>
 <p>构造<code>html</code>邮件。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</span><br><span class="line">msg = MIMEText(<span class="string">"&lt;a href='https://yhw-miracle.win/'&gt;my blog&lt;/a&gt;"</span>, <span class="string">"html"</span>, <span class="string">"utf-8"</span>)</span><br></pre></td></tr></table></figure></p>
