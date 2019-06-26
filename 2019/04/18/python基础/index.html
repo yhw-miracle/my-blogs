@@ -1,0 +1,531 @@
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    <title>python基础 - 痛点就是起点</title>
+    <link href="/images/logo.jpg" rel="shortcut icon">
+<link href="/atom.xml" rel="alternate" type="application/rss+xml">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
+
+
+  </head>
+  <body>
+    <header>
+  <a id="go-back-home" href="/"><img src="/images/logo.jpg" alt="Home" width="53" height="59"></a>
+  <p>痛点就是起点</p>
+  <p>Speaking is as important as doing!</p>
+</header>
+
+    <div id="container">
+      <div class="block">
+  
+    <a class="main" href="/">Home</a>
+  
+    <a class="main" href="/ToYou">ToYou</a>
+  
+    <a class="main" href="/categories">Categories</a>
+  
+    <a class="main" href="/atom.xml">RSS</a>
+  
+</div>
+
+      <section class="paging">
+  
+  
+    <div class="right">
+      <a href="/2019/04/01/learning-python-01/">
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class="content">
+        <section class="post">
+          <h1>
+            <div class="date">2019-04-18</div>
+            python基础
+          </h1>
+          <h3 id="python介绍"><a href="#python介绍" class="headerlink" title="python介绍"></a><code>python</code>介绍</h3><ol>
+<li>解释型编程语言</li>
+<li><code>python</code>单行注释<code>#</code></li>
+<li><code>python</code>多行注释<code>&quot;&quot;&quot;</code>与<code>&quot;&quot;&quot;</code></li>
+<li><code># TODO</code>说明文字</li>
+</ol>
+<h3 id="变量、关键字"><a href="#变量、关键字" class="headerlink" title="变量、关键字"></a>变量、关键字</h3><ol>
+<li>变量用于描述计算机中的数据存储空间，作用是在计算机内存中保存数据。</li>
+<li>变量名的命名规则是由数字、字母和下划线组成，不能以数字开头，不能是关键字，区分大小写。</li>
+<li>下划线连接，驼峰命名法</li>
+<li>关键字<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> keyword</span><br><span class="line">print(keyword.kwlist)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><img src="/images/2019/Apr/01.png" alt=""></p>
+<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><h4 id="基本数据结构"><a href="#基本数据结构" class="headerlink" title="基本数据结构"></a>基本数据结构</h4><ol>
+<li>数值型：<code>int</code>、<code>float</code>、<code>bool</code></li>
+<li>非数值型：<code>str</code></li>
+<li><code>type()</code>：获取数据类型</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int</td>
+<td>整型</td>
+</tr>
+<tr>
+<td>float</td>
+<td>浮点型</td>
+</tr>
+<tr>
+<td>bool</td>
+<td>布尔型</td>
+</tr>
+<tr>
+<td>str</td>
+<td>字符串</td>
+</tr>
+</tbody>
+</table>
+<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><ol>
+<li>列表（<code>list</code>）（<code>[]</code>）是一种存储大量数据的存储模型，可以对数据进行增、删、改、查操作。</li>
+<li><p>增加数据<br>| function | meanings |<br>| —— | —— |<br>| append(self, object) | Append object to the end of the list. |<br>| insert(self, index, object) | Insert object before index. |<br>| extend(self, iterable) | Extend list by appending elements from the iterable. |</p>
+<ul>
+<li>翻译：<br>(1). append(self, object): 在列表的末尾添加元素。<br>(2). insert(self, index, object): 在指定位置之前插入元素。<br>(3). extend(self, iterable): 从可迭代数据存储器中扩充到列表末尾。</li>
+</ul>
+</li>
+<li><p>删除数据<br>| function | meanings |<br>| —— | —— |<br>| remove(self, object) | Remove first occurrence of value.Raises ValueError if the value is not present. |<br>| pop(self, index) | Remove and return item at index (default last).Raises IndexError if list is empty or index is out of range. |<br>| clear(self) | Remove all items from list. |</p>
+<ul>
+<li>翻译：<br>(1). remove(self, object): 移除列表中第一个指定数据，若指定数据不存在，抛出<code>ValueError</code>。<br>(2). pop(self, index): 移除并返回列表中指定位置的数据（默认为最后一个），若列表为空或者指定位置超过范围，抛出<code>IndexError</code>。<br>(3). clear(self): 移除列表中所有元素。</li>
+</ul>
+</li>
+<li><p>修改数据和查询数据</p>
+<ul>
+<li>根据索引</li>
+</ul>
+</li>
+<li><p>其他函数<br>| function | meanings |<br>| —— | —— |<br>| count(self, object) | Return number of occurrences of value. |<br>| index(self, object, start, stop) | Return first index of value.Raises ValueError if the value is not present. |<br>| copy(self) | Return a shallow copy of the list. |<br>| reverse(self) | Reverse <em>IN PLACE</em>. |<br>| sort(self, key, reverse) | Stable sort <em>IN PLACE</em>. |</p>
+<ul>
+<li>翻译<br>(1). count(self, object): 返回指定数据在列表中的个数。<br>(2). index(self, object, start, stop): 返回指定数据在列表中第一个位置，若指定数据不存在，抛出<code>ValueError</code>。<br>(3). copy(self): 返回一个列表的拷贝。<br>(4). reverse(self): 在列表上反转。<br>(4). sort(self, key, reverse): 在列表上执行稳定排序。</li>
+</ul>
+</li>
+</ol>
+<h4 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h4><ol>
+<li>元组（<code>tuple</code>）（<code>()</code>）是一种存储固定数据的存储模型，元组中的数据通过<code>索引</code>修改。</li>
+<li>元组中的数据若是<code>非引用类型数据</code>，不允许修改；若是<code>引用类型数据</code>，不允许修改对象，可以修对象的值。</li>
+<li>元组函数<br>| function | meanings |<br>| —— | —— |<br>| count(self, x) | Return number of occurrences of value. |<br>| index(self, x, start, end) | Return first index of value.Raises ValueError if the value is not present. |<ul>
+<li>翻译<br>(1). count(self, x): 返回元组中指定数据出现的次数。<br>(2). index(self, x, start, end): 返回指定数据在元组中出现的第一个位置，若指定数据不存在，抛出<code>ValueError</code>。</li>
+</ul>
+</li>
+</ol>
+<h4 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h4><ol>
+<li>集合（<code>set</code>）（<code>{,,...}</code>）是一种存储无序不重复数据的存储模型，没有<code>索引</code>概念。</li>
+<li><p>集合中的函数<br>(1). add(self, element): Add an element to a set.This has no effect if the element is already present.<br>(2). clear(self): Remove all elements from this set.<br>(3). copy(self): Return a shallow copy of a set.<br>(4). difference(self, s): Return the difference of two or more sets as a new set.(i.e. all elements that are in this set but not the others.)<br>(5). difference_update(self,  s): Remove all elements of another set from this set.<br>(6). discard(self, element): Remove an element from a set if it is a member.If the element is not a member, do nothing.<br>(7). intersection(self, s): Return the intersection of two sets as a new set.(i.e. all elements that are in both sets.)<br>(8). intersection_update(self,  s): Update a set with the intersection of itself and another.<br>(9). isdisjoint(self, s): Return True if two sets have a null intersection.<br>(10). issubset(self ,s): Report whether another set contains this set.<br>(11). issuperset(self, s): Report whether this set contains another set.<br>(12). pop(self): Remove and return an arbitrary set element.Raises KeyError if the set is empty.<br>(13). remove(self ,element): Remove an element from a set; it must be a member.If the element is not a member, raise a KeyError.<br>(14). symmetric_difference(self,  s): Return the symmetric difference of two sets as a new set.(i.e. all elements that are in exactly one of the sets.)<br>(15). symmetric_difference_update(self,  s): Update a set with the symmetric difference of itself and another.<br>(16). union(self, s): Return the union of sets as a new set.(i.e. all elements that are in either set.)<br>(17). update(self,  s): Update a set with the union of itself and others.</p>
+<ul>
+<li>翻译<br>(1). add(self, element): 添加一个元素到集合中，若改元素已经存在，集合将无任何影响。<br>(2). clear(self): 移除集合中所有元素。<br>(3). copy(self): 返回集合的拷贝体。<br>(4). difference(self, s): 记录该集合与其他集合之间的不同元素，组成新的集合并返回（简单来说，返回集合中的所有元素在该集合中，不在其他集合中）。<br>(5). difference_update(self,  s): 移除另一个集合中与该集合相同的元素。<br>(6). discard(self, element): 移除集合中的指定元素，若该元素不存，则不任何事。<br>(7).intersection(self, s): 记录两个集合的交集，组成新的集合并返回（简单来说，新的集合中元素是两个集合中都有的元素）。<br>(8). intersection_update(self,  s): 将该集合和另一个集合的交集更新到该集合中。<br>(9). isdisjoint(self, s): 若两个集合没有交集，返回<code>True</code>。<br>(10). issubset(self ,s): 报告另一个集合是否包含该集合，若包含，返回<code>True</code>；若不包含，返回<code>False</code>。<br>(11). issuperset(self, s): 报告这个集合是否包含另一个集合，若包含，返回<code>True</code>；若不包含，返回<code>False</code>。<br>(12). pop(self): 移除并返回这个该集合中随意一个元素，若集合为空，抛出<code>KeyError</code>。<br>(13). remove(self ,element): 移除集合中指定的元素，若指定元素不存在，抛出<code>KeyError</code>。<br>(14). symmetric_difference(self,  s): 记录两个集合的均匀区别，组成新的集合并返回（简单来说，新的集合中元素只存在于其中一个集合中）。<br>(15). symmetric_difference_update(self,  s): 将两个集合的均匀区别更新到该集合中。<br>(16). union(self, s): 记录两个集合之间的并集，组成新的集合并返回（简单来说，两个集合中所有元素）。<br>(17). update(self,  s): 将两个集合之间的并集更新到该集合中。</li>
+</ul>
+</li>
+</ol>
+<h4 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h4><ol>
+<li>字典（dict）（{xx: xx,…}）是一种使用“键值对结构”存储数据的存储模型，没有<code>索引</code>概念，利用<code>键</code>（键是<strong>唯一</strong>的）来索引，可以根据<code>键</code>对字典数据进行增、删、改、查操作。</li>
+<li><p>字典中的函数<br>(1). clear(self):  D.clear() -&gt; None.  Remove all items from D.<br>(2). copy(self): D.copy() -&gt; a shallow copy of D.<br>(3). fromkeys(seq): Create a new dictionary with keys from iterable and values set to value.<br>(4). get(self, k): Return the value for key if key is in the dictionary, else default.<br>(5). items(self): D.items() -&gt; a set-like object providing a view on D’s items.<br>(6). keys(self): D.keys() -&gt; a set-like object providing a view on D’s keys.<br>(7). values(self): D.values() -&gt; an object providing a view on D’s values.<br>(8). pop(self,  k): D.pop(k[,d]) -&gt; v, remove specified key and return the corresponding value.If key is not found, d is returned if given, otherwise KeyError is raised.<br>(9). popitem(self): D.popitem() -&gt; (k, v), remove and return some (key, value) pair as a 2-tuple; but raise KeyError if D is empty.<br>(10). setdefault(self, k,  default): Insert key with a value of default if key is not in the dictionary.Return the value for key if key is in the dictionary, else default.<br>(11). update(self, E=None, **F): D.update([E, ]**F) -&gt; None.  Update D from dict/iterable E and F. If E is present and has a .keys() method, then does:  for k in E: D[k] = E[k]. If E is present and lacks a .keys() method, then does:  for k, v in E: D[k] = v. In either case, this is followed by: for k in F:  D[k] = F[k].</p>
+<ul>
+<li>翻译<br>(1). clear(self): 清空字典中的所有项。<br>(2). copy(self): 返回字典的一个拷贝。<br>(3). fromkeys(seq): 用来自迭代器作为键，值集合作为值，创建新的字典。<br>(4). get(self, k): 返回指定的键对应的值。<br>(5). items(self): 获取字典中所有键值对，以列表形式返回。<br>(6). keys(self): 获取字典中所有键，以列表的形式返回。<br>(7). values(self): 获取字典中所有值，以列表的形式返回。<br>(8). pop(self,  k[, d]): 移除字典中指定的键，并返回对应的值。如果指定的键不存在，若给出<code>d</code>，则返回<code>d</code>；否则将抛出<code>KeyError</code>。<br>(9). popitem(self): 移除字典中最后一对键值对，并以二元元组的形式返回。若字典为空，抛出<code>KeyError</code>。<br>(10).setdefault(self, k,  default): 如果指定的键不在字典中，将指定的键和值（没有，默认为<code>None</code>）插入到字典中，并返回值。<br>(11). update(self, E=None, **F): 使用新字典中的数据对原始字典数据进行更新。如果字典<code>E</code>存在，有<code>keys()</code>方法，则执行代码<code>for k in E: D[k] = E[K]</code>；如果迭代器<code>E</code>存在，缺失<code>keys()</code>方法，则执行代码<code>for k, v in E: D[k] = v</code>；如果字典或迭代器<code>E</code>不存在，则执行代码<code>for k in F: D[k] = F[k]</code>。</li>
+</ul>
+</li>
+<li><p>当需要存储大量数据，并且期望在编程期以最快速度获取单个数据，或者使用非对象格式保存单个对象的属性值，推荐选择字典来存储。</p>
+</li>
+</ol>
+<h4 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int()</span><br><span class="line">float()</span><br><span class="line">bool()</span><br><span class="line">str()</span><br><span class="line">tuple()</span><br><span class="line">list()</span><br><span class="line">set()</span><br><span class="line">dict()</span><br></pre></td></tr></table></figure>
+<ol>
+<li>int()，字符串转换为整型数据。</li>
+<li>float()，字符串，整型数据转换为浮点型数据。 </li>
+<li>bool()，<code>bool</code>(0)为False，<code>bool(1)</code>为True。</li>
+<li>list(tuple | set)</li>
+<li>tuple(list |set)</li>
+<li>set(list | tuple)</li>
+</ol>
+<h4 id="公共方法"><a href="#公共方法" class="headerlink" title="公共方法"></a>公共方法</h4><ol>
+<li>元组、列表、集合、字典拥有的公共方法：<code>len()</code>、<code>max()</code>、<code>min()</code>。</li>
+<li>元组、列表和字符串可以进行<code>切片</code>获取局部数据，格式如下：<code>contain[start:end:step]</code>。</li>
+</ol>
+<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><ol>
+<li>字符串是一个包含若干个字符并按照一定顺序排列成整体的容器，支持<code>索引</code>操作，字符串定义可以是<code>&quot;xxxx&quot;</code>,<code>&#39;xxx&#39;</code>,<code>&quot;&quot;&quot;xxx&quot;&quot;&quot;</code>,<code>&#39;&#39;&#39;xxx&#39;&#39;&#39;</code>。</li>
+<li>字符串的一些函数<br>isalnum(self, <em>args, \</em>*kwargs): Return True if the string is an alpha-numeric string, False otherwise. A string is alpha-numeric if all characters in the string are alpha-numeric and there is at least one character in the string.</li>
+</ol>
+<p>isalpha(self, <em>args, \</em>*kwargs): Return True if the string is an alphabetic string, False otherwise. A string is alphabetic if all characters in the string are alphabetic and there is at least one character in the string.</p>
+<p>isascii(self, <em>args, \</em>*kwargs): Return True if all characters in the string are ASCII, False otherwise. ASCII characters have code points in the range U+0000-U+007F. Empty string is ASCII too.</p>
+<p>isdecimal(self, <em>args, \</em>*kwargs): Return True if the string is a decimal string, False otherwise. A string is a decimal string if all characters in the string are decimal and there is at least one character in the string.</p>
+<p>isdigit(self, <em>args, \</em>*kwargs): Return True if the string is a digit string, False otherwise. A string is a digit string if all characters in the string are digits and there is at least one character in the string.</p>
+<p>isidentifier(self, <em>args, \</em>*kwargs): Return True if the string is a valid Python identifier, False otherwise. Use keyword.iskeyword() to test for reserved identifiers such as “def” and “class”.</p>
+<p>islower(self, <em>args, \</em>*kwargs): Return True if the string is a lowercase string, False otherwise. A string is lowercase if all cased characters in the string are lowercase and there is at least one cased character in the string.</p>
+<p>isnumeric(self, <em>args, \</em>*kwargs): Return True if the string is a numeric string, False otherwise. A string is numeric if all characters in the string are numeric and there is at least one character in the string.</p>
+<p>isprintable(self, <em>args, \</em>*kwargs): Return True if the string is printable, False otherwise. A string is printable if all of its characters are considered printable in repr() or if it is empty.</p>
+<p>isspace(self, <em>args, \</em>*kwargs): Return True if the string is a whitespace string, False otherwise. A string is whitespace if all characters in the string are whitespace and there is at least one character in the string.</p>
+<p>istitle(self, <em>args, \</em>*kwargs): Return True if the string is a title-cased string, False otherwise. In a title-cased string, upper- and title-case characters may only follow uncased characters and lowercase characters only cased ones.</p>
+<p>isupper(self, <em>args, \</em>*kwargs): Return True if the string is an uppercase string, False otherwise. A string is uppercase if all cased characters in the string are uppercase and there is at least one cased character in the string.</p>
+<p>strip(self, <em>args, \</em>*kwargs): Return a copy of the string with leading and trailing whitespace remove. If chars is given and not None, remove characters in chars instead.</p>
+<p>lstrip(self, <em>args, \</em>*kwargs): Return a copy of the string with leading whitespace removed. If chars is given and not None, remove characters in chars instead.</p>
+<p>rstrip(self, <em>args, \</em>*kwargs): Return a copy of the string with trailing whitespace removed. If chars is given and not None, remove characters in chars instead.</p>
+<p>ljust(self, <em>args, \</em>*kwargs): Return a left-justified string of length width. Padding is done using the specified fill character (default is a space).</p>
+<p>rjust(self, <em>args, \</em>*kwargs): Return a right-justified string of length width. Padding is done using the specified fill character (default is a space).</p>
+<p>find(self, sub, start=None, end=None): S.find(sub[, start[, end]]) -&gt; int   Return the lowest index in S where substring sub is found, such that sub is contained within S[start:end].  Optional arguments start and end are interpreted as in slice notation. Return -1 on failure.</p>
+<p>rfind(self, sub, start=None, end=None): S.rfind(sub[, start[, end]]) -&gt; int   Return the highest index in S where substring sub is found, such that sub is contained within S[start:end].  Optional arguments start and end are interpreted as in slice notation. Return -1 on failure.</p>
+<p>index(self, sub, start=None, end=None): S.index(sub[, start[, end]]) -&gt; int   Return the lowest index in S where substring sub is found, such that sub is contained within S[start:end].  Optional arguments start and end are interpreted as in slice notation. Raises ValueError when the substring is not found.</p>
+<p>rindex(self, sub, start=None, end=None): S.rindex(sub[, start[, end]]) -&gt; int   Return the highest index in S where substring sub is found, such that sub is contained within S[start:end].  Optional arguments start and end are interpreted as in slice notation. Raises ValueError when the substring is not found.</p>
+<p>replace(self, <em>args, \</em>*kwargs): Return a copy with all occurrences of substring old replaced by new. count: Maximum number of occurrences to replace. -1 (the default value) means replace all occurrences. If the optional argument count is given, only the first count occurrences are replaced.</p>
+<p>partition(self, <em>args, \</em>*kwargs): Partition the string into three parts using the given separator. This will search for the separator in the string.  If the separator is found, returns a 3-tuple containing the part before the separator, the separator itself, and the part after it. If the separator is not found, returns a 3-tuple containing the original string and two empty strings.</p>
+<p>rpartition(self, <em>args, \</em>*kwargs): Partition the string into three parts using the given separator. This will search for the separator in the string, starting at the end. If the separator is found, returns a 3-tuple containing the part before the separator, the separator itself, and the part after it. If the separator is not found, returns a 3-tuple containing two empty strings and the original string.</p>
+<p>split(self, <em>args, \</em>*kwargs): Return a list of the words in the string, using sep as the delimiter string. sep: The delimiter according which to split the string. None (the default value) means split according to any whitespace, and discard empty strings from the result. maxsplit: Maximum number of splits to do. -1 (the default value) means no limit.</p>
+<p>rsplit(self, <em>args, \</em>*kwargs): Return a list of the words in the string, using sep as the delimiter string. sep: The delimiter according which to split the string. None (the default value) means split according to any whitespace, and discard empty strings from the result. maxsplit: Maximum number of splits to do. -1 (the default value) means no limit. Splits are done starting at the end of the string and working to the front.</p>
+<p>splitlines(self, <em>args, \</em>*kwargs): Return a list of the lines in the string, breaking at line boundaries. Line breaks are not included in the resulting list unless keepends is given and true.</p>
+<p>startswith(self, prefix, start=None, end=None): S.startswith(prefix[, start[, end]]) -&gt; bool   Return True if S starts with the specified prefix, False otherwise. With optional start, test S beginning at that position. With optional end, stop comparing S at that position. prefix can also be a tuple of strings to try.</p>
+<p>endswith(self, suffix, start=None, end=None): S.endswith(suffix[, start[, end]]) -&gt; bool   Return True if S ends with the specified suffix, False otherwise. With optional start, test S beginning at that position. With optional end, stop comparing S at that position. suffix can also be a tuple of strings to try.</p>
+<p>format(self, <em>args, \</em>*kwargs): S.format(<em>args, \</em>*kwargs) -&gt; str   Return a formatted version of S, using substitutions from args and kwargs. The substitutions are identified by braces (‘{‘ and ‘}’).</p>
+<p>format_map(self, mapping): S.format_map(mapping) -&gt; str   Return a formatted version of S, using substitutions from mapping. The substitutions are identified by braces (‘{‘ and ‘}’).</p>
+<p>lower(self, <em>args, \</em>*kwargs): Return a copy of the string converted to lowercase.</p>
+<p>upper(self, <em>args, \</em>*kwargs): Return a copy of the string converted to uppercase.</p>
+<p>swapcase(self, <em>args, \</em>*kwargs): Convert uppercase characters to lowercase and lowercase characters to uppercase. </p>
+<p>title(self, <em>args, \</em>*kwargs): Return a version of the string where each word is titlecased. More specifically, words start with uppercased characters and all remaining cased characters have lower case.</p>
+<p>capitalize(self, <em>args, 、\</em>*kwargs): Return a capitalized version of the string. More specifically, make the first character have upper case and the rest lower case.</p>
+<p>casefold(self, <em>args, \</em>*kwargs): Return a version of the string suitable for caseless comparisons.</p>
+<p>center(self, <em>args, \</em>*kwargs): Return a centered string of length width. Padding is done using the specified fill character (default is a space).</p>
+<p>expandtabs(self, <em>args, \</em>*kwargs): Return a copy where all tab characters are expanded using spaces. If tabsize is not given, a tab size of 8 characters is assumed.</p>
+<p>zfill(self, <em>args, \</em>*kwargs): Pad a numeric string with zeros on the left, to fill a field of the given width.The string is never truncated.</p>
+<p>count(self, sub, start=None, end=None): S.count(sub[, start[, end]]) -&gt; int   Return the number of non-overlapping occurrences of substring sub in string S[start:end].  Optional arguments start and end are interpreted as in slice notation.</p>
+<p>encode(self, <em>args, \</em>*kwargs): Encode the string using the codec registered for encoding.   encoding: The encoding in which to encode the string.   errors: The error handling scheme to use for encoding errors. The default is ‘strict’ meaning that encoding errors raise a UnicodeEncodeError.  Other possible values are ‘ignore’, ‘replace’ and ‘xmlcharrefreplace’ as well as any other name registered with codecs.register_error that can handle UnicodeEncodeErrors.</p>
+<p>join(self, ab=None, pq=None, rs=None): Concatenate any number of strings. The string whose method is called is inserted in between each given string. The result is returned as a new string. <code>Example: &#39;.&#39;.join([&#39;ab&#39;, &#39;pq&#39;, &#39;rs&#39;]) -&gt; &#39;ab.pq.rs&#39;</code></p>
+<p>maketrans(self, <em>args, \</em>*kwargs): Return a translation table usable for str.translate(). If there is only one argument, it must be a dictionary mapping Unicode ordinals (integers) or characters to Unicode ordinals, strings or None. Character keys will be then converted to ordinals. If there are two arguments, they must be strings of equal length, and in the resulting dictionary, each character in x will be mapped to the character at the same position in y. If there is a third argument, it must be a string, whose characters will be mapped to None in the result.</p>
+<p>translate(self, <em>args, \</em>*kwargs): Replace each character in the string using the given translation table.table: Translation table, which must be a mapping of Unicode ordinals to Unicode ordinals, strings, or None. The table must implement lookup/indexing via __getitem__, for instance a dictionary or list.  If this operation raises LookupError, the character is left untouched.  Characters mapped to None are deleted.</p>
+<ul>
+<li>翻译</li>
+<li><p>判断函数<br>isalnum(self, <em>args, \</em>*kwargs): 判断字符串是否字母数字。<br>isalpha(self, <em>args, \</em>*kwargs): 判断字符串是否全是字母。<br>isascii(self, <em>args, \</em>*kwargs): 判断字符串是否全是<code>ASCII</code>字符。<br>isdecimal(self, <em>args, \</em>*kwargs): 判断字符串是否全是数字。<br>isdigit(self, <em>args, \</em>*kwargs): 判断字符串是否全是数字。<br>isidentifier(self, <em>args, \</em>*kwargs): 判断字符串是否是有效的<code>python</code>标识符。<br>islower(self, <em>args, \</em>*kwargs): 判断字符串是否全是小写。<br>isnumeric(self, <em>args, \</em>*kwargs): 判断字符串是否全是数字。<br>isprintable(self, <em>args, \</em>*kwargs): 判断字符串是否是可打印的。<br>isspace(self, <em>args, \</em>*kwargs): 判断字符串是否是空白字符。<br>istitle(self, <em>args, \</em>*kwargs): 判断字符串是否是首字母大写，其他小写。<br>isupper(self, <em>args, \</em>*kwargs): 判断字符串是否全是大写。</p>
+</li>
+<li><p>格式转换函数<br>strip(self, <em>args, \</em>*kwargs): 返回去掉字符串左右两侧空白字符或指定字符的拷贝。<br>lstrip(self, <em>args, \</em>*kwargs): 返回去掉字符串左侧空白字符或指定字符的拷贝。<br>rstrip(self, <em>args, \</em>*kwargs): 返回去掉字符串右侧空白字符或指定字符的拷贝。</p>
+</li>
+</ul>
+<p>ljust(self, <em>args, \</em>*kwargs): 返回右侧用空格或指定字符补齐指定宽度的字符串。<br>rjust(self, <em>args, \</em>*kwargs): 返回左侧用空格或指定字符补齐指定宽度的字符串。</p>
+<p>center(self, <em>args, \</em>*kwargs): 填充字符串左右两侧几乎相等的指定字符或空格，是字符串居于中间位置，返回这样的字符串。</p>
+<p>zfill(self, <em>args, \</em>*kwargs): 用<code>0</code>在数字字符串的左边补齐给定的宽度，字符串不会<code>truncated</code>。</p>
+<ul>
+<li><p>查询函数<br>find(self, sub, start=None, end=None): 返回指定字符串在原字符串中出现的最小下标。若给定<code>start</code>和<code>end</code>，则在指定范围里搜索；若指定字符串未发现，则返回<code>-1</code>。<br>rfind(self, sub, start=None, end=None): 返回指定字符串在原字符串中出现的最大下标。若给定<code>start</code>和<code>end</code>，则在指定范围里搜索；若指定字符串未发现，则返回<code>-1</code>。<br>index(self, sub, start=None, end=None): 返回指定字符串在原字符串中出现的最小下标。若给定<code>start</code>和<code>end</code>，则在指定范围里搜索；若指定字符串未发现，则抛出<code>ValueError</code>。<br>rindex(self, sub, start=None, end=None): 返回指定字符串在原字符串中出现的最大下标。若给定<code>start</code>和<code>end</code>，则在指定范围里搜索；若指定字符串未发现，则抛出<code>ValueError</code>。</p>
+</li>
+<li><p>划分函数<br>partition(self, <em>args, \</em>*kwargs): 从字符串左侧开始，根据指定参数将字符串划分为三部分，参数左侧、参数和参数右侧，组成三元元组并返回。如果指定参数不存在，三元元组由两个空项和自身组成。<br>rpartition(self, <em>args, \</em>*kwargs): 从字符串右侧开始，根据指定参数将字符串划分为三部分，参数左侧、参数和参数右侧，组成三元元组并返回。如果指定参数不存在，三元元组由两个空项和自身组成。</p>
+</li>
+</ul>
+<p>split(self, <em>args, \</em>*kwargs): 用指定参数作为分隔符将原字符串划分为若干字符串，组成列表返回。<br>rsplit(self, <em>args, \</em>*kwargs): 用指定参数作为分隔符将原字符串从右侧开始划分为若干字符串，组成列表返回。<br>splitlines(self, <em>args, \</em>*kwargs): 用分行符作为分隔符将原字符串划分若干个字符串，组成列表返回，其中分行符不会包括在结果字符串中。</p>
+<ul>
+<li>替换函数<br>replace(self, <em>args, \</em>*kwargs): 使用新字符串替换原字符串中指定的字符串。</li>
+</ul>
+<p>expandtabs(self, <em>args, \</em>*kwargs): 返回用空格替换字符串中的制表位的拷贝。</p>
+<ul>
+<li>字符转换函数<br>lower(self, <em>args, \</em>*kwargs): 返回字符串中各字符转换为小写字符的拷贝。<br>upper(self, <em>args, \</em>*kwargs): 返回字符串中各个字符转换为大写的拷贝。<br>swapcase(self, <em>args, \</em>*kwargs): 将字符串的大写字符转换为小写字符，小写字符转换为大写字符。<br>title(self, <em>args, \</em>*kwargs): 返回首字母大写，其他小写的字符串。<br>capitalize(self, <em>args, 、\</em>*kwargs): 返回字符串首字母大写，其他小写。<br>casefold(self, <em>args, \</em>*kwargs): 返回字符串中所有字母转换为小写字母。</li>
+</ul>
+<p>startswith(self, prefix, start=None, end=None): 如果字符串以给定字符参数<code>prefix</code>开头，返回<code>True</code>；否则，返回<code>False</code>。如果给定<code>start</code>和<code>end</code>参数，则从<code>start</code>和<code>end</code>的位置进行检测。<br>endswith(self, suffix, start=None, end=None): 如果字符串以给定字符参数<code>suffix</code>结尾，返回<code>True</code>；否则，返回<code>False</code>。如果给定<code>start</code>和<code>end</code>参数，则从<code>start</code>和<code>end</code>的位置进行检测。</p>
+<ul>
+<li>其他函数<br>format(self, <em>args, \</em>*kwargs): 使用元组数据格式化字符串。<br>format_map(self, mapping): 使用字典类型数据格式化字符串。</li>
+</ul>
+<p>count(self, sub, start=None, end=None): 返回指定的字符串在原字符串中出现的次数。如果给定<code>start</code>和<code>end</code>参数，则从<code>start</code>和<code>end</code>的位置进行检测。</p>
+<p>encode(self, <em>args, \</em>*kwargs): 使用指定的编码方式给字符串编码。</p>
+<p>join(self, ab=None, pq=None, rs=None): 连接字符串，返回新的字符串。</p>
+<p>maketrans(self, <em>args, \</em>*kwargs): 返回函数<code>tranlate()</code>需要的翻译表。一般是<code>maketrans(str1, str2)</code>。<br>translate(self, <em>args, \</em>*kwargs): 用给定的翻译表替换字符串中的每一个字符。一般是<code>translate(dict)</code>。</p>
+<h3 id="标准输入输出"><a href="#标准输入输出" class="headerlink" title="标准输入输出"></a>标准输入输出</h3><h4 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h4><ol>
+<li>input()<h4 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h4></li>
+<li>print()</li>
+<li>%s，字符串占位符</li>
+<li>%d，整数占位符</li>
+<li>%f，浮点数占位符</li>
+<li>%%，输入<code>%</code></li>
+</ol>
+<h3 id="python运算"><a href="#python运算" class="headerlink" title="python运算"></a>python运算</h3><h4 id="字符串运算"><a href="#字符串运算" class="headerlink" title="字符串运算"></a>字符串运算</h4><ol>
+<li><code>+</code>：拼接</li>
+<li><code>*</code>：连续拼接</li>
+</ol>
+<h4 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h4><ol>
+<li><code>+</code>，加</li>
+<li><code>-</code>，减</li>
+<li><code>*</code>，乘</li>
+<li><code>/</code>，除</li>
+<li><code>//</code>，整除</li>
+<li><code>%</code>，取余</li>
+<li><code>**</code>，乘方</li>
+<li>优先级，乘方 &gt; [乘，除，整除，取余] &gt; [加，减]</li>
+</ol>
+<h4 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h4><ol>
+<li>=，赋值</li>
+<li>+=，加后赋值</li>
+<li>-=，减后赋值</li>
+<li>*=，乘后赋值</li>
+<li>/=，除后赋值</li>
+<li>//=，整除后赋值</li>
+<li>%=，取余后赋值</li>
+<li>**=，次方后赋值</li>
+</ol>
+<h4 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h4><ol>
+<li>>，大于</li>
+<li>>=，大于等于</li>
+<li>&lt;，小于</li>
+<li>&lt;=，小于等于</li>
+<li>!=，不低于</li>
+<li>==，等于</li>
+<li>查看字母和数字的<code>ASCII</code>值<br>查看<code>ASCII</code>值：ord()<br>已知<code>ASCII</code>值查看对应的字符：chr()</li>
+</ol>
+<h4 id="关系运算符（逻辑运算符）"><a href="#关系运算符（逻辑运算符）" class="headerlink" title="关系运算符（逻辑运算符）"></a>关系运算符（逻辑运算符）</h4><ol>
+<li>and<br>短路与，左操作数为<code>False</code>，表达式结果为<code>False</code>，与<code>左</code>操作数<code>bool</code>值相同。 </li>
+<li>or<br>短路或，左操作数为<code>True</code>，表达式结果为<code>True</code>，与<code>左</code>操作数<code>bool</code>值相同。</li>
+<li>not</li>
+<li>一些例子<br>| 表达式 | 结果 |<br>| —— | —— |<br>| 1 and True | True |<br>| 0 and True | 0 |<br>| 1 or True | 1 |<br>| 0 or True | True |<br>| 1 and False | False |<br>| 0 and False | 0 |<br>| 1 or False | 1 |<br>| 0 or False  | False |</li>
+</ol>
+<hr>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">表达式</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">True and 1</td>
+<td>1</td>
+</tr>
+<tr>
+<td style="text-align:left">True and 0</td>
+<td>0</td>
+</tr>
+<tr>
+<td style="text-align:left">True or 1</td>
+<td>True</td>
+</tr>
+<tr>
+<td style="text-align:left">True or 0</td>
+<td>True</td>
+</tr>
+<tr>
+<td style="text-align:left">False and 1</td>
+<td>False</td>
+</tr>
+<tr>
+<td style="text-align:left">False and 0</td>
+<td>False</td>
+</tr>
+<tr>
+<td style="text-align:left">False or 1</td>
+<td>1</td>
+</tr>
+<tr>
+<td style="text-align:left">False or 0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="三大语句"><a href="#三大语句" class="headerlink" title="三大语句"></a>三大语句</h3><h4 id="顺序语句"><a href="#顺序语句" class="headerlink" title="顺序语句"></a>顺序语句</h4><p>自上而下执行语句</p>
+<h4 id="分支语句"><a href="#分支语句" class="headerlink" title="分支语句"></a>分支语句</h4><ol>
+<li>if…</li>
+<li>if…else…</li>
+<li>if…elif…else…</li>
+<li>分支嵌套</li>
+</ol>
+<h4 id="循环结构"><a href="#循环结构" class="headerlink" title="循环结构"></a>循环结构</h4><ol>
+<li>while</li>
+<li>for…in…</li>
+<li>for…in…else…，循环正常结束后执行<code>else</code>部分。</li>
+<li>while…else…</li>
+<li>break，终止循环的执行</li>
+<li>continue，终止本轮循环的执行</li>
+<li>range(m, n, s): 生成 m（默认为0） 到 n-1 的整数，整数间隔为 s（默认为1）。</li>
+<li>推导式的使用<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">list1 = [data <span class="keyword">for</span> data <span class="keyword">in</span> range(<span class="number">5</span>)]</span><br><span class="line">list1 = [data**<span class="number">2</span> <span class="keyword">for</span> data <span class="keyword">in</span> range(<span class="number">5</span>)]</span><br><span class="line">list1 = [data <span class="keyword">for</span> data <span class="keyword">in</span> range(<span class="number">5</span>) <span class="keyword">if</span> data &gt; <span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ol>
+<li>函数是将具有独立给你的代码块组织成为一个整体，使其具有特殊给你的代码集。函数的作用主要是加强代码的<code>复用性</code>，提高程序编写的效率。</li>
+<li>无参函数、有参函数、带返回值的函数<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> 函数名<span class="params">([参数])</span>:</span></span><br><span class="line">	函数体</span><br><span class="line">	[<span class="keyword">return</span> ...]</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>调用格式<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[变量=]函数名([参数])</span><br></pre></td></tr></table></figure></p>
+<ol start="3">
+<li>若函数没有返回值，使用变量接收时结果为<code>None</code></li>
+<li>函数定义时规定的参数为<code>形参</code>，函数调用时使用的参数为<code>实参</code>，<code>形参</code>的<code>作用域</code>为函数定义开始到定义结束。</li>
+<li>变量的<code>作用域</code>可划分为<code>局部变量</code>（整个函数内部）和<code>全局变量</code>（整个文件）。</li>
+<li><code>局部变量</code>可添加关键字<code>global</code>提升作用域。</li>
+<li>定义函数时，在函数名下用一对<code>&quot;&quot;&quot;</code>进行文档注释。</li>
+<li><code>默认参数</code>是函数或方法定义时指定形参的值，位置在<code>位置形参</code>的后面，调用该函数或方法时可以不指定默认参数的值，也可以指定默认参数的值，指定多个默认参数的值需要从左到右依次赋值。</li>
+<li><code>关键字参数</code>是在调用函数或方法时为指定名称的形参赋值所对应的实参.<code>关键字参数</code>需要在<code>位置参数</code>后面；不能对同一形参多次赋值；既可以为位置参数赋值，也可以为默认参数赋值。通常使用关键字参数是解决<code>默认参数</code>选择性赋值的问题。</li>
+<li><code>可变参数</code>是函数或方法定义时用于接收多个实参的形参，接收的多个实参组装成元组对象，定义可变参数的格式是<code>*args</code>。可变参数只能定义一个，定义在<code>位置参数</code>的后面。<code>可变参数</code>定义在<code>位置参数</code>后面。</li>
+<li><code>字典参数</code>是在函数或方法定义时，用于接收若干组未定义直接使用的关键字参数（调用后，会组装成字典对象），对应的形参。其定义格式是<code>**kwargs</code>。<code>字典参数</code>只能定义一个。</li>
+<li>形参定义的顺序：先<code>位置参数</code>，再<code>可变参数</code>，后<code>默认参数</code>，再后<code>字典参数</code>。 </li>
+<li><code>匿名函数</code>，也称<code>lambda</code>表达式。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方式一</span></span><br><span class="line">函数名 = <span class="keyword">lambda</span> [形参] : 返回值</span><br><span class="line">结果 = 函数名([实参])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方式二</span></span><br><span class="line">结果 = (<span class="keyword">lambda</span> [形参] : 返回值)([实参])</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><h4 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h4><ol>
+<li><code>类</code>是一系列事物的统称，包括<code>成员变量</code>和<code>成员方法</code>，统称<code>类成员</code>。</li>
+<li><code>类</code>的关键字是<code>class</code>，命名满足大驼峰命名法。</li>
+<li><code>对象</code>是<code>类</code>的实例，<code>self</code>仅出现在成员方法中，指代执行该方法的对象。</li>
+<li>类在<code>__init__(self)</code>方法中创建对象时初始化公有成员变量；<code>对象</code>可以声明<code>独有变量</code>；类可以定义属于类的<code>类变量</code>，<code>类变量</code>可以私有化。</li>
+<li>类的方法有<code>成员方法</code>、<code>类方法</code>、<code>私有方法</code>和<code>静态方法</code>。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AAA</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">bbb</span><span class="params">(self[,args])</span>:</span></span><br><span class="line">		<span class="string">'''成员方法'''</span></span><br><span class="line">		<span class="string">'''实例变量，实例方法，类变量，类方法均可使用'''</span></span><br><span class="line">		<span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AAA</span>:</span></span><br><span class="line"><span class="meta">	@classmethod</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">bbb</span><span class="params">(cls[,args])</span>:</span></span><br><span class="line">	<span class="string">'''类方法'''</span></span><br><span class="line">	<span class="string">'''不能使用实例变量和实例方法'''</span></span><br><span class="line">	<span class="string">'''可以使用类变量和类变量'''</span></span><br><span class="line">	<span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AAA</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__bb</span><span class="params">(self[,args])</span>:</span></span><br><span class="line">	<span class="string">'''私有方法'''</span></span><br><span class="line">	<span class="string">'''只能在类的内部使用'''</span></span><br><span class="line">	<span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AAA</span>:</span></span><br><span class="line"><span class="meta">	@staticmethod</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">bbb</span><span class="params">([args])</span>:</span></span><br><span class="line">	<span class="string">'''静态方法'''</span></span><br><span class="line">	<span class="string">'''一般不访问成员变量和类变量'''</span></span><br><span class="line">	<span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>成员方法</th>
+<th>适用范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>成员方法</code></td>
+<td>只访问<code>成员变量</code></td>
+</tr>
+<tr>
+<td><code>类方法</code></td>
+<td>只访问<code>类变量</code></td>
+</tr>
+<tr>
+<td><code>成员方法</code></td>
+<td>既访问<code>成员变量</code>，又访问<code>类变量</code></td>
+</tr>
+<tr>
+<td><code>静态方法</code></td>
+<td>既不访问<code>成员变量</code>，又不访问<code>类变量</code></td>
+</tr>
+</tbody>
+</table>
+<ol start="6">
+<li><p>魔术方法</p>
+<ul>
+<li><code>__init__(self)</code>，创建对象时初始化公有成员变量。</li>
+<li><code>__str__(self)</code>，打印对象时自动调用的方法。</li>
+<li><code>__new__(cls, *args, **kwargs)</code>，创建对象时自动执行（创建对象由<code>object</code>类的<code>__new__</code>方法执行）。</li>
+<li><code>__del__(self)</code>，<code>销毁对象</code>时自动执行。</li>
+</ul>
+</li>
+<li><p><code>==</code>与<code>is</code>的区别：<code>==</code>判断的是内容，<code>is</code>判断的是地址。</p>
+</li>
+<li>单例设计模式<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AAA</span>:</span></span><br><span class="line">    <span class="comment"># 单例设计模式</span></span><br><span class="line">    __instance = <span class="keyword">None</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(cls, *args, **kwargs)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> cls.__instance <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">            cls.__instance = object.__new__(AAA)</span><br><span class="line">        <span class="keyword">return</span> cls.__instance</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><ol>
+<li>封装是对类成员进行访问控制，保护数据不被非法访问。</li>
+<li>一般对成员变量进行封装，需要给出访问接口。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AAA</span>:</span></span><br><span class="line">	self.__bbb = <span class="number">1</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">get_bbb</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">return</span> self.__bbb</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">set_bbb</span><span class="params">(self)</span>:</span></span><br><span class="line">		self.__bbb = <span class="number">2</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><ol>
+<li>子类可以使用父类的成员变量、类变量、成员方法、类方法、静态方法。子类不能使用父类的私有方法。</li>
+<li>获取继承关系的属性<code>__mro__</code>。</li>
+<li>重写：子类重新定义与父类相同的成员方法。</li>
+<li><p>子类中访问父类被重写的方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 父类名.方法名(对象)</span><br><span class="line"><span class="number">2.</span> super(本类名, 对象).方法名()</span><br><span class="line"><span class="number">3.</span> super().方法名()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>python</code>支持<code>多继承</code>，访问父类成员时遇到<code>冲突</code>，访问继承的第一个父类的成员。</p>
+</li>
+</ol>
+<h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><ol>
+<li>父类的引用指向子类对象。不同子类调用相同的父类方法，执行结果不同。</li>
+<li>鸭子类型，类与类之间不用共同继承一个父类，只需要将它们做得像一种事物即可。</li>
+<li>Duck typing 这个概念来源于美国印第安纳州的诗人詹姆斯·惠特科姆·莱利（James Whitcomb Riley,1849- 1916）的诗句：”When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.” </li>
+</ol>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><ol>
+<li>引用是一种变量指向数据存储空间的现象，内存地址是数据在物理内存中的存储位置，引用地址是对象在内存中的描述性地址。</li>
+<li>相同数据在内存空间中仅占用一个存储空间。</li>
+<li>获取内存存储地址<code>id()</code>。</li>
+<li>使用<code>固定内存地址</code>存储数据如下：-5到256的整数、True和False、由字母、数字、下滑线组成的字符串；使用<code>临时内存地址</code>存储数据如下：小于-5后大于256的整数、所有小数、包含字母、数字、下滑线之外的字符组成的字符串。</li>
+<li>无变量引用时，列表、集合、字典、对象保存在临时引用地址中，该引用地址可以反复使用；有变量引用时，列表、集合、字典、对象保存在独立引用地址中，该引用地址专用。</li>
+<li>列表变量、集合变量、字典变量指向引用地址，该引用地址保存存储信息的内存地址。当存储空间不足时，会申请新的内存地址，并更新引用地址所指向的内存地址，重新申请的内存地址将复制原始内存地址中的数据。</li>
+<li>空元组（无数据）：空元组指向统一的独立引用地址，所有空元组共用同一个引用地址。非空元组（有数据）：非空元组保存在独立引用地址中，每个元组对象具有独立引用地址，该引用地址保存存储信息的内存地址，元组创建的同时存储的数据已经固定，内存结构也固定。</li>
+<li>元组中的数据如果是引用类型的，对应的数据可以在自身的内存地址中进行数据变更，对元组不影响。</li>
+<li>对象中的变量是通过引用地址的形式查找真实数据。对象中的变量存储形式是一个字典的形式，对变量的操作参照字典的操作方式，变量名为字典的key，变量值为字典的value。</li>
+<li>可变类型数据：列表、集合、字典和对象；不可变类型数据：数值、字符串、布尔和元组。</li>
+<li>变量的引用和定义的区别。</li>
+</ol>
+<h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3><h4 id="文件打开和关闭"><a href="#文件打开和关闭" class="headerlink" title="文件打开和关闭"></a>文件打开和关闭</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方式一</span></span><br><span class="line">file = open(file, mode=<span class="string">'r'</span>, buffering=<span class="keyword">None</span>, encoding=<span class="keyword">None</span>, errors=<span class="keyword">None</span>, newline=<span class="keyword">None</span>, closefd=<span class="keyword">True</span>)</span><br><span class="line">file.close()   <span class="comment"># 文件不用后需关闭，否则会造成内存泄漏问题</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 方式二</span></span><br><span class="line"><span class="keyword">with</span> open(...) <span class="keyword">as</span> file:</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<h4 id="文件读写模式"><a href="#文件读写模式" class="headerlink" title="文件读写模式"></a>文件读写模式</h4><ol>
+<li><p>官方文档：<br>| Character | Meaning |<br>| —— | —— |<br>| ‘r’ | open for reading (default) |<br>| ‘w’  | open for writing, truncating the file first |<br>| ‘x’ | create a new file and open it for writing |<br>| ‘a’ | open for writing, appending to the end of the file if it exists |<br>| ‘b’ | binary mode |<br>| ‘t’ | text mode (default) |<br>| ‘+’ | open a disk file for updating (reading and writing) |<br>| ‘U’ | universal newline mode (deprecated) |</p>
+</li>
+<li><p>翻译：<br>(1). <code>rb</code>，读字节，文件不存在报错。<br>(2). <code>wb</code>，写字节，每次调用会覆盖原文件，文件不存在会新建。<br>(3). <code>ab</code>，追加写字节，写入信息会追加到文件末尾，文件不存在会新建。<br>(4). <code>rb+</code>，读、写字节，文件不存在会报错。<br>(5). <code>wb+</code>，读、写字节，每次调用会覆盖原文件，文件不存在会新建。<br>(6). <code>ab+</code>，读、追加写字节，写入信息会追加到文件末尾，文件不存在会新建。<br>(7). <code>r</code>，读字符，文件不存会报错。<br>(8). <code>w</code>，写字符，每次调用会覆盖原文件，文件不存在会新建。<br>(9). <code>a</code>，追加写字符，写入信息会追加到文件末尾，文件不存在会新建。<br>(10). <code>r+</code>，读、 写字符，文件不存在会报错。<br>(11). <code>w+</code>，读、写字符，每次调用会覆盖原文件，文件不存在会新建。<br>(12). <code>a+</code>，读、追加写字符，写入信息会追加到文件末尾，文件不存在会新建。</p>
+</li>
+</ol>
+<h4 id="读文件"><a href="#读文件" class="headerlink" title="读文件"></a>读文件</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">read(self, n: int = -1) -&gt; AnyStr</span><br><span class="line"></span><br><span class="line">readable(self) -&gt; bool:</span><br><span class="line"></span><br><span class="line">readline(self, limit: int = -1) -&gt; AnyStr:</span><br><span class="line"></span><br><span class="line">readlines(self, hint: int = -1) -&gt; List[AnyStr]</span><br></pre></td></tr></table></figure>
+<h4 id="写文件"><a href="#写文件" class="headerlink" title="写文件"></a>写文件</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">writable(self) -&gt; bool</span><br><span class="line"></span><br><span class="line">write(self, s: AnyStr) -&gt; int</span><br><span class="line"></span><br><span class="line">writelines(self, lines: List[AnyStr]) -&gt; None</span><br></pre></td></tr></table></figure>
+<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><ol>
+<li><p>异常处理格式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	<span class="comment"># 可能引发异常现象的代码</span></span><br><span class="line">	<span class="keyword">pass</span></span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">	<span class="comment"># 出现异常时执行的代码</span></span><br><span class="line">	<span class="comment"># 可有多个 except 代码块，但只执行一条 except 代码块</span></span><br><span class="line">	<span class="comment"># 一般格式：except 异常类名[ as 变量名]</span></span><br><span class="line">	<span class="comment"># 一般捕获异常类型从小到大</span></span><br><span class="line">	<span class="comment"># Exception 类是所有异常类的父类</span></span><br><span class="line">	<span class="keyword">pass</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	<span class="comment"># 未出现异常时执行的代码</span></span><br><span class="line">	<span class="keyword">pass</span></span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">	<span class="comment"># try 代码块结束时执行的代码</span></span><br><span class="line">	<span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>异常抛出格式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">raise</span> 异常类对象</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自定义异常</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AAA</span><span class="params">(Exception)</span>:</span></span><br><span class="line">	<span class="string">""" AAA 为自定义异常类名"""</span></span><br><span class="line">	<span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="模块和包"><a href="#模块和包" class="headerlink" title="模块和包"></a>模块和包</h3><ol>
+<li><p>导入模块的方式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;模块名&#125;   <span class="comment"># 全部导入</span></span><br><span class="line"><span class="keyword">from</span> &#123;模块名&#125; <span class="keyword">import</span> &#123;资源名称&#125;   <span class="comment"># 局部导入</span></span><br><span class="line"><span class="comment"># 资源名称包括：类名、函数和全局变量</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>局部导入资源访问控制</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> &#123;模块名称&#125; <span class="keyword">import</span> *</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__al__ = [<span class="string">"&#123;资源名称&#125;"</span>, <span class="string">"&#123;资源名称&#125;"</span>]</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><p>屏蔽文件的执行代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ = <span class="string">"__main__"</span>:</span><br><span class="line">	<span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>模块资源运行工作原理：第一次导入资源文件生成<code>.pyc</code>缓存文件。 </p>
+</li>
+<li><code>包</code>是项目结构中的目录，用于文件分层管理。</li>
+</ol>
+<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><ol>
+<li><p>超长行处理</p>
+<ul>
+<li>换行处使用<code>\</code></li>
+<li>对整体添加<code>()</code>，<code>()</code>中随意换行</li>
+</ul>
+</li>
+<li><p><code>import this</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">import</span> this</span><br><span class="line">The Zen of Python, by Tim Peters</span><br><span class="line"></span><br><span class="line">Beautiful <span class="keyword">is</span> better than ugly.</span><br><span class="line">Explicit <span class="keyword">is</span> better than implicit.</span><br><span class="line">Simple <span class="keyword">is</span> better than complex.</span><br><span class="line">Complex <span class="keyword">is</span> better than complicated.</span><br><span class="line">Flat <span class="keyword">is</span> better than nested.</span><br><span class="line">Sparse <span class="keyword">is</span> better than dense.</span><br><span class="line">Readability counts.</span><br><span class="line">Special cases aren<span class="string">'t special enough to break the rules.</span></span><br><span class="line"><span class="string">Although practicality beats purity.</span></span><br><span class="line"><span class="string">Errors should never pass silently.</span></span><br><span class="line"><span class="string">Unless explicitly silenced.</span></span><br><span class="line"><span class="string">In the face of ambiguity, refuse the temptation to guess.</span></span><br><span class="line"><span class="string">There should be one-- and preferably only one --obvious way to do it.</span></span><br><span class="line"><span class="string">Although that way may not be obvious at first unless you'</span>re Dutch.</span><br><span class="line">Now <span class="keyword">is</span> better than never.</span><br><span class="line">Although never <span class="keyword">is</span> often better than *right* now.</span><br><span class="line">If the implementation <span class="keyword">is</span> hard to explain, it<span class="string">'s a bad idea.</span></span><br><span class="line"><span class="string">If the implementation is easy to explain, it may be a good idea.</span></span><br><span class="line"><span class="string">Namespaces are one honking great idea -- let'</span>s do more of those!</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+          <br>
+<p> from yhw-miracle</p>
+<p align="center"><img src="/images/qrcode_for_gh_5efb2780ab44_258.jpg" alt="痛点就是起点"></p>
+<p align="center">算法和代码的世界不仅是学习的痛点，而且是成功的起点。欢迎关注，共同进步！</p>
+
+        </section>
+      </div>
+      
+      <!--<div class="block">
+  
+    <a class="main" href="/">Home</a>
+  
+    <a class="main" href="/ToYou">ToYou</a>
+  
+    <a class="main" href="/categories">Categories</a>
+  
+    <a class="main" href="/atom.xml">RSS</a>
+  
+</div>
+-->
+    </div>
+    <footer>
+  <span class="muted">&copy; 2016 - 2019 yhw-miracle. All Rights Reserved.</span><br>
+  <!--<a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>-->
+  <img src="/images/logo.jpg" width="53" height="59" alt="痛点就是起点">
+</footer>
+
+  </body>
+</html>
