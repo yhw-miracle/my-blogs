@@ -35,6 +35,12 @@
 
       <section class="paging">
   
+    <div class="left">
+      <a href="/2019/07/07/CentOS安装python3及配置Python虚拟环境/">
+        ‹
+      </a>
+    </div>
+  
   
     <div class="right">
       <a href="/2019/04/18/python基础/">
@@ -50,13 +56,22 @@
             <div class="date">2019-07-03</div>
             搭建一台可以永久使用的编程机器
           </h1>
-          <p>在学习编程时，我们总会出现很多<code>BUG</code>，严重的话可能会导致系统崩塌，无法运行。这时候，心态好的人会选择重新安装系统，卷土重来，<strong>因为这时修复问题的成本已远远高于重装系统的成本</strong>；可是，对于恋旧且不懂安装系统的同学来说，重装系统太复杂，重来任务太巨大，修复<code>BUG</code>又无从下手。因此，学习编程的痛点就出现：我们可不可以使用一台这样的机器，遇到严重<code>BUG</code>可以随时回退；数据文件不易丢失；系统稳定，最好一次安装，永久不用重装？</p>
+          <blockquote>
+<p>本文为<code>yhw-miracle</code>原创文章，可以随意转载，但需注明出处。</p>
+</blockquote>
+<p>在学习编程时，我们总会出现很多<code>BUG</code>，严重的话可能会导致系统崩塌，无法运行。这时候，心态好的人会选择重新安装系统，卷土重来，<strong>因为这时修复问题的成本已远远高于重装系统的成本</strong>；可是，对于恋旧且不懂安装系统的同学来说，重装系统太复杂，重来任务太巨大，修复<code>BUG</code>又无从下手。因此，学习编程的痛点就出现：我们可不可以使用一台这样的机器，遇到严重<code>BUG</code>可以随时回退；数据文件不易丢失；系统稳定，最好一次安装，永久不用重装？</p>
 <p>在我本科学习编程时，我就常常被这个痛点所困扰，那时候，我常常因为重装系统而耗费大量时间在数据备份和项目重来的过程中。有痛点，就会催促我以此为起点寻找解决方法，庆幸的是，我找到了一种很好解决这种痛点的解决方案。</p>
-<p>我推荐，不管是初学编程还是编程高手，不管你使用的使用的是什么系统（<code>windows</code>、<code>linux</code>、<code>MAC OS</code>），你最好至少有一台安装服务器系统，存储数据文件和编程环境的虚拟机。虚拟机的好处有：第一，可以拍摄快照，随时记录你当前的虚拟机状态，遇到严重<code>BUG</code>可以回退到问题之前的地方；第二，虚拟机软件可以跨平台运行，你只需要<strong>完整保存好安装好系统的虚拟机文件</strong>，虚拟机里存储数据文件就不会丢失，不受宿主机的影响；第三，虚拟机也是一种很好的试错方式，随时尝试，遇错回退。</p>
-<p>虚拟机软件目前市面上有两种，<a href="https://www.virtualbox.org" target="_blank" rel="noopener">VIrtualBox</a>和<a href="https://www.vmware.com/cn.html" target="_blank" rel="noopener">VMware</a>，两种软件的区别是，<code>VirtualBox</code>是免费的，<code>VMware</code>是收费的，两种软件都能很好的运行虚拟机。如果非要鸡蛋里挑骨头，<code>VMware</code>可能在使用体验上稍逊于<code>VirtualBox</code>，毕竟是收费软件。</p>
+<p>我推荐，不管是初学编程还是编程高手，不管你使用的是什么系统，<code>windows</code>、<code>linux</code>，还是<code>MAC OS</code>，你最好至少有一台安装有服务器系统，存储数据文件和编程环境的虚拟机。虚拟机的好处有：第一，可以拍摄快照，随时记录你当前的虚拟机状态，遇到严重<code>BUG</code>可以回退到问题之前的地方；第二，虚拟机软件可以跨平台运行，你只需要<strong>完整保存好安装好系统的虚拟机文件</strong>，虚拟机里存储数据文件就不会丢失，不受宿主机的影响；第三，虚拟机也是一种很好的试错方式，随时尝试，遇错回退。</p>
+<p>虚拟机软件目前市面上有两种，<code>VIrtualBox</code>和<code>VMware</code>，这两种软件的下载链接见文末的<code>文内资源</code>。两种软件的区别是，<code>VirtualBox</code>是免费的，<code>VMware</code>是收费的，两种软件都能很好的运行虚拟机。如果非要鸡蛋里挑骨头，<code>VirtualBox</code>可能在使用体验上稍逊于<code>VMware</code>，毕竟是收费软件。</p>
 <p>操作系统目前市面上有<code>windows</code>、<code>linux</code>和<code>MAC OS</code>，虽然目前<code>windows</code>所占市场很大，我的看法是<code>windows</code>可以用来编程，因为现在的<code>windows 10</code>已经很好了，但是我不建议用它来存储编程所产生的文件信息。<code>windows</code>是桌面系统，操作员往往很容易将注意力放在操作上，这点点，那点点，一不注意点到什么不该点的地方，可能就是系统崩溃；而服务器系统只有黑窗口，操作员只能通过命令进行交互，这就在一定程度上增加你操作的成本，保护了数据安全。虽然操作服务器系统可能会增加学习成本，但是，我相信你既然学习了编程，就肯定会很快上手的。免费的服务器系统主要是<code>linux</code>的发行版，有<code>centos</code>和<code>ubuntu</code>，使用体验都不错。</p>
 <p>下面，将以<code>VirtualBox</code>创建虚拟机，安装<code>ubuntu-16.04.4-server-amd64</code>服务器系统为例，介绍安装全过程。</p>
-<h3 id="安装VirtualBox，下载安装包，双击安装即可。"><a href="#安装VirtualBox，下载安装包，双击安装即可。" class="headerlink" title="安装VirtualBox，下载安装包，双击安装即可。"></a>安装<code>VirtualBox</code>，下载<a href="https://download.virtualbox.org/virtualbox/6.0.8/VirtualBox-6.0.8-130520-Win.exe" target="_blank" rel="noopener">安装包</a>，双击安装即可。</h3><h3 id="安装ubuntu16-04虚拟机"><a href="#安装ubuntu16-04虚拟机" class="headerlink" title="安装ubuntu16.04虚拟机"></a>安装<code>ubuntu16.04</code>虚拟机</h3><ol>
+<ul>
+<li><p>安装<code>VirtualBox</code>，下载安装包，双击安装即可。</p>
+</li>
+<li><p>安装<code>ubuntu16.04</code>虚拟机，安装步骤如下。</p>
+</li>
+</ul>
+<ol>
 <li>新建虚拟机；</li>
 </ol>
 <p><img src="/images/2019/Jul/01.png" alt=""></p>
@@ -201,6 +216,16 @@
 <ol start="35">
 <li>至此，虚拟机安装完成。</li>
 </ol>
+<hr>
+<ul>
+<li><p>文内资源：</p>
+<ul>
+<li><a href="https://www.virtualbox.org" target="_blank" rel="noopener">VIrtualBox</a></li>
+<li><a href="https://www.vmware.com/cn.html" target="_blank" rel="noopener">VMware</a></li>
+<li><a href="https://download.virtualbox.org/virtualbox/6.0.8/VirtualBox-6.0.8-130520-Win.exe" target="_blank" rel="noopener">VirtualBox-6.0.8-130520-Win.exe</a></li>
+</ul>
+</li>
+</ul>
 
           <br>
 <p> from yhw-miracle</p>
