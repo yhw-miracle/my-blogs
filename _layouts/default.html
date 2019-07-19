@@ -15,11 +15,17 @@
   {% if paginator.total_pages > 1 %}
     <div class="pagination">
       {% if paginator.previous_page == 1 %}
-        <a href="{{ '/' | prepend: site.baseurl | replace: '//', '/' }}" class="page-item">&laquo;</a>
+        <a href="{{ '/' | prepend: site.baseurl | replace: '//', '/' }}" class="page-item">
+          <img src="/images/previous-1.png" />
+        </a>
       {% elsif paginator.previous_page%}
-        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="page-item">&laquo;</a>
+        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="page-item">
+          <img src="/images/previous-1.png" />
+        </a>
       {% else %}
-        <span class="page-item">&laquo;</span>
+        <span class="page-item">
+          <img src="/images/no_idea_16.png" />
+        </span>
       {% endif %}
       
       {% for page in (1..paginator.total_pages) %}
@@ -33,9 +39,13 @@
       {% endfor %}
 
       {% if paginator.next_page %}
-        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="page-item">&raquo;</a>
+        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="page-item">
+          <img src="/images/next-1.png" />
+        </a>
       {% else %}
-        <span class="page-item">&raquo;</span>
+        <span class="page-item">
+          <img src="/images/no_idea_16.png" />
+        </span>
       {% endif %}
       <br />
       共 {{ paginator.total_pages }} 页，计 {{ site.posts.size }} 篇。
