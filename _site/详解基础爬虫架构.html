@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>详解基础爬虫架构</title>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>详解基础爬虫架构 | yhw-miracle’s Blog</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="详解基础爬虫架构" />
+<meta name="author" content="yhw-miracle" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="基础爬虫框架主要包括五大模块，分别为URL管理器、HTML下载器、HTML解析器、数据存储器和爬虫调度器。它们之间关系如下图所示。 URL管理器负责管理URL链接，维护已爬取的URL集合和为未爬取的URL集合，并提供外部访问接口。 HTML下载器负责从URL管理器中获取未爬取的URL链接，并下载相应的HTML网页。 HTML解析器负责解析HTML下载器下载的网页信息，解析出的信息交给数据存储器，解析出的新的URL链接交给URL管理器。 数据存储器负责将HTML解析器解析出来的数据通过文件或数据库的形式存储起来。 爬虫调度器负责统筹以上四个模块之间协调工作。 以爬取百度百科100条词条的词条标题、摘要和链接为例。 URL管理器 URL管理器维护了两个变量，已爬取URL集合和未爬取URL集合；对外提供了四类访问这两个变量的方法，包括是否有待爬取的URL、获取未爬取的URL、添加新的URL到未爬取集合中、已爬取URL集合和未爬取URL集合的大小。 URL管理器需要对爬取的URL进行去重处理，常见的去重方案有三种，分别是内存去重、关系数据库去重和缓存数据库去重。 两个变量 self.new_urls = set() self.old_urls = set() 六个方法 have_new_url(self) get_new_url(self) add_new_url(self, url) add_new_urls(self, urls) new_url_size(self) old_url_size(self) # coding: utf-8 class URLManager(object): def __init__(self): self.new_urls = set() self.old_urls = set() def have_new_url(self): &quot;&quot;&quot; 判断是否有待爬取的 url :return: 待爬取的 url 集合的大小 &quot;&quot;&quot; return self.new_url_size() != 0 def get_new_url(self): &quot;&quot;&quot; 获取待爬取的 url :return: 一个待爬取的 url &quot;&quot;&quot; new_url = self.new_urls.pop() if new_url is not None: self.old_urls.add(new_url) return new_url def add_new_url(self, url): &quot;&quot;&quot; 添加一个待爬取的 url :param url: :return: &quot;&quot;&quot; if url is None: return if url not in self.new_urls and url not in self.old_urls: self.new_urls.add(url) def add_new_urls(self, urls): &quot;&quot;&quot; 添加待爬取的 url 集合 :param urls: :return: &quot;&quot;&quot; if urls is None or len(urls) == 0: return for url in urls: self.add_new_url(url) def new_url_size(self): &quot;&quot;&quot; 待爬取的 url 集合的大小 :return: &quot;&quot;&quot; return len(self.new_urls) def old_url_size(self): &quot;&quot;&quot; 已爬取的 url 集合的大小 :return: &quot;&quot;&quot; return len(self.old_urls) HTML下载器 # coding: utf-8 import requests class HtmlDownloader(object): def download(self, url): if url is None: return user_agent = &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) &quot; \ &quot;Chrome/71.0.3578.98 Safari/537.36&quot; headers = {&quot;User-Agent&quot;: user_agent} req = requests.get(url, headers=headers) if req.status_code == 200: req.encoding = &quot;utf-8&quot; return req.text return None HTML解析器 # coding: utf-8 from bs4 import BeautifulSoup import re, urlparse class HtmlParser(object): def parser(self, page_url, html_content): &quot;&quot;&quot; :param page_url: :param html_content: :return: &quot;&quot;&quot; if page_url is None or html_content is None: return soup = BeautifulSoup(html_content, &quot;lxml&quot;) new_urls = self.get_new_urls(page_url, soup) new_data = self.get_new_data(page_url, soup) return new_urls, new_data def get_new_urls(self, page_url, soup): &quot;&quot;&quot; :param page_url: :param soup: :return: &quot;&quot;&quot; new_urls = set() links = soup.find_all(&quot;a&quot;, href=re.compile(r&#39;/item/(%\w+)+/\d+&#39;)) for link in links: new_url = link[&quot;href&quot;] new_full_url = urlparse.urljoin(page_url, new_url) new_urls.add(new_full_url) return new_urls def get_new_data(self, page_url, soup): &quot;&quot;&quot; :param page_url: :param soup: :return: &quot;&quot;&quot; data = {} data[&quot;url&quot;] = page_url.encode(&quot;utf-8&quot;) title = soup.find(&quot;dd&quot;, class_=&quot;lemmaWgt-lemmaTitle-title&quot;).find(&quot;h1&quot;) data[&quot;title&quot;] = title.string.encode(&quot;utf-8&quot;) summary = soup.find(&quot;div&quot;, class_=&quot;lemma-summary&quot;) data[&quot;summary&quot;] = summary.get_text().encode(&quot;utf-8&quot;) return data 数据存储器 # coding: utf-8 import csv class DataOutput(object): def __init__(self): self.datas = [] def store_data(self, data): if data is None: return self.datas.append(data) def output_html(self): headers = [&quot;url&quot;, &quot;title&quot;, &quot;summary&quot;] with open(&quot;baike.csv&quot;, &quot;w&quot;) as fp: fp_csv = csv.DictWriter(fp, headers) fp_csv.writeheader() fp_csv.writerows(self.datas) 爬虫调度器 # coding: utf-8 from URLManager import URLManager from HtmlDownloader import HtmlDownloader from HtmlParser import HtmlParser from DataOutput import DataOutput class Spider(object): def __init__(self): self.manager = URLManager() self.downloader = HtmlDownloader() self.parser = HtmlParser() self.output = DataOutput() def crawl(self, root_url): self.manager.add_new_url(root_url) while(self.manager.have_new_url() and self.manager.old_url_size() &lt; 100): try: new_url = self.manager.get_new_url() html = self.downloader.download(new_url) new_urls, data = self.parser.parser(new_url, html) self.manager.add_new_urls(new_urls) self.output.store_data(data) print &quot;已经爬取 %s 个链接&quot; % self.manager.old_url_size() except Exception, e: print &quot;crawl failed.&quot; print e self.output.output_html() if __name__ == &quot;__main__&quot;: spider = Spider() spider.crawl(&quot;https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB&quot;)" />
+<meta property="og:description" content="基础爬虫框架主要包括五大模块，分别为URL管理器、HTML下载器、HTML解析器、数据存储器和爬虫调度器。它们之间关系如下图所示。 URL管理器负责管理URL链接，维护已爬取的URL集合和为未爬取的URL集合，并提供外部访问接口。 HTML下载器负责从URL管理器中获取未爬取的URL链接，并下载相应的HTML网页。 HTML解析器负责解析HTML下载器下载的网页信息，解析出的信息交给数据存储器，解析出的新的URL链接交给URL管理器。 数据存储器负责将HTML解析器解析出来的数据通过文件或数据库的形式存储起来。 爬虫调度器负责统筹以上四个模块之间协调工作。 以爬取百度百科100条词条的词条标题、摘要和链接为例。 URL管理器 URL管理器维护了两个变量，已爬取URL集合和未爬取URL集合；对外提供了四类访问这两个变量的方法，包括是否有待爬取的URL、获取未爬取的URL、添加新的URL到未爬取集合中、已爬取URL集合和未爬取URL集合的大小。 URL管理器需要对爬取的URL进行去重处理，常见的去重方案有三种，分别是内存去重、关系数据库去重和缓存数据库去重。 两个变量 self.new_urls = set() self.old_urls = set() 六个方法 have_new_url(self) get_new_url(self) add_new_url(self, url) add_new_urls(self, urls) new_url_size(self) old_url_size(self) # coding: utf-8 class URLManager(object): def __init__(self): self.new_urls = set() self.old_urls = set() def have_new_url(self): &quot;&quot;&quot; 判断是否有待爬取的 url :return: 待爬取的 url 集合的大小 &quot;&quot;&quot; return self.new_url_size() != 0 def get_new_url(self): &quot;&quot;&quot; 获取待爬取的 url :return: 一个待爬取的 url &quot;&quot;&quot; new_url = self.new_urls.pop() if new_url is not None: self.old_urls.add(new_url) return new_url def add_new_url(self, url): &quot;&quot;&quot; 添加一个待爬取的 url :param url: :return: &quot;&quot;&quot; if url is None: return if url not in self.new_urls and url not in self.old_urls: self.new_urls.add(url) def add_new_urls(self, urls): &quot;&quot;&quot; 添加待爬取的 url 集合 :param urls: :return: &quot;&quot;&quot; if urls is None or len(urls) == 0: return for url in urls: self.add_new_url(url) def new_url_size(self): &quot;&quot;&quot; 待爬取的 url 集合的大小 :return: &quot;&quot;&quot; return len(self.new_urls) def old_url_size(self): &quot;&quot;&quot; 已爬取的 url 集合的大小 :return: &quot;&quot;&quot; return len(self.old_urls) HTML下载器 # coding: utf-8 import requests class HtmlDownloader(object): def download(self, url): if url is None: return user_agent = &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) &quot; \ &quot;Chrome/71.0.3578.98 Safari/537.36&quot; headers = {&quot;User-Agent&quot;: user_agent} req = requests.get(url, headers=headers) if req.status_code == 200: req.encoding = &quot;utf-8&quot; return req.text return None HTML解析器 # coding: utf-8 from bs4 import BeautifulSoup import re, urlparse class HtmlParser(object): def parser(self, page_url, html_content): &quot;&quot;&quot; :param page_url: :param html_content: :return: &quot;&quot;&quot; if page_url is None or html_content is None: return soup = BeautifulSoup(html_content, &quot;lxml&quot;) new_urls = self.get_new_urls(page_url, soup) new_data = self.get_new_data(page_url, soup) return new_urls, new_data def get_new_urls(self, page_url, soup): &quot;&quot;&quot; :param page_url: :param soup: :return: &quot;&quot;&quot; new_urls = set() links = soup.find_all(&quot;a&quot;, href=re.compile(r&#39;/item/(%\w+)+/\d+&#39;)) for link in links: new_url = link[&quot;href&quot;] new_full_url = urlparse.urljoin(page_url, new_url) new_urls.add(new_full_url) return new_urls def get_new_data(self, page_url, soup): &quot;&quot;&quot; :param page_url: :param soup: :return: &quot;&quot;&quot; data = {} data[&quot;url&quot;] = page_url.encode(&quot;utf-8&quot;) title = soup.find(&quot;dd&quot;, class_=&quot;lemmaWgt-lemmaTitle-title&quot;).find(&quot;h1&quot;) data[&quot;title&quot;] = title.string.encode(&quot;utf-8&quot;) summary = soup.find(&quot;div&quot;, class_=&quot;lemma-summary&quot;) data[&quot;summary&quot;] = summary.get_text().encode(&quot;utf-8&quot;) return data 数据存储器 # coding: utf-8 import csv class DataOutput(object): def __init__(self): self.datas = [] def store_data(self, data): if data is None: return self.datas.append(data) def output_html(self): headers = [&quot;url&quot;, &quot;title&quot;, &quot;summary&quot;] with open(&quot;baike.csv&quot;, &quot;w&quot;) as fp: fp_csv = csv.DictWriter(fp, headers) fp_csv.writeheader() fp_csv.writerows(self.datas) 爬虫调度器 # coding: utf-8 from URLManager import URLManager from HtmlDownloader import HtmlDownloader from HtmlParser import HtmlParser from DataOutput import DataOutput class Spider(object): def __init__(self): self.manager = URLManager() self.downloader = HtmlDownloader() self.parser = HtmlParser() self.output = DataOutput() def crawl(self, root_url): self.manager.add_new_url(root_url) while(self.manager.have_new_url() and self.manager.old_url_size() &lt; 100): try: new_url = self.manager.get_new_url() html = self.downloader.download(new_url) new_urls, data = self.parser.parser(new_url, html) self.manager.add_new_urls(new_urls) self.output.store_data(data) print &quot;已经爬取 %s 个链接&quot; % self.manager.old_url_size() except Exception, e: print &quot;crawl failed.&quot; print e self.output.output_html() if __name__ == &quot;__main__&quot;: spider = Spider() spider.crawl(&quot;https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB&quot;)" />
+<link rel="canonical" href="http://localhost:4000/%E8%AF%A6%E8%A7%A3%E5%9F%BA%E7%A1%80%E7%88%AC%E8%99%AB%E6%9E%B6%E6%9E%84" />
+<meta property="og:url" content="http://localhost:4000/%E8%AF%A6%E8%A7%A3%E5%9F%BA%E7%A1%80%E7%88%AC%E8%99%AB%E6%9E%B6%E6%9E%84" />
+<meta property="og:site_name" content="yhw-miracle’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-01-15T00:00:01+08:00" />
+<script type="application/ld+json">
+{"description":"基础爬虫框架主要包括五大模块，分别为URL管理器、HTML下载器、HTML解析器、数据存储器和爬虫调度器。它们之间关系如下图所示。 URL管理器负责管理URL链接，维护已爬取的URL集合和为未爬取的URL集合，并提供外部访问接口。 HTML下载器负责从URL管理器中获取未爬取的URL链接，并下载相应的HTML网页。 HTML解析器负责解析HTML下载器下载的网页信息，解析出的信息交给数据存储器，解析出的新的URL链接交给URL管理器。 数据存储器负责将HTML解析器解析出来的数据通过文件或数据库的形式存储起来。 爬虫调度器负责统筹以上四个模块之间协调工作。 以爬取百度百科100条词条的词条标题、摘要和链接为例。 URL管理器 URL管理器维护了两个变量，已爬取URL集合和未爬取URL集合；对外提供了四类访问这两个变量的方法，包括是否有待爬取的URL、获取未爬取的URL、添加新的URL到未爬取集合中、已爬取URL集合和未爬取URL集合的大小。 URL管理器需要对爬取的URL进行去重处理，常见的去重方案有三种，分别是内存去重、关系数据库去重和缓存数据库去重。 两个变量 self.new_urls = set() self.old_urls = set() 六个方法 have_new_url(self) get_new_url(self) add_new_url(self, url) add_new_urls(self, urls) new_url_size(self) old_url_size(self) # coding: utf-8 class URLManager(object): def __init__(self): self.new_urls = set() self.old_urls = set() def have_new_url(self): &quot;&quot;&quot; 判断是否有待爬取的 url :return: 待爬取的 url 集合的大小 &quot;&quot;&quot; return self.new_url_size() != 0 def get_new_url(self): &quot;&quot;&quot; 获取待爬取的 url :return: 一个待爬取的 url &quot;&quot;&quot; new_url = self.new_urls.pop() if new_url is not None: self.old_urls.add(new_url) return new_url def add_new_url(self, url): &quot;&quot;&quot; 添加一个待爬取的 url :param url: :return: &quot;&quot;&quot; if url is None: return if url not in self.new_urls and url not in self.old_urls: self.new_urls.add(url) def add_new_urls(self, urls): &quot;&quot;&quot; 添加待爬取的 url 集合 :param urls: :return: &quot;&quot;&quot; if urls is None or len(urls) == 0: return for url in urls: self.add_new_url(url) def new_url_size(self): &quot;&quot;&quot; 待爬取的 url 集合的大小 :return: &quot;&quot;&quot; return len(self.new_urls) def old_url_size(self): &quot;&quot;&quot; 已爬取的 url 集合的大小 :return: &quot;&quot;&quot; return len(self.old_urls) HTML下载器 # coding: utf-8 import requests class HtmlDownloader(object): def download(self, url): if url is None: return user_agent = &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) &quot; \\ &quot;Chrome/71.0.3578.98 Safari/537.36&quot; headers = {&quot;User-Agent&quot;: user_agent} req = requests.get(url, headers=headers) if req.status_code == 200: req.encoding = &quot;utf-8&quot; return req.text return None HTML解析器 # coding: utf-8 from bs4 import BeautifulSoup import re, urlparse class HtmlParser(object): def parser(self, page_url, html_content): &quot;&quot;&quot; :param page_url: :param html_content: :return: &quot;&quot;&quot; if page_url is None or html_content is None: return soup = BeautifulSoup(html_content, &quot;lxml&quot;) new_urls = self.get_new_urls(page_url, soup) new_data = self.get_new_data(page_url, soup) return new_urls, new_data def get_new_urls(self, page_url, soup): &quot;&quot;&quot; :param page_url: :param soup: :return: &quot;&quot;&quot; new_urls = set() links = soup.find_all(&quot;a&quot;, href=re.compile(r&#39;/item/(%\\w+)+/\\d+&#39;)) for link in links: new_url = link[&quot;href&quot;] new_full_url = urlparse.urljoin(page_url, new_url) new_urls.add(new_full_url) return new_urls def get_new_data(self, page_url, soup): &quot;&quot;&quot; :param page_url: :param soup: :return: &quot;&quot;&quot; data = {} data[&quot;url&quot;] = page_url.encode(&quot;utf-8&quot;) title = soup.find(&quot;dd&quot;, class_=&quot;lemmaWgt-lemmaTitle-title&quot;).find(&quot;h1&quot;) data[&quot;title&quot;] = title.string.encode(&quot;utf-8&quot;) summary = soup.find(&quot;div&quot;, class_=&quot;lemma-summary&quot;) data[&quot;summary&quot;] = summary.get_text().encode(&quot;utf-8&quot;) return data 数据存储器 # coding: utf-8 import csv class DataOutput(object): def __init__(self): self.datas = [] def store_data(self, data): if data is None: return self.datas.append(data) def output_html(self): headers = [&quot;url&quot;, &quot;title&quot;, &quot;summary&quot;] with open(&quot;baike.csv&quot;, &quot;w&quot;) as fp: fp_csv = csv.DictWriter(fp, headers) fp_csv.writeheader() fp_csv.writerows(self.datas) 爬虫调度器 # coding: utf-8 from URLManager import URLManager from HtmlDownloader import HtmlDownloader from HtmlParser import HtmlParser from DataOutput import DataOutput class Spider(object): def __init__(self): self.manager = URLManager() self.downloader = HtmlDownloader() self.parser = HtmlParser() self.output = DataOutput() def crawl(self, root_url): self.manager.add_new_url(root_url) while(self.manager.have_new_url() and self.manager.old_url_size() &lt; 100): try: new_url = self.manager.get_new_url() html = self.downloader.download(new_url) new_urls, data = self.parser.parser(new_url, html) self.manager.add_new_urls(new_urls) self.output.store_data(data) print &quot;已经爬取 %s 个链接&quot; % self.manager.old_url_size() except Exception, e: print &quot;crawl failed.&quot; print e self.output.output_html() if __name__ == &quot;__main__&quot;: spider = Spider() spider.crawl(&quot;https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB&quot;)","author":{"@type":"Person","name":"yhw-miracle"},"@type":"BlogPosting","url":"http://localhost:4000/%E8%AF%A6%E8%A7%A3%E5%9F%BA%E7%A1%80%E7%88%AC%E8%99%AB%E6%9E%B6%E6%9E%84","headline":"详解基础爬虫架构","dateModified":"2019-01-15T00:00:01+08:00","datePublished":"2019-01-15T00:00:01+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/%E8%AF%A6%E8%A7%A3%E5%9F%BA%E7%A1%80%E7%88%AC%E8%99%AB%E6%9E%B6%E6%9E%84"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>YHW-MIRACLE</h1>
+    </a>
+    <div class="header-links">
+      <a href="/all_posts">
+    <h2 class="header-link">All_Posts | </h2>
+</a>
+<a href="/about">
+    <h2 class="header-link">About | </h2>
+</a>
+<a href="/categories">
+    <h2 class="header-link">Categories | </h2>
+</a>
+<a href="/tags">
+    <h2 class="header-link">Tags</h2>
+</a>
+<!--<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>-->
+
+    </div>
+  </div>
+</header>
+
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2 align="center">详解基础爬虫架构</h2>
+  <img src="/images/authorize.png" />
+  <center>
+    yhw-miracle writed in <time datetime="2019-01-15T00:00:01+08:00" class="by-line">January 15th, 2019</time>
+  </center>
+  <p>基础爬虫框架主要包括五大模块，分别为<code class="highlighter-rouge">URL</code>管理器、<code class="highlighter-rouge">HTML</code>下载器、<code class="highlighter-rouge">HTML</code>解析器、数据存储器和爬虫调度器。它们之间关系如下图所示。</p>
+
+<p><img src="/images/2019/Jan/2.png" alt="" /></p>
+
+<p><code class="highlighter-rouge">URL</code>管理器负责管理<code class="highlighter-rouge">URL</code>链接，维护已爬取的<code class="highlighter-rouge">URL</code>集合和为未爬取的<code class="highlighter-rouge">URL</code>集合，并提供外部访问接口。</p>
+
+<p><code class="highlighter-rouge">HTML</code>下载器负责从<code class="highlighter-rouge">URL</code>管理器中获取未爬取的<code class="highlighter-rouge">URL</code>链接，并下载相应的<code class="highlighter-rouge">HTML</code>网页。</p>
+
+<p><code class="highlighter-rouge">HTML</code>解析器负责解析<code class="highlighter-rouge">HTML</code>下载器下载的网页信息，解析出的信息交给数据存储器，解析出的新的<code class="highlighter-rouge">URL</code>链接交给<code class="highlighter-rouge">URL</code>管理器。</p>
+
+<p>数据存储器负责将<code class="highlighter-rouge">HTML</code>解析器解析出来的数据通过文件或数据库的形式存储起来。</p>
+
+<p>爬虫调度器负责统筹以上四个模块之间协调工作。</p>
+
+<p>以爬取百度百科<code class="highlighter-rouge">100</code>条词条的词条标题、摘要和链接为例。</p>
+
+<h3 id="url管理器"><code class="highlighter-rouge">URL</code>管理器</h3>
+<p><code class="highlighter-rouge">URL</code>管理器维护了两个变量，已爬取<code class="highlighter-rouge">URL</code>集合和未爬取<code class="highlighter-rouge">URL</code>集合；对外提供了四类访问这两个变量的方法，包括是否有待爬取的<code class="highlighter-rouge">URL</code>、获取未爬取的<code class="highlighter-rouge">URL</code>、添加新的<code class="highlighter-rouge">URL</code>到未爬取集合中、已爬取<code class="highlighter-rouge">URL</code>集合和未爬取<code class="highlighter-rouge">URL</code>集合的大小。</p>
+
+<p><code class="highlighter-rouge">URL</code>管理器需要对爬取的<code class="highlighter-rouge">URL</code>进行去重处理，常见的去重方案有三种，分别是内存去重、关系数据库去重和缓存数据库去重。</p>
+
+<p>两个变量</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="bp">self</span><span class="o">.</span><span class="n">new_urls</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">old_urls</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>六个方法</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">have_new_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="n">get_new_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="n">add_new_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="n">add_new_urls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">urls</span><span class="p">)</span>
+<span class="n">new_url_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="n">old_url_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># coding: utf-8
+</span>
+
+<span class="k">class</span> <span class="nc">URLManager</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">new_urls</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">old_urls</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">have_new_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        判断是否有待爬取的 url
+        :return: 待爬取的 url 集合的大小
+        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_url_size</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">get_new_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        获取待爬取的 url
+        :return: 一个待爬取的 url
+        """</span>
+        <span class="n">new_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_urls</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">new_url</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">old_urls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">new_url</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">new_url</span>
+
+    <span class="k">def</span> <span class="nf">add_new_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+        <span class="s">"""
+        添加一个待爬取的 url
+        :param url:
+        :return:
+        """</span>
+        <span class="k">if</span> <span class="n">url</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="n">url</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_urls</span> <span class="ow">and</span> <span class="n">url</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">old_urls</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">new_urls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_new_urls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">urls</span><span class="p">):</span>
+        <span class="s">"""
+        添加待爬取的 url 集合
+        :param urls:
+        :return:
+        """</span>
+        <span class="k">if</span> <span class="n">urls</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">urls</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_new_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">new_url_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        待爬取的 url 集合的大小
+        :return:
+        """</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">new_urls</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">old_url_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        已爬取的 url 集合的大小
+        :return:
+        """</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">old_urls</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h3 id="html下载器"><code class="highlighter-rouge">HTML</code>下载器</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># coding: utf-8
+</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+
+<span class="k">class</span> <span class="nc">HtmlDownloader</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">url</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">user_agent</span> <span class="o">=</span> <span class="s">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "</span> \
+                     <span class="s">"Chrome/71.0.3578.98 Safari/537.36"</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"User-Agent"</span><span class="p">:</span> <span class="n">user_agent</span><span class="p">}</span>
+        <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="n">req</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="s">"utf-8"</span>
+            <span class="k">return</span> <span class="n">req</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+
+</code></pre></div></div>
+
+<h3 id="html解析器"><code class="highlighter-rouge">HTML</code>解析器</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># coding: utf-8
+</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">re</span><span class="p">,</span> <span class="n">urlparse</span>
+
+
+<span class="k">class</span> <span class="nc">HtmlParser</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page_url</span><span class="p">,</span> <span class="n">html_content</span><span class="p">):</span>
+        <span class="s">"""
+
+        :param page_url:
+        :param html_content:
+        :return:
+        """</span>
+        <span class="k">if</span> <span class="n">page_url</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">html_content</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html_content</span><span class="p">,</span> <span class="s">"lxml"</span><span class="p">)</span>
+        <span class="n">new_urls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_new_urls</span><span class="p">(</span><span class="n">page_url</span><span class="p">,</span> <span class="n">soup</span><span class="p">)</span>
+        <span class="n">new_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_new_data</span><span class="p">(</span><span class="n">page_url</span><span class="p">,</span> <span class="n">soup</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_urls</span><span class="p">,</span> <span class="n">new_data</span>
+
+    <span class="k">def</span> <span class="nf">get_new_urls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page_url</span><span class="p">,</span> <span class="n">soup</span><span class="p">):</span>
+        <span class="s">"""
+
+        :param page_url:
+        :param soup:
+        :return:
+        """</span>
+        <span class="n">new_urls</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">links</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">"a"</span><span class="p">,</span> <span class="n">href</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="nb">compile</span><span class="p">(</span><span class="s">r'/item/(</span><span class="si">%</span><span class="s">\w+)+/\d+'</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">links</span><span class="p">:</span>
+            <span class="n">new_url</span> <span class="o">=</span> <span class="n">link</span><span class="p">[</span><span class="s">"href"</span><span class="p">]</span>
+            <span class="n">new_full_url</span> <span class="o">=</span> <span class="n">urlparse</span><span class="o">.</span><span class="n">urljoin</span><span class="p">(</span><span class="n">page_url</span><span class="p">,</span> <span class="n">new_url</span><span class="p">)</span>
+            <span class="n">new_urls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">new_full_url</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_urls</span>
+
+    <span class="k">def</span> <span class="nf">get_new_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page_url</span><span class="p">,</span> <span class="n">soup</span><span class="p">):</span>
+        <span class="s">"""
+
+        :param page_url:
+        :param soup:
+        :return:
+        """</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">data</span><span class="p">[</span><span class="s">"url"</span><span class="p">]</span> <span class="o">=</span> <span class="n">page_url</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span>
+
+        <span class="n">title</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">"dd"</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s">"lemmaWgt-lemmaTitle-title"</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">"h1"</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s">"title"</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span>
+
+        <span class="n">summary</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">"div"</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s">"lemma-summary"</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s">"summary"</span><span class="p">]</span> <span class="o">=</span> <span class="n">summary</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">data</span>
+
+</code></pre></div></div>
+
+<h3 id="数据存储器">数据存储器</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># coding: utf-8
+</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+
+
+<span class="k">class</span> <span class="nc">DataOutput</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">datas</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">store_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">datas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">output_html</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s">"url"</span><span class="p">,</span> <span class="s">"title"</span><span class="p">,</span> <span class="s">"summary"</span><span class="p">]</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"baike.csv"</span><span class="p">,</span> <span class="s">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+            <span class="n">fp_csv</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+            <span class="n">fp_csv</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
+            <span class="n">fp_csv</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">datas</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h3 id="爬虫调度器">爬虫调度器</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># coding: utf-8
+</span>
+<span class="kn">from</span> <span class="nn">URLManager</span> <span class="kn">import</span> <span class="n">URLManager</span>
+<span class="kn">from</span> <span class="nn">HtmlDownloader</span> <span class="kn">import</span> <span class="n">HtmlDownloader</span>
+<span class="kn">from</span> <span class="nn">HtmlParser</span> <span class="kn">import</span> <span class="n">HtmlParser</span>
+<span class="kn">from</span> <span class="nn">DataOutput</span> <span class="kn">import</span> <span class="n">DataOutput</span>
+
+
+<span class="k">class</span> <span class="nc">Spider</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">manager</span> <span class="o">=</span> <span class="n">URLManager</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">downloader</span> <span class="o">=</span> <span class="n">HtmlDownloader</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="n">HtmlParser</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">DataOutput</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">crawl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_url</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">add_new_url</span><span class="p">(</span><span class="n">root_url</span><span class="p">)</span>
+        <span class="k">while</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">have_new_url</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">old_url_size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">new_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">get_new_url</span><span class="p">()</span>
+                <span class="n">html</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">downloader</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">new_url</span><span class="p">)</span>
+                <span class="n">new_urls</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">parser</span><span class="p">(</span><span class="n">new_url</span><span class="p">,</span> <span class="n">html</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">add_new_urls</span><span class="p">(</span><span class="n">new_urls</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">store_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                <span class="k">print</span> <span class="s">"已经爬取 </span><span class="si">%</span><span class="s">s 个链接"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">old_url_size</span><span class="p">()</span>
+            <span class="k">except</span> <span class="nb">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">"crawl failed."</span>
+                <span class="k">print</span> <span class="n">e</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">output_html</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">spider</span> <span class="o">=</span> <span class="n">Spider</span><span class="p">()</span>
+    <span class="n">spider</span><span class="o">.</span><span class="n">crawl</span><span class="p">(</span><span class="s">"https://baike.baidu.com/item/</span><span class="si">%</span><span class="s">E7</span><span class="si">%</span><span class="s">BD</span><span class="si">%91%</span><span class="s">E7</span><span class="si">%</span><span class="s">BB</span><span class="si">%9</span><span class="s">C</span><span class="si">%</span><span class="s">E7</span><span class="si">%88%</span><span class="s">AC</span><span class="si">%</span><span class="s">E8</span><span class="si">%99%</span><span class="s">AB"</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+</article>
+
+
+	<div class="tags">
+	<img src="/images/tag.png" />
+	
+		<a href="/tag/python">python</a>
+	
+		<a href="/tag/爬虫框架">爬虫框架</a>
+	
+	</div>
+
+
+
+
+
+
+	<div class="categories">
+	<img src="/images/category.png" />
+	
+	  <a href="/category/知识总结">知识总结</a>
+	
+	</div>
+
+
+
+
+<div class="pagination">
+    上一篇：
+    
+      <a href="/learning_python_01" class="previous">
+        <img src="/images/previous.png" />
+      </a>
+    
+  
+    | 下一篇：
+    
+      <a href="/python%E5%AE%9E%E7%8E%B0%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81" class="next">
+        <img src="/images/next.png" />
+      </a>
+    
+  </div>
+
+
+      </section>
+    </div>
+  </div>
+
+  
+
+  <div align="center" id="qecode_img">
+  <hr />
+  <p>欢迎关注，我们一起进行认知迭代！</p>
+  <img src="/images/qrcode_for_gh_5efb2780ab44_258.jpg" /><br />
+  痛点就是起点
+</div>
+
+<footer>
+  <!-- <a href="https://blogs.yhw-miracle.cn">
+    <span>
+        <b>yhw-miracle</b>
+    </span>
+    
+    <span>© 2016 - 2019</span>
+  </a> -->
+</footer>
+
+<div align="center" style="font-size: 13px;">
+  <hr />
+  <span>&copy; 2016 - 2019</span>基于
+  <a href="https://jekyllrb.com">jekyll</a> | 
+  <a href="https://github.com">Github Pags</a> | 
+  By <a href="blogs.yhw-miracle.cn">yhw-miracle</a>
+</div>
+
+
+  <!--  -->
+</body>
+</html>

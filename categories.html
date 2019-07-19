@@ -1,0 +1,24 @@
+---
+layout: page
+title: categories
+---
+
+{% for category in site.categories %}
+    <ul>
+        <img src="/images/category.png" style="margin: 5px 5px 5px 5px; float: left;" />
+        <li class="categories" style="display: inline-block;background-color: #ff6a00;">
+            {{ category[0] }}({{ category[1].size }})
+        </li>
+        {% for post in category[1] %}
+            <ul>
+                <li> 
+                    {{ post.date | date:"%Y/%m/%d" }}
+                    ---
+                    <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
+                        {{ post.title }}
+                    </a>
+                </li>
+            </ul>
+        {% endfor %}
+    </ul>
+{% endfor %}

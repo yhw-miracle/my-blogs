@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>Android布局</title>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Android布局 | yhw-miracle’s Blog</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="Android布局" />
+<meta name="author" content="yhw-miracle" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="这篇文章将讲述 Addroid 的五大布局方式，分别为 LinearLayout、Relativelayout、FrameLayout、AbsoluteLayout 和 TableLayout。" />
+<meta property="og:description" content="这篇文章将讲述 Addroid 的五大布局方式，分别为 LinearLayout、Relativelayout、FrameLayout、AbsoluteLayout 和 TableLayout。" />
+<link rel="canonical" href="http://localhost:4000/Android%E5%B8%83%E5%B1%80" />
+<meta property="og:url" content="http://localhost:4000/Android%E5%B8%83%E5%B1%80" />
+<meta property="og:site_name" content="yhw-miracle’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-09-14T00:00:00+08:00" />
+<script type="application/ld+json">
+{"description":"这篇文章将讲述 Addroid 的五大布局方式，分别为 LinearLayout、Relativelayout、FrameLayout、AbsoluteLayout 和 TableLayout。","author":{"@type":"Person","name":"yhw-miracle"},"@type":"BlogPosting","url":"http://localhost:4000/Android%E5%B8%83%E5%B1%80","headline":"Android布局","dateModified":"2017-09-14T00:00:00+08:00","datePublished":"2017-09-14T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/Android%E5%B8%83%E5%B1%80"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>YHW-MIRACLE</h1>
+    </a>
+    <div class="header-links">
+      <a href="/all_posts">
+    <h2 class="header-link">All_Posts | </h2>
+</a>
+<a href="/about">
+    <h2 class="header-link">About | </h2>
+</a>
+<a href="/categories">
+    <h2 class="header-link">Categories | </h2>
+</a>
+<a href="/tags">
+    <h2 class="header-link">Tags</h2>
+</a>
+<!--<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>-->
+
+    </div>
+  </div>
+</header>
+
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2 align="center">Android布局</h2>
+  <img src="/images/authorize.png" />
+  <center>
+    yhw-miracle writed in <time datetime="2017-09-14T00:00:00+08:00" class="by-line">September 14th, 2017</time>
+  </center>
+  <p>这篇文章将讲述 Addroid 的五大布局方式，分别为 LinearLayout、Relativelayout、FrameLayout、AbsoluteLayout 和 TableLayout。</p>
+
+<h4 id="1-linearlayout-线性布局">1 LinearLayout 线性布局</h4>
+<p>LinearLayout 的属性：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">android:</span><span class="n">orientation</span><span class="o">=</span><span class="s">"horizontal | vertical"</span>
+<span class="nl">android:</span><span class="n">gravity</span><span class="o">=</span><span class="s">"center | center_horizontal | center_vertical | left | right | bottom"</span>
+</code></pre></div></div>
+
+<ol>
+  <li>orientation 决定其子类控件的排布方式，垂直分布或者水平分布</li>
+  <li>gravity 决定其子类控件的 xy 位置，垂直居中、水平居中、都居中、左边、右边或者底部</li>
+</ol>
+
+<p>子类控件用到的属性：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">android:</span><span class="n">layout_gravity</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_weight</span><span class="o">=</span><span class="s">""</span>
+</code></pre></div></div>
+
+<ol>
+  <li>layout_gravity 决定本身控件在父类容器的 xy 位置</li>
+  <li>layout_weight 决定本身控件在父类容器的比例</li>
+</ol>
+
+<h4 id="2-relativelayout-相对布局">2 RelativeLayout 相对布局</h4>
+<p>子类控件相对父类容器的位置：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">android:</span><span class="n">layout_alignParentLeft</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_alignParentRight</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_alignParentTop</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_alignParentBottom</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_marginLeft</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_marginRight</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_marginTop</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_marginBottom</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_centerHorizontal</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_centerVertical</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_centerInParent</span><span class="o">=</span><span class="s">""</span>
+</code></pre></div></div>
+
+<p>子类控件相对于子类控件的位置：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">android:</span><span class="n">layout_below</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_toLeftOf</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_toRightOf</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_above</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_alignBaseline</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_alignLeft</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_alignRight</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_alignTop</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_alignBottom</span><span class="o">=</span><span class="s">""</span>
+</code></pre></div></div>
+
+<h4 id="3-framelayout-帧布局">3 FrameLayout 帧布局</h4>
+<p>帧布局不能设置子类控件的位置，子类控件会自动显示在左上角，后来添加的子类控件会部分或全部覆盖前面的控件。</p>
+
+<h4 id="4-absolutelayut-绝对布局">4 AbsoluteLayut 绝对布局</h4>
+<p>这种布局方式以固定的位置规定控件的位置，不具有适配多种手机的能力。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">android:</span><span class="n">layout_X</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_Y</span><span class="o">=</span><span class="s">""</span>
+</code></pre></div></div>
+
+<p>1.5 TableLayout 表格布局
+表格布局的每一行是 TableRow ，可以将布局以表格三大形式显示在屏幕上。</p>
+
+<p>全局属性：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">android:</span><span class="n">collapseColumns</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">shrinkColumns</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">stretchColumns</span><span class="o">=</span><span class="s">""</span>
+</code></pre></div></div>
+
+<p>控件属性：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">android:</span><span class="n">layout_column</span><span class="o">=</span><span class="s">""</span>
+<span class="nl">android:</span><span class="n">layout_span</span><span class="o">=</span><span class="s">""</span>
+</code></pre></div></div>
+
+</article>
+
+
+	<div class="tags">
+	<img src="/images/tag.png" />
+	
+		<a href="/tag/Android">Android</a>
+	
+		<a href="/tag/界面布局">界面布局</a>
+	
+	</div>
+
+
+
+
+
+
+	<div class="categories">
+	<img src="/images/category.png" />
+	
+	  <a href="/category/知识总结">知识总结</a>
+	
+	</div>
+
+
+
+
+<div class="pagination">
+    上一篇：
+    
+      <a href="/Intent%E5%AE%9E%E7%8E%B0%E9%A1%B5%E9%9D%A2%E4%B9%8B%E9%97%B4%E8%B7%B3%E8%BD%AC" class="previous">
+        <img src="/images/previous.png" />
+      </a>
+    
+  
+    | 下一篇：
+    
+      <a href="/Android%E8%B7%91%E9%A9%AC%E7%81%AF%E6%95%88%E6%9E%9C" class="next">
+        <img src="/images/next.png" />
+      </a>
+    
+  </div>
+
+
+      </section>
+    </div>
+  </div>
+
+  
+
+  <div align="center" id="qecode_img">
+  <hr />
+  <p>欢迎关注，我们一起进行认知迭代！</p>
+  <img src="/images/qrcode_for_gh_5efb2780ab44_258.jpg" /><br />
+  痛点就是起点
+</div>
+
+<footer>
+  <!-- <a href="https://blogs.yhw-miracle.cn">
+    <span>
+        <b>yhw-miracle</b>
+    </span>
+    
+    <span>© 2016 - 2019</span>
+  </a> -->
+</footer>
+
+<div align="center" style="font-size: 13px;">
+  <hr />
+  <span>&copy; 2016 - 2019</span>基于
+  <a href="https://jekyllrb.com">jekyll</a> | 
+  <a href="https://github.com">Github Pags</a> | 
+  By <a href="blogs.yhw-miracle.cn">yhw-miracle</a>
+</div>
+
+
+  <!--  -->
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>java基础之注释、关键字、标识符、数据类型和常量</title>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>java基础之注释、关键字、标识符、数据类型和常量 | yhw-miracle’s Blog</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="java基础之注释、关键字、标识符、数据类型和常量" />
+<meta name="author" content="yhw-miracle" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. 了解 Java 程序 在学习 java 基础语法之前，我先介绍一下 java 程序如何编译和运行。java 程序在编译时需要 javac.exe 工具。运行时需要 java.exe 工具，这两个工具在 jdk 中有，具体见下图所示。" />
+<meta property="og:description" content="1. 了解 Java 程序 在学习 java 基础语法之前，我先介绍一下 java 程序如何编译和运行。java 程序在编译时需要 javac.exe 工具。运行时需要 java.exe 工具，这两个工具在 jdk 中有，具体见下图所示。" />
+<link rel="canonical" href="http://localhost:4000/java%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%B3%A8%E9%87%8A-%E5%85%B3%E9%94%AE%E5%AD%97-%E6%A0%87%E8%AF%86%E7%AC%A6-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%B8%B8%E9%87%8F" />
+<meta property="og:url" content="http://localhost:4000/java%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%B3%A8%E9%87%8A-%E5%85%B3%E9%94%AE%E5%AD%97-%E6%A0%87%E8%AF%86%E7%AC%A6-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%B8%B8%E9%87%8F" />
+<meta property="og:site_name" content="yhw-miracle’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-06-26T00:00:00+08:00" />
+<script type="application/ld+json">
+{"description":"1. 了解 Java 程序 在学习 java 基础语法之前，我先介绍一下 java 程序如何编译和运行。java 程序在编译时需要 javac.exe 工具。运行时需要 java.exe 工具，这两个工具在 jdk 中有，具体见下图所示。","author":{"@type":"Person","name":"yhw-miracle"},"@type":"BlogPosting","url":"http://localhost:4000/java%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%B3%A8%E9%87%8A-%E5%85%B3%E9%94%AE%E5%AD%97-%E6%A0%87%E8%AF%86%E7%AC%A6-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%B8%B8%E9%87%8F","headline":"java基础之注释、关键字、标识符、数据类型和常量","dateModified":"2018-06-26T00:00:00+08:00","datePublished":"2018-06-26T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/java%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%B3%A8%E9%87%8A-%E5%85%B3%E9%94%AE%E5%AD%97-%E6%A0%87%E8%AF%86%E7%AC%A6-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%B8%B8%E9%87%8F"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>YHW-MIRACLE</h1>
+    </a>
+    <div class="header-links">
+      <a href="/all_posts">
+    <h2 class="header-link">All_Posts | </h2>
+</a>
+<a href="/about">
+    <h2 class="header-link">About | </h2>
+</a>
+<a href="/categories">
+    <h2 class="header-link">Categories | </h2>
+</a>
+<a href="/tags">
+    <h2 class="header-link">Tags</h2>
+</a>
+<!--<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>-->
+
+    </div>
+  </div>
+</header>
+
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2 align="center">java基础之注释、关键字、标识符、数据类型和常量</h2>
+  <img src="/images/authorize.png" />
+  <center>
+    yhw-miracle writed in <time datetime="2018-06-26T00:00:00+08:00" class="by-line">June 26th, 2018</time>
+  </center>
+  <h3 id="1-了解-java-程序">1. 了解 Java 程序</h3>
+<p>在学习 java 基础语法之前，我先介绍一下 java 程序如何编译和运行。java 程序在编译时需要 javac.exe 工具。运行时需要 java.exe 工具，这两个工具在 jdk 中有，具体见下图所示。</p>
+
+<p><img src="/images/2018/stWJxc6RceRTsvEoyyMo3d7v.png" alt="" /></p>
+
+<h3 id="2-java-程序中的注释">2. java 程序中的注释</h3>
+<p>我们在编写 java 程序时，需要在源代码中添加文字用来对进行代码解释说明，但这些文字并不是Java代码的语法，直接书写会导致编译出错。这时我们可以使用注释来完成这一功能。在编译时，编译器会忽略注释的存在，所以注释并不会导致编译出错，同时注释还方便编写者和其他人阅读源代码，加强对代码的理解。</p>
+
+<p>Java 中提供了三种注释方式，分别是：</p>
+
+<ul>
+  <li>单行注释 //注释内容</li>
+  <li>多行注释 /注释内容/</li>
+  <li>文档注释 /*注释内容/</li>
+</ul>
+
+<p>其中，单行注释一般作为为单行代码解释，书写在被解释代码的上一行位置。</p>
+
+<p><img src="/images/2018/vWGoK_2lTdzWFOS_pJEhPr5W.png" alt="" /></p>
+
+<p>多行注释可以书写多行的解释文字，一般用来解释 Java 程序中类的功能或者解释某一段代码，也可以在多行解释中前几行注明开发者姓名和联系方式，便于交流。</p>
+
+<p><img src="/images/2018/ctDtPvnJItCjNCYbrBCmf4Ur.png" alt="" /></p>
+
+<p>文档注释与多行注释作用基本相同，唯一的区别是文档注释可以使用 javadoc.exe 命令生成API文档。</p>
+
+<p><img src="/images/2018/B-Ro0y6qGlhuHxS4YQ7CoNdh.png" alt="" /></p>
+
+<p><img src="/images/2018/zyVDVPupzW0eGqQtnQbeVx0G.png" alt="" /></p>
+
+<h3 id="3-关键字">3. 关键字</h3>
+<p>java 中关键字是被赋予特殊含义，具有专门用途。这些单词我们可以随时使用，但是不能用于定义标识符。</p>
+
+<p><img src="/images/2018/K2Tpzxy0QxPS-yFhrU-A5-rc.png" alt="" /></p>
+
+<h3 id="4-标识符">4. 标识符</h3>
+<p>Java 语言中，标识符是由英文字母（A-Z，a-z），数字（0-9），下划线（_）和美元符号（$）组成；其中，在定义标识符时，不能以数字开头，不能使用关键字，严格区分大小写；在起名时，要尽量做到见名知意。</p>
+
+<p>一般，在命名类名时，习惯采用大驼峰命名法，也就是每一个单词第一个字母大写，如：“AddStudentInfo”；在命名方法时，习惯使用小驼峰命名法，就是方法名的第一个单词小写，后面单词的第一个字母大写，如：“addStudentInfo”。</p>
+
+<h3 id="5-数据类型">5. 数据类型</h3>
+<p>Java 语言中数据类型分为基本数据类型和引用数据类型。基本数据类型是 Java 语言中内置的类型，分别是整数类型、小数类型、字符类型、布尔类型。这四类基本类型是最简单、最基础的类型。引用数据类型是强大的数据类型，它是基于基本数据类型创建的，主要有数组、类和接口。</p>
+
+<p><img src="/images/2018/BQrOU_XL27fsaUOBhnKO6djs.png" alt="" /></p>
+
+<ol>
+  <li>
+    <p>常量
+Java 语言中常量就是不变的数据量，根据基本数据类型划分，常量有以下类型。</p>
+  </li>
+  <li>
+    <p>整数类型
+十进制表示法（0-9）；二进制表示法（0和1），以 0b 开头；八进制表示法（0-7），以 0 开头；十六进制表示法（0-9，A-F），以 0x 开头。</p>
+  </li>
+  <li>
+    <p>小数类型</p>
+  </li>
+  <li>
+    <p>布尔类型
+有 true 和 false 两种形式。</p>
+  </li>
+  <li>
+    <p>字符类型
+用单引号（‘’）括起来，单引号里只能写一个字符。</p>
+  </li>
+  <li>
+    <p>字符串类型
+用双引号（“”）括起来，双引号里可以写 0 到任意个字符。</p>
+  </li>
+</ol>
+
+</article>
+
+
+	<div class="tags">
+	<img src="/images/tag.png" />
+	
+		<a href="/tag/java">java</a>
+	
+		<a href="/tag/注释">注释</a>
+	
+		<a href="/tag/关键字">关键字</a>
+	
+		<a href="/tag/标识符">标识符</a>
+	
+		<a href="/tag/数据类型">数据类型</a>
+	
+		<a href="/tag/常量">常量</a>
+	
+	</div>
+
+
+
+
+
+
+	<div class="categories">
+	<img src="/images/category.png" />
+	
+	  <a href="/category/知识总结">知识总结</a>
+	
+	</div>
+
+
+
+
+<div class="pagination">
+    上一篇：
+    
+      <a href="/java%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%8F%98%E9%87%8F" class="previous">
+        <img src="/images/previous.png" />
+      </a>
+    
+  
+    | 下一篇：
+    
+      <a href="/java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85" class="next">
+        <img src="/images/next.png" />
+      </a>
+    
+  </div>
+
+
+      </section>
+    </div>
+  </div>
+
+  
+
+  <div align="center" id="qecode_img">
+  <hr />
+  <p>欢迎关注，我们一起进行认知迭代！</p>
+  <img src="/images/qrcode_for_gh_5efb2780ab44_258.jpg" /><br />
+  痛点就是起点
+</div>
+
+<footer>
+  <!-- <a href="https://blogs.yhw-miracle.cn">
+    <span>
+        <b>yhw-miracle</b>
+    </span>
+    
+    <span>© 2016 - 2019</span>
+  </a> -->
+</footer>
+
+<div align="center" style="font-size: 13px;">
+  <hr />
+  <span>&copy; 2016 - 2019</span>基于
+  <a href="https://jekyllrb.com">jekyll</a> | 
+  <a href="https://github.com">Github Pags</a> | 
+  By <a href="blogs.yhw-miracle.cn">yhw-miracle</a>
+</div>
+
+
+  <!--  -->
+</body>
+</html>

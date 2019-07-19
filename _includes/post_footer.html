@@ -1,0 +1,23 @@
+<div class="pagination">
+    上一篇：
+    {% if page.next %}
+      <a href="{{ page.next.url }}" class="previous">
+        <img src="/images/previous.png" />
+      </a>
+    {% else %}
+      <span class="previous">
+        <img src="/images/no_idea.png" />
+      </span>
+    {% endif %}
+  
+    | 下一篇：
+    {% if page.previous %}
+      <a href="{{ page.previous.url }}" class="next">
+        <img src="/images/next.png" />
+      </a>
+    {% else %}
+      <span class="next">
+        <img src="/images/no_idea.png" />
+      </span>
+    {% endif %}
+  </div>

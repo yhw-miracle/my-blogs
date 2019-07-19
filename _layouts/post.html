@@ -1,0 +1,17 @@
+---
+layout: default
+---
+
+<article>
+  <h2 align="center">{{ page.title }}</h2>
+  <img src="/images/authorize.png" />
+  <center>
+    {{ page.author }} writed in <time datetime="{{ page.date | date_to_xmlschema }}" class="by-line">{{ page.date | date_to_long_string: "ordinal", "US" }}</time>
+  </center>
+  {{ content }}
+</article>
+
+{% include show_tags.html %}
+{% include show_categories.html %}
+{% include post_footer.html %}
+

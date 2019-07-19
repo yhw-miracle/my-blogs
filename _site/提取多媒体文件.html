@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>提取多媒体文件</title>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>提取多媒体文件 | yhw-miracle’s Blog</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="提取多媒体文件" />
+<meta name="author" content="yhw-miracle" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="利用 python 爬取多媒体文件，存储它们有两种方式，一是只存储 url 链接，二是将文件下载下来。存储文件链接可以将文件的链接信息存储到 json 文件或 csv 文件；下载文件需要用到 urllib 模块提供的 urlretrieve() 函数，urlretrieve() 函数可以将远程数据下载到本地。 urlretrieve(url,filename=None,reporthook=None,data=None,context=None) 参数 filename 是指存储的本地路径；reporthook 是一个回调函数，当连接到服务器以及传输完毕相应的数据块，会调用该回调函数，一般用于显示下载进度。 以爬取天堂网图片为例 http://www.ivsky.com/tupian/ziranfengguang/，下载图片的代码如下所示： import urllib from lxml import etree import requests def schedule(blocknum, blocksize, totalsize): per = 100.0 * blocknum * blocksize / totalsize if per &gt; 100: per = 100 print &quot;当前下载进度： %d&quot; % per user_agent = &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) &quot; \ &quot;Chrome/71.0.3578.98 Safari/537.36&quot; headers = {&quot;User-Agent&quot;: user_agent} req = requests.get(&quot;http://www.ivsky.com/tupian/ziranfengguang/&quot;, headers=headers) html = etree.HTML(req.text) img_urls = html.xpath(&quot;.//img/@src&quot;) i = 0 for img_url in img_urls: urllib.urlretrieve(img_url, &quot;./images/img&quot;+str(i)+&quot;.jpg&quot;, schedule) i += 1" />
+<meta property="og:description" content="利用 python 爬取多媒体文件，存储它们有两种方式，一是只存储 url 链接，二是将文件下载下来。存储文件链接可以将文件的链接信息存储到 json 文件或 csv 文件；下载文件需要用到 urllib 模块提供的 urlretrieve() 函数，urlretrieve() 函数可以将远程数据下载到本地。 urlretrieve(url,filename=None,reporthook=None,data=None,context=None) 参数 filename 是指存储的本地路径；reporthook 是一个回调函数，当连接到服务器以及传输完毕相应的数据块，会调用该回调函数，一般用于显示下载进度。 以爬取天堂网图片为例 http://www.ivsky.com/tupian/ziranfengguang/，下载图片的代码如下所示： import urllib from lxml import etree import requests def schedule(blocknum, blocksize, totalsize): per = 100.0 * blocknum * blocksize / totalsize if per &gt; 100: per = 100 print &quot;当前下载进度： %d&quot; % per user_agent = &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) &quot; \ &quot;Chrome/71.0.3578.98 Safari/537.36&quot; headers = {&quot;User-Agent&quot;: user_agent} req = requests.get(&quot;http://www.ivsky.com/tupian/ziranfengguang/&quot;, headers=headers) html = etree.HTML(req.text) img_urls = html.xpath(&quot;.//img/@src&quot;) i = 0 for img_url in img_urls: urllib.urlretrieve(img_url, &quot;./images/img&quot;+str(i)+&quot;.jpg&quot;, schedule) i += 1" />
+<link rel="canonical" href="http://localhost:4000/%E6%8F%90%E5%8F%96%E5%A4%9A%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6" />
+<meta property="og:url" content="http://localhost:4000/%E6%8F%90%E5%8F%96%E5%A4%9A%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6" />
+<meta property="og:site_name" content="yhw-miracle’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-01-14T00:00:01+08:00" />
+<script type="application/ld+json">
+{"description":"利用 python 爬取多媒体文件，存储它们有两种方式，一是只存储 url 链接，二是将文件下载下来。存储文件链接可以将文件的链接信息存储到 json 文件或 csv 文件；下载文件需要用到 urllib 模块提供的 urlretrieve() 函数，urlretrieve() 函数可以将远程数据下载到本地。 urlretrieve(url,filename=None,reporthook=None,data=None,context=None) 参数 filename 是指存储的本地路径；reporthook 是一个回调函数，当连接到服务器以及传输完毕相应的数据块，会调用该回调函数，一般用于显示下载进度。 以爬取天堂网图片为例 http://www.ivsky.com/tupian/ziranfengguang/，下载图片的代码如下所示： import urllib from lxml import etree import requests def schedule(blocknum, blocksize, totalsize): per = 100.0 * blocknum * blocksize / totalsize if per &gt; 100: per = 100 print &quot;当前下载进度： %d&quot; % per user_agent = &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) &quot; \\ &quot;Chrome/71.0.3578.98 Safari/537.36&quot; headers = {&quot;User-Agent&quot;: user_agent} req = requests.get(&quot;http://www.ivsky.com/tupian/ziranfengguang/&quot;, headers=headers) html = etree.HTML(req.text) img_urls = html.xpath(&quot;.//img/@src&quot;) i = 0 for img_url in img_urls: urllib.urlretrieve(img_url, &quot;./images/img&quot;+str(i)+&quot;.jpg&quot;, schedule) i += 1","author":{"@type":"Person","name":"yhw-miracle"},"@type":"BlogPosting","url":"http://localhost:4000/%E6%8F%90%E5%8F%96%E5%A4%9A%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6","headline":"提取多媒体文件","dateModified":"2019-01-14T00:00:01+08:00","datePublished":"2019-01-14T00:00:01+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/%E6%8F%90%E5%8F%96%E5%A4%9A%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>YHW-MIRACLE</h1>
+    </a>
+    <div class="header-links">
+      <a href="/all_posts">
+    <h2 class="header-link">All_Posts | </h2>
+</a>
+<a href="/about">
+    <h2 class="header-link">About | </h2>
+</a>
+<a href="/categories">
+    <h2 class="header-link">Categories | </h2>
+</a>
+<a href="/tags">
+    <h2 class="header-link">Tags</h2>
+</a>
+<!--<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>-->
+
+    </div>
+  </div>
+</header>
+
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2 align="center">提取多媒体文件</h2>
+  <img src="/images/authorize.png" />
+  <center>
+    yhw-miracle writed in <time datetime="2019-01-14T00:00:01+08:00" class="by-line">January 14th, 2019</time>
+  </center>
+  <p>利用 python 爬取多媒体文件，存储它们有两种方式，一是只存储 url 链接，二是将文件下载下来。存储文件链接可以将文件的链接信息存储到 json 文件或 csv 文件；下载文件需要用到 urllib 模块提供的 urlretrieve() 函数，urlretrieve() 函数可以将远程数据下载到本地。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">reporthook</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">context</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>参数 filename 是指存储的本地路径；reporthook 是一个回调函数，当连接到服务器以及传输完毕相应的数据块，会调用该回调函数，一般用于显示下载进度。</p>
+
+<p>以爬取天堂网图片为例 <a href="http://www.ivsky.com/tupian/ziranfengguang/">http://www.ivsky.com/tupian/ziranfengguang/</a>，下载图片的代码如下所示：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+
+<span class="k">def</span> <span class="nf">schedule</span><span class="p">(</span><span class="n">blocknum</span><span class="p">,</span> <span class="n">blocksize</span><span class="p">,</span> <span class="n">totalsize</span><span class="p">):</span>
+    <span class="n">per</span> <span class="o">=</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="n">blocknum</span> <span class="o">*</span> <span class="n">blocksize</span> <span class="o">/</span> <span class="n">totalsize</span>
+    <span class="k">if</span> <span class="n">per</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="n">per</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="k">print</span> <span class="s">"当前下载进度： </span><span class="si">%</span><span class="s">d"</span> <span class="o">%</span> <span class="n">per</span>
+
+
+<span class="n">user_agent</span> <span class="o">=</span> <span class="s">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "</span> \
+             <span class="s">"Chrome/71.0.3578.98 Safari/537.36"</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"User-Agent"</span><span class="p">:</span> <span class="n">user_agent</span><span class="p">}</span>
+<span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"http://www.ivsky.com/tupian/ziranfengguang/"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="n">html</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="n">img_urls</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">".//img/@src"</span><span class="p">)</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">img_url</span> <span class="ow">in</span> <span class="n">img_urls</span><span class="p">:</span>
+    <span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">img_url</span><span class="p">,</span> <span class="s">"./images/img"</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s">".jpg"</span><span class="p">,</span> <span class="n">schedule</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p><img src="/images/2019/Jan/1.png" alt="" /></p>
+
+</article>
+
+
+	<div class="tags">
+	<img src="/images/tag.png" />
+	
+		<a href="/tag/多媒体文件">多媒体文件</a>
+	
+		<a href="/tag/下载">下载</a>
+	
+	</div>
+
+
+
+
+
+
+	<div class="categories">
+	<img src="/images/category.png" />
+	
+	  <a href="/category/知识总结">知识总结</a>
+	
+	</div>
+
+
+
+
+<div class="pagination">
+    上一篇：
+    
+      <a href="/python%E5%AE%9E%E7%8E%B0%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81" class="previous">
+        <img src="/images/previous.png" />
+      </a>
+    
+  
+    | 下一篇：
+    
+      <a href="/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E4%B8%BAjson%E5%92%8Ccsv" class="next">
+        <img src="/images/next.png" />
+      </a>
+    
+  </div>
+
+
+      </section>
+    </div>
+  </div>
+
+  
+
+  <div align="center" id="qecode_img">
+  <hr />
+  <p>欢迎关注，我们一起进行认知迭代！</p>
+  <img src="/images/qrcode_for_gh_5efb2780ab44_258.jpg" /><br />
+  痛点就是起点
+</div>
+
+<footer>
+  <!-- <a href="https://blogs.yhw-miracle.cn">
+    <span>
+        <b>yhw-miracle</b>
+    </span>
+    
+    <span>© 2016 - 2019</span>
+  </a> -->
+</footer>
+
+<div align="center" style="font-size: 13px;">
+  <hr />
+  <span>&copy; 2016 - 2019</span>基于
+  <a href="https://jekyllrb.com">jekyll</a> | 
+  <a href="https://github.com">Github Pags</a> | 
+  By <a href="blogs.yhw-miracle.cn">yhw-miracle</a>
+</div>
+
+
+  <!--  -->
+</body>
+</html>

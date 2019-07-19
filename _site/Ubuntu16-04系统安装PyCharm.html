@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>Ubuntu16.04系统安装PyCharm</title>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Ubuntu16.04系统安装PyCharm | yhw-miracle’s Blog</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="Ubuntu16.04系统安装PyCharm" />
+<meta name="author" content="yhw-miracle" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="随着人工智能的发展，python 越来越流行。作为年轻一代的互联网技术人员，学习 python 就变得十分必要。俗话说，“工欲善其事必先利其器”，在学习 python 之前，一个好的 IDE 将会使编程效率得到大幅度提高。本人在进行 python 开发时，强烈建议 pycharm 编辑器。" />
+<meta property="og:description" content="随着人工智能的发展，python 越来越流行。作为年轻一代的互联网技术人员，学习 python 就变得十分必要。俗话说，“工欲善其事必先利其器”，在学习 python 之前，一个好的 IDE 将会使编程效率得到大幅度提高。本人在进行 python 开发时，强烈建议 pycharm 编辑器。" />
+<link rel="canonical" href="http://localhost:4000/Ubuntu16-04%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85PyCharm" />
+<meta property="og:url" content="http://localhost:4000/Ubuntu16-04%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85PyCharm" />
+<meta property="og:site_name" content="yhw-miracle’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-07-22T00:00:00+08:00" />
+<script type="application/ld+json">
+{"description":"随着人工智能的发展，python 越来越流行。作为年轻一代的互联网技术人员，学习 python 就变得十分必要。俗话说，“工欲善其事必先利其器”，在学习 python 之前，一个好的 IDE 将会使编程效率得到大幅度提高。本人在进行 python 开发时，强烈建议 pycharm 编辑器。","author":{"@type":"Person","name":"yhw-miracle"},"@type":"BlogPosting","url":"http://localhost:4000/Ubuntu16-04%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85PyCharm","headline":"Ubuntu16.04系统安装PyCharm","dateModified":"2018-07-22T00:00:00+08:00","datePublished":"2018-07-22T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/Ubuntu16-04%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85PyCharm"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>YHW-MIRACLE</h1>
+    </a>
+    <div class="header-links">
+      <a href="/all_posts">
+    <h2 class="header-link">All_Posts | </h2>
+</a>
+<a href="/about">
+    <h2 class="header-link">About | </h2>
+</a>
+<a href="/categories">
+    <h2 class="header-link">Categories | </h2>
+</a>
+<a href="/tags">
+    <h2 class="header-link">Tags</h2>
+</a>
+<!--<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>-->
+
+    </div>
+  </div>
+</header>
+
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2 align="center">Ubuntu16.04系统安装PyCharm</h2>
+  <img src="/images/authorize.png" />
+  <center>
+    yhw-miracle writed in <time datetime="2018-07-22T00:00:00+08:00" class="by-line">July 22nd, 2018</time>
+  </center>
+  <p>随着人工智能的发展，python 越来越流行。作为年轻一代的互联网技术人员，学习 python 就变得十分必要。俗话说，“工欲善其事必先利其器”，在学习 python 之前，一个好的 IDE 将会使编程效率得到大幅度提高。本人在进行 python 开发时，强烈建议 pycharm 编辑器。</p>
+
+<h3 id="1-pycharm">1. pycharm</h3>
+<p>pycharm 主要分为专业版和社区版，专业版是收费的，有 30 天试用期，当然专业版功能非常强大；而社区版是免费的，是专业版的阉割版，但基本上可以满足学习和开发的需要。pycharm 具有跨平台性，可以在 windows、linux、mac系统下使用。其官方链接为 <a href="https://www.jetbrains.com/pycharm/">PyCharm</a> 。</p>
+
+<h3 id="2-安装过程">2. 安装过程</h3>
+<p>pycharm 安装十分简单，windows 系统下只需要简单的一路“next”，即可成功安装。本人以 pycharm 社区版在 Ubuntu 16.04 系统安装为例，介绍其安装过程。首先介绍一种最简单的安装方式，只需要两条命令即可，分别为:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository ppa:mystic-mirage/pycharm
+</code></pre></div></div>
+
+<p><img src="/images/2018/XR6zLENFy4WAZlVAFkwFV3zs.png" alt="" /></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>pycharm-community
+</code></pre></div></div>
+
+<p>这种方式可能由于镜像源的问题，我在安装时网速很慢，安装进程严重耽误，故我放弃这种安装方式，采用官网安装包解压安装的方式。</p>
+
+<ol>
+  <li>
+    <p>首先在官网上下载 pycahrm 在 linux 系统的软件包。</p>
+  </li>
+  <li>
+    <p>下载完 pycharm 安装包后，如图所示，将其解压到 Linux 系统下某个路径下，这里我是解压到 /usr/local/ 目录下。
+解压命令为：</p>
+  </li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo tar</span> <span class="nt">-zxvf</span> pycharm-community-2018.1.4.tar.gz <span class="nt">-C</span> /usr/local/
+</code></pre></div></div>
+
+<p><img src="/images/2018/Db_FgbgW3ailrm2teuaryPNr.png" alt="" /></p>
+
+<p><img src="/images/2018/zn8Nlp40rVrJz_opjSBIM4Nw.png" alt="" /></p>
+
+<ol>
+  <li>进入到 /usr/local/pycharm-community-2018.1.4/bin/ 目录下，运行 pycharm.sh 文件即可打开 pycharm 查询，首次运行会弹出初始设置界面，只要进行相应的设置即可。相应的 linux 命令为：</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /usr/local/pycharm-community-2018.1.4/bin/
+./pycharm.sh
+</code></pre></div></div>
+
+<p><img src="/images/2018/8e9jpPJWpDD2oPHIjE8vc9dS.png" alt="" /></p>
+
+<p><img src="/images/2018/veNihRw8WdrlX_33KfW2Tw0J.png" alt="" /></p>
+
+<ol>
+  <li>以上过程完成后，恭喜你，你已经完成 pycharm 在 Ubuntu 16.04 系统下的安装，可以使用 pycharm 编辑器了。但是，以上步骤有一个问题，就是每次启动 pycharm 时都需要在 Terminal 运行 ./pycharm.sh 命令，有没有可以直接点击桌面图标，像 windows 系统那样便捷启动方式？答案是有的。这需要在 /usr/share/applications/ 下创建 pycharm 的快捷方式 pycharm.desktop（姑且这么理解吧），然后在 pycharm.desktop 文件下键入以下内容，启动 pycarm 时，右键将其锁定在桌面上。创建快捷方式的命令是：</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>gedit /usr/share/applications/pycharm.desktop
+</code></pre></div></div>
+
+<p><img src="/images/2018/Y0YSUQcPIsaeHBNBj9pHlbJ0.png" alt="" /></p>
+
+<p><img src="/images/2018/WeijxqZPKha2rOoCtuNFxGIf.png" alt="" /></p>
+
+<p>现在，你可以在 Ubuntu 16.04 系统下尽情享受 pycharm 编辑器了。</p>
+
+</article>
+
+
+	<div class="tags">
+	<img src="/images/tag.png" />
+	
+		<a href="/tag/ubuntu">ubuntu</a>
+	
+		<a href="/tag/pycharm">pycharm</a>
+	
+	</div>
+
+
+
+
+
+
+	<div class="categories">
+	<img src="/images/category.png" />
+	
+	  <a href="/category/问题解决">问题解决</a>
+	
+	</div>
+
+
+
+
+<div class="pagination">
+    上一篇：
+    
+      <a href="/python%E4%B9%8BIO%E7%BC%96%E7%A8%8B" class="previous">
+        <img src="/images/previous.png" />
+      </a>
+    
+  
+    | 下一篇：
+    
+      <a href="/java%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%8F%98%E9%87%8F" class="next">
+        <img src="/images/next.png" />
+      </a>
+    
+  </div>
+
+
+      </section>
+    </div>
+  </div>
+
+  
+
+  <div align="center" id="qecode_img">
+  <hr />
+  <p>欢迎关注，我们一起进行认知迭代！</p>
+  <img src="/images/qrcode_for_gh_5efb2780ab44_258.jpg" /><br />
+  痛点就是起点
+</div>
+
+<footer>
+  <!-- <a href="https://blogs.yhw-miracle.cn">
+    <span>
+        <b>yhw-miracle</b>
+    </span>
+    
+    <span>© 2016 - 2019</span>
+  </a> -->
+</footer>
+
+<div align="center" style="font-size: 13px;">
+  <hr />
+  <span>&copy; 2016 - 2019</span>基于
+  <a href="https://jekyllrb.com">jekyll</a> | 
+  <a href="https://github.com">Github Pags</a> | 
+  By <a href="blogs.yhw-miracle.cn">yhw-miracle</a>
+</div>
+
+
+  <!--  -->
+</body>
+</html>

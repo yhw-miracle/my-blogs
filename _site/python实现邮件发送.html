@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>python实现邮件发送</title>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>python实现邮件发送 | yhw-miracle’s Blog</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="python实现邮件发送" />
+<meta name="author" content="yhw-miracle" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="在爬虫开发中，爬虫运行过程中遇到异常或服务器遇到问题时，我们可以采用发送邮件，及时报告爬虫程序当前故障问题。 邮件发送协议是SMTP，python内置对SMTP 的支持，可以发送纯文本邮件、HTML 邮件以及带附件的邮件。python中对SMTP支持有 smtpplib和email模块，email 负责构造邮件，smtplib负责发送邮件。 1.以网易的邮件发送服务器为例smtp.163.com，需要开启网易邮箱的smtp功能。 2.构造纯文本邮件。 from email.mime.text import MIMEText msg = MIMEText(&quot;你好，世界！&quot;, &quot;plain&quot;, &quot;utf-8&quot;) 构造html邮件。 from email.mime.text import MIMEText msg = MIMEText(&quot;&lt;a href=&#39;https://yhw-miracle.win/&#39;&gt;my blog&lt;/a&gt;&quot;, &quot;html&quot;, &quot;utf-8&quot;) 3.设置发件人信息、收件人信息和邮件主题信息。 from_addr = &quot;yhw_software@163.com&quot; password = &quot;********&quot; to_addr = &quot;yhw_software@qq.com&quot; smtp_server = &quot;smtp.163.com&quot; msg[&#39;From&#39;] = format_addr(&quot;我是 &lt;%s&gt;&quot; % from_addr) msg[&quot;To&quot;] = format_addr(&quot;你是 &lt;%s&gt;&quot; % to_addr) msg[&quot;Subject&quot;] = Header(&quot;晚安&quot;, &quot;utf-8&quot;).encode() 4.发送邮件。 server = smtplib.SMTP(smtp_server, 25) server.login(from_addr, password) server.sendmail(from_addr, [to_addr], msg.as_string()) server.quit() 完整代码如下所示。 # coding: utf-8 from email.header import Header from email.mime.text import MIMEText from email.utils import parseaddr, formataddr import smtplib def format_addr(s): name, addr = parseaddr(s) return formataddr((Header(name, &quot;utf-8&quot;).encode(), addr)) from_addr = &quot;yhw_software@163.com&quot; password = &quot;*********&quot; to_addr = &quot;yhw_software@qq.com&quot; smtp_server = &quot;smtp.163.com&quot; msg = MIMEText(&quot;晚上好！&quot;, &quot;plain&quot;, &quot;utf-8&quot;) msg[&#39;From&#39;] = format_addr(&quot;我是 &lt;%s&gt;&quot; % from_addr) msg[&quot;To&quot;] = format_addr(&quot;你是 &lt;%s&gt;&quot; % to_addr) msg[&quot;Subject&quot;] = Header(&quot;晚安&quot;, &quot;utf-8&quot;).encode() server = smtplib.SMTP(smtp_server, 25) server.login(from_addr, password) server.sendmail(from_addr, [to_addr], msg.as_string()) server.quit()" />
+<meta property="og:description" content="在爬虫开发中，爬虫运行过程中遇到异常或服务器遇到问题时，我们可以采用发送邮件，及时报告爬虫程序当前故障问题。 邮件发送协议是SMTP，python内置对SMTP 的支持，可以发送纯文本邮件、HTML 邮件以及带附件的邮件。python中对SMTP支持有 smtpplib和email模块，email 负责构造邮件，smtplib负责发送邮件。 1.以网易的邮件发送服务器为例smtp.163.com，需要开启网易邮箱的smtp功能。 2.构造纯文本邮件。 from email.mime.text import MIMEText msg = MIMEText(&quot;你好，世界！&quot;, &quot;plain&quot;, &quot;utf-8&quot;) 构造html邮件。 from email.mime.text import MIMEText msg = MIMEText(&quot;&lt;a href=&#39;https://yhw-miracle.win/&#39;&gt;my blog&lt;/a&gt;&quot;, &quot;html&quot;, &quot;utf-8&quot;) 3.设置发件人信息、收件人信息和邮件主题信息。 from_addr = &quot;yhw_software@163.com&quot; password = &quot;********&quot; to_addr = &quot;yhw_software@qq.com&quot; smtp_server = &quot;smtp.163.com&quot; msg[&#39;From&#39;] = format_addr(&quot;我是 &lt;%s&gt;&quot; % from_addr) msg[&quot;To&quot;] = format_addr(&quot;你是 &lt;%s&gt;&quot; % to_addr) msg[&quot;Subject&quot;] = Header(&quot;晚安&quot;, &quot;utf-8&quot;).encode() 4.发送邮件。 server = smtplib.SMTP(smtp_server, 25) server.login(from_addr, password) server.sendmail(from_addr, [to_addr], msg.as_string()) server.quit() 完整代码如下所示。 # coding: utf-8 from email.header import Header from email.mime.text import MIMEText from email.utils import parseaddr, formataddr import smtplib def format_addr(s): name, addr = parseaddr(s) return formataddr((Header(name, &quot;utf-8&quot;).encode(), addr)) from_addr = &quot;yhw_software@163.com&quot; password = &quot;*********&quot; to_addr = &quot;yhw_software@qq.com&quot; smtp_server = &quot;smtp.163.com&quot; msg = MIMEText(&quot;晚上好！&quot;, &quot;plain&quot;, &quot;utf-8&quot;) msg[&#39;From&#39;] = format_addr(&quot;我是 &lt;%s&gt;&quot; % from_addr) msg[&quot;To&quot;] = format_addr(&quot;你是 &lt;%s&gt;&quot; % to_addr) msg[&quot;Subject&quot;] = Header(&quot;晚安&quot;, &quot;utf-8&quot;).encode() server = smtplib.SMTP(smtp_server, 25) server.login(from_addr, password) server.sendmail(from_addr, [to_addr], msg.as_string()) server.quit()" />
+<link rel="canonical" href="http://localhost:4000/python%E5%AE%9E%E7%8E%B0%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81" />
+<meta property="og:url" content="http://localhost:4000/python%E5%AE%9E%E7%8E%B0%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81" />
+<meta property="og:site_name" content="yhw-miracle’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-01-15T00:00:00+08:00" />
+<script type="application/ld+json">
+{"description":"在爬虫开发中，爬虫运行过程中遇到异常或服务器遇到问题时，我们可以采用发送邮件，及时报告爬虫程序当前故障问题。 邮件发送协议是SMTP，python内置对SMTP 的支持，可以发送纯文本邮件、HTML 邮件以及带附件的邮件。python中对SMTP支持有 smtpplib和email模块，email 负责构造邮件，smtplib负责发送邮件。 1.以网易的邮件发送服务器为例smtp.163.com，需要开启网易邮箱的smtp功能。 2.构造纯文本邮件。 from email.mime.text import MIMEText msg = MIMEText(&quot;你好，世界！&quot;, &quot;plain&quot;, &quot;utf-8&quot;) 构造html邮件。 from email.mime.text import MIMEText msg = MIMEText(&quot;&lt;a href=&#39;https://yhw-miracle.win/&#39;&gt;my blog&lt;/a&gt;&quot;, &quot;html&quot;, &quot;utf-8&quot;) 3.设置发件人信息、收件人信息和邮件主题信息。 from_addr = &quot;yhw_software@163.com&quot; password = &quot;********&quot; to_addr = &quot;yhw_software@qq.com&quot; smtp_server = &quot;smtp.163.com&quot; msg[&#39;From&#39;] = format_addr(&quot;我是 &lt;%s&gt;&quot; % from_addr) msg[&quot;To&quot;] = format_addr(&quot;你是 &lt;%s&gt;&quot; % to_addr) msg[&quot;Subject&quot;] = Header(&quot;晚安&quot;, &quot;utf-8&quot;).encode() 4.发送邮件。 server = smtplib.SMTP(smtp_server, 25) server.login(from_addr, password) server.sendmail(from_addr, [to_addr], msg.as_string()) server.quit() 完整代码如下所示。 # coding: utf-8 from email.header import Header from email.mime.text import MIMEText from email.utils import parseaddr, formataddr import smtplib def format_addr(s): name, addr = parseaddr(s) return formataddr((Header(name, &quot;utf-8&quot;).encode(), addr)) from_addr = &quot;yhw_software@163.com&quot; password = &quot;*********&quot; to_addr = &quot;yhw_software@qq.com&quot; smtp_server = &quot;smtp.163.com&quot; msg = MIMEText(&quot;晚上好！&quot;, &quot;plain&quot;, &quot;utf-8&quot;) msg[&#39;From&#39;] = format_addr(&quot;我是 &lt;%s&gt;&quot; % from_addr) msg[&quot;To&quot;] = format_addr(&quot;你是 &lt;%s&gt;&quot; % to_addr) msg[&quot;Subject&quot;] = Header(&quot;晚安&quot;, &quot;utf-8&quot;).encode() server = smtplib.SMTP(smtp_server, 25) server.login(from_addr, password) server.sendmail(from_addr, [to_addr], msg.as_string()) server.quit()","author":{"@type":"Person","name":"yhw-miracle"},"@type":"BlogPosting","url":"http://localhost:4000/python%E5%AE%9E%E7%8E%B0%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81","headline":"python实现邮件发送","dateModified":"2019-01-15T00:00:00+08:00","datePublished":"2019-01-15T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/python%E5%AE%9E%E7%8E%B0%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>YHW-MIRACLE</h1>
+    </a>
+    <div class="header-links">
+      <a href="/all_posts">
+    <h2 class="header-link">All_Posts | </h2>
+</a>
+<a href="/about">
+    <h2 class="header-link">About | </h2>
+</a>
+<a href="/categories">
+    <h2 class="header-link">Categories | </h2>
+</a>
+<a href="/tags">
+    <h2 class="header-link">Tags</h2>
+</a>
+<!--<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>-->
+
+    </div>
+  </div>
+</header>
+
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2 align="center">python实现邮件发送</h2>
+  <img src="/images/authorize.png" />
+  <center>
+    yhw-miracle writed in <time datetime="2019-01-15T00:00:00+08:00" class="by-line">January 15th, 2019</time>
+  </center>
+  <p>在爬虫开发中，爬虫运行过程中遇到异常或服务器遇到问题时，我们可以采用发送邮件，及时报告爬虫程序当前故障问题。</p>
+
+<p>邮件发送协议是<code class="highlighter-rouge">SMTP</code>，<code class="highlighter-rouge">python</code>内置对<code class="highlighter-rouge">SMTP</code> 的支持，可以发送纯文本邮件、<code class="highlighter-rouge">HTML</code> 邮件以及带附件的邮件。<code class="highlighter-rouge">python</code>中对<code class="highlighter-rouge">SMTP</code>支持有 <code class="highlighter-rouge">smtpplib</code>和<code class="highlighter-rouge">email</code>模块，<code class="highlighter-rouge">email</code> 负责构造邮件，<code class="highlighter-rouge">smtplib</code>负责发送邮件。</p>
+
+<p>1.以网易的邮件发送服务器为例<code class="highlighter-rouge">smtp.163.com</code>，需要开启网易邮箱的<code class="highlighter-rouge">smtp</code>功能。</p>
+
+<p>2.构造纯文本邮件。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="n">MIMEText</span><span class="p">(</span><span class="s">"你好，世界！"</span><span class="p">,</span> <span class="s">"plain"</span><span class="p">,</span> <span class="s">"utf-8"</span><span class="p">)</span>
+</code></pre></div></div>
+<p>构造<code class="highlighter-rouge">html</code>邮件。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="n">MIMEText</span><span class="p">(</span><span class="s">"&lt;a href='https://yhw-miracle.win/'&gt;my blog&lt;/a&gt;"</span><span class="p">,</span> <span class="s">"html"</span><span class="p">,</span> <span class="s">"utf-8"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>3.设置发件人信息、收件人信息和邮件主题信息。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">from_addr</span> <span class="o">=</span> <span class="s">"yhw_software@163.com"</span>
+<span class="n">password</span> <span class="o">=</span> <span class="s">"********"</span>
+
+<span class="n">to_addr</span> <span class="o">=</span> <span class="s">"yhw_software@qq.com"</span>
+
+<span class="n">smtp_server</span> <span class="o">=</span> <span class="s">"smtp.163.com"</span>
+
+<span class="n">msg</span><span class="p">[</span><span class="s">'From'</span><span class="p">]</span> <span class="o">=</span> <span class="n">format_addr</span><span class="p">(</span><span class="s">"我是 &lt;</span><span class="si">%</span><span class="s">s&gt;"</span> <span class="o">%</span> <span class="n">from_addr</span><span class="p">)</span>
+<span class="n">msg</span><span class="p">[</span><span class="s">"To"</span><span class="p">]</span> <span class="o">=</span> <span class="n">format_addr</span><span class="p">(</span><span class="s">"你是 &lt;</span><span class="si">%</span><span class="s">s&gt;"</span> <span class="o">%</span> <span class="n">to_addr</span><span class="p">)</span>
+<span class="n">msg</span><span class="p">[</span><span class="s">"Subject"</span><span class="p">]</span> <span class="o">=</span> <span class="n">Header</span><span class="p">(</span><span class="s">"晚安"</span><span class="p">,</span> <span class="s">"utf-8"</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>4.发送邮件。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span><span class="n">smtp_server</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">from_addr</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="n">from_addr</span><span class="p">,</span> <span class="p">[</span><span class="n">to_addr</span><span class="p">],</span> <span class="n">msg</span><span class="o">.</span><span class="n">as_string</span><span class="p">())</span>
+<span class="n">server</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>完整代码如下所示。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># coding: utf-8
+</span>
+<span class="kn">from</span> <span class="nn">email.header</span> <span class="kn">import</span> <span class="n">Header</span>
+<span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+<span class="kn">from</span> <span class="nn">email.utils</span> <span class="kn">import</span> <span class="n">parseaddr</span><span class="p">,</span> <span class="n">formataddr</span>
+
+<span class="kn">import</span> <span class="nn">smtplib</span>
+
+
+<span class="k">def</span> <span class="nf">format_addr</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">parseaddr</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">formataddr</span><span class="p">((</span><span class="n">Header</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s">"utf-8"</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">addr</span><span class="p">))</span>
+
+
+<span class="n">from_addr</span> <span class="o">=</span> <span class="s">"yhw_software@163.com"</span>
+<span class="n">password</span> <span class="o">=</span> <span class="s">"*********"</span>
+
+<span class="n">to_addr</span> <span class="o">=</span> <span class="s">"yhw_software@qq.com"</span>
+
+<span class="n">smtp_server</span> <span class="o">=</span> <span class="s">"smtp.163.com"</span>
+
+<span class="n">msg</span> <span class="o">=</span> <span class="n">MIMEText</span><span class="p">(</span><span class="s">"晚上好！"</span><span class="p">,</span> <span class="s">"plain"</span><span class="p">,</span> <span class="s">"utf-8"</span><span class="p">)</span>
+
+<span class="n">msg</span><span class="p">[</span><span class="s">'From'</span><span class="p">]</span> <span class="o">=</span> <span class="n">format_addr</span><span class="p">(</span><span class="s">"我是 &lt;</span><span class="si">%</span><span class="s">s&gt;"</span> <span class="o">%</span> <span class="n">from_addr</span><span class="p">)</span>
+<span class="n">msg</span><span class="p">[</span><span class="s">"To"</span><span class="p">]</span> <span class="o">=</span> <span class="n">format_addr</span><span class="p">(</span><span class="s">"你是 &lt;</span><span class="si">%</span><span class="s">s&gt;"</span> <span class="o">%</span> <span class="n">to_addr</span><span class="p">)</span>
+<span class="n">msg</span><span class="p">[</span><span class="s">"Subject"</span><span class="p">]</span> <span class="o">=</span> <span class="n">Header</span><span class="p">(</span><span class="s">"晚安"</span><span class="p">,</span> <span class="s">"utf-8"</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span><span class="n">smtp_server</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">from_addr</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="n">from_addr</span><span class="p">,</span> <span class="p">[</span><span class="n">to_addr</span><span class="p">],</span> <span class="n">msg</span><span class="o">.</span><span class="n">as_string</span><span class="p">())</span>
+<span class="n">server</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+</article>
+
+
+	<div class="tags">
+	<img src="/images/tag.png" />
+	
+		<a href="/tag/python">python</a>
+	
+		<a href="/tag/邮件发送">邮件发送</a>
+	
+	</div>
+
+
+
+
+
+
+	<div class="categories">
+	<img src="/images/category.png" />
+	
+	  <a href="/category/知识总结">知识总结</a>
+	
+	</div>
+
+
+
+
+<div class="pagination">
+    上一篇：
+    
+      <a href="/%E8%AF%A6%E8%A7%A3%E5%9F%BA%E7%A1%80%E7%88%AC%E8%99%AB%E6%9E%B6%E6%9E%84" class="previous">
+        <img src="/images/previous.png" />
+      </a>
+    
+  
+    | 下一篇：
+    
+      <a href="/%E6%8F%90%E5%8F%96%E5%A4%9A%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6" class="next">
+        <img src="/images/next.png" />
+      </a>
+    
+  </div>
+
+
+      </section>
+    </div>
+  </div>
+
+  
+
+  <div align="center" id="qecode_img">
+  <hr />
+  <p>欢迎关注，我们一起进行认知迭代！</p>
+  <img src="/images/qrcode_for_gh_5efb2780ab44_258.jpg" /><br />
+  痛点就是起点
+</div>
+
+<footer>
+  <!-- <a href="https://blogs.yhw-miracle.cn">
+    <span>
+        <b>yhw-miracle</b>
+    </span>
+    
+    <span>© 2016 - 2019</span>
+  </a> -->
+</footer>
+
+<div align="center" style="font-size: 13px;">
+  <hr />
+  <span>&copy; 2016 - 2019</span>基于
+  <a href="https://jekyllrb.com">jekyll</a> | 
+  <a href="https://github.com">Github Pags</a> | 
+  By <a href="blogs.yhw-miracle.cn">yhw-miracle</a>
+</div>
+
+
+  <!--  -->
+</body>
+</html>

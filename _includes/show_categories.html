@@ -1,0 +1,17 @@
+{% if page.categories %}
+	<div class="categories">
+	<img src="/images/category.png" />
+	{% for category in page.categories %}
+	  <a href="{{ site.baseurl }}category/{{ category }}">{{ category }}</a>
+	{% endfor%}
+	</div>
+{% endif %}
+
+{% if post.categories %}
+	<div class="categories">
+	<img src="/images/category.png" />
+	{% for category in post.categories %}
+	  <a href="{{ site.baseurl }}category/{{ category }}">{{ category }}</a>
+	{% endfor%}
+	</div>
+{% endif %}

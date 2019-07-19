@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>learning_python_03</title>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>learning_python_03 | yhw-miracle’s Blog</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="learning_python_03" />
+<meta name="author" content="yhw-miracle" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="本文为yhw-miracle原创文章，可以随意转载，但需注明出处。" />
+<meta property="og:description" content="本文为yhw-miracle原创文章，可以随意转载，但需注明出处。" />
+<link rel="canonical" href="http://localhost:4000/learning-python-03" />
+<meta property="og:url" content="http://localhost:4000/learning-python-03" />
+<meta property="og:site_name" content="yhw-miracle’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-04-03T20:50:32+08:00" />
+<script type="application/ld+json">
+{"description":"本文为yhw-miracle原创文章，可以随意转载，但需注明出处。","author":{"@type":"Person","name":"yhw-miracle"},"@type":"BlogPosting","url":"http://localhost:4000/learning-python-03","headline":"learning_python_03","dateModified":"2019-04-03T20:50:32+08:00","datePublished":"2019-04-03T20:50:32+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/learning-python-03"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>YHW-MIRACLE</h1>
+    </a>
+    <div class="header-links">
+      <a href="/all_posts">
+    <h2 class="header-link">All_Posts | </h2>
+</a>
+<a href="/about">
+    <h2 class="header-link">About | </h2>
+</a>
+<a href="/categories">
+    <h2 class="header-link">Categories | </h2>
+</a>
+<a href="/tags">
+    <h2 class="header-link">Tags</h2>
+</a>
+<!--<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>-->
+
+    </div>
+  </div>
+</header>
+
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2 align="center">learning_python_03</h2>
+  <img src="/images/authorize.png" />
+  <center>
+    yhw-miracle writed in <time datetime="2019-04-03T20:50:32+08:00" class="by-line">April 3rd, 2019</time>
+  </center>
+  <blockquote>
+  <p>本文为<code class="highlighter-rouge">yhw-miracle</code>原创文章，可以随意转载，但需注明出处。</p>
+</blockquote>
+
+<h3 id="元组">元组</h3>
+<ul>
+  <li>
+    <p>元组（<code class="highlighter-rouge">tuple</code>）（<code class="highlighter-rouge">()</code>）是一种存储固定数据的存储模型，元组中的数据通过<code class="highlighter-rouge">索引</code>修改。</p>
+  </li>
+  <li>
+    <p>元组中的数据若是<code class="highlighter-rouge">非引用类型数据</code>，不允许修改；若是<code class="highlighter-rouge">引用类型数据</code>，不允许修改对象，可以修对象的值。</p>
+  </li>
+  <li>
+    <p>元组函数</p>
+    <blockquote>
+      <ul>
+        <li><code class="highlighter-rouge">count(self, x)</code>: Return number of occurrences of value.</li>
+        <li><code class="highlighter-rouge">index(self, x, start, end)</code>: Return first index of value.Raises ValueError if the value is not present
+___</li>
+        <li>翻译</li>
+        <li><code class="highlighter-rouge">count(self, x)</code>: 返回元组中指定数据出现的次数。</li>
+        <li><code class="highlighter-rouge">index(self, x, start, end)</code>: 返回指定数据在元组中出现的第一个位置，若指定数据不存在，抛出<code class="highlighter-rouge">ValueError</code>。</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="集合">集合</h3>
+<ul>
+  <li>
+    <p>集合（<code class="highlighter-rouge">set</code>）（<code class="highlighter-rouge">{,,...}</code>）是一种存储无序不重复数据的存储模型，没有<code class="highlighter-rouge">索引</code>概念。</p>
+  </li>
+  <li>
+    <p>集合中的函数</p>
+    <blockquote>
+      <ul>
+        <li><code class="highlighter-rouge">add(self, element)</code>: Add an element to a set.This has no effect if the element is already present.</li>
+        <li><code class="highlighter-rouge">clear(self)</code>: Remove all elements from this set.</li>
+        <li><code class="highlighter-rouge">copy(self)</code>: Return a shallow copy of a set.</li>
+        <li><code class="highlighter-rouge">difference(self, s)</code>: Return the difference of two or more sets as a new set.(i.e. all elements that are in this set but not the others.)</li>
+        <li><code class="highlighter-rouge">difference_update(self,  s)</code>: Remove all elements of another set from this set.</li>
+        <li><code class="highlighter-rouge">discard(self, element)</code>: Remove an element from a set if it is a member.If the element is not a member, do nothing.</li>
+        <li><code class="highlighter-rouge">intersection(self, s)</code>: Return the intersection of two sets as a new set.(i.e. all elements that are in both sets.)</li>
+        <li><code class="highlighter-rouge">intersection_update(self,  s)</code>: Update a set with the intersection of itself and another.</li>
+        <li><code class="highlighter-rouge">isdisjoint(self, s)</code>: Return True if two sets have a null intersection.</li>
+        <li><code class="highlighter-rouge">issubset(self ,s)</code>: Report whether another set contains this set.</li>
+        <li><code class="highlighter-rouge">issuperset(self, s)</code>: Report whether this set contains another set.</li>
+        <li><code class="highlighter-rouge">pop(self)</code>: Remove and return an arbitrary set element.Raises KeyError if the set is empty.</li>
+        <li><code class="highlighter-rouge">remove(self ,element)</code>: Remove an element from a set; it must be a member.If the element is not a member, raise a KeyError.</li>
+        <li><code class="highlighter-rouge">symmetric_difference(self,  s)</code>: Return the symmetric difference of two sets as a new set.(i.e. all elements that are in exactly one of the sets.)</li>
+        <li><code class="highlighter-rouge">symmetric_difference_update(self,  s)</code>: Update a set with the symmetric difference of itself and another.</li>
+        <li><code class="highlighter-rouge">union(self, s)</code>: Return the union of sets as a new set.(i.e. all elements that are in either set.)</li>
+        <li><code class="highlighter-rouge">update(self,  s)</code>: Update a set with the union of itself and others.</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li>翻译</li>
+    <li><code class="highlighter-rouge">add(self, element)</code>: 添加一个元素到集合中，若改元素已经存在，集合将无任何影</li>
+    <li><code class="highlighter-rouge">clear(self)</code>: 移除集合中所有元素。</li>
+    <li><code class="highlighter-rouge">copy(self)</code>: 返回集合的拷贝体。</li>
+    <li><code class="highlighter-rouge">difference(self, s)</code>: 记录该集合与其他集合之间的不同元素，组成新的集合并返回（简单来说，返回集合中的所有元素在该集合中，不在其他集合中）。</li>
+    <li><code class="highlighter-rouge">difference_update(self,  s)</code>: 移除另一个集合中与该集合相同的元素。</li>
+    <li><code class="highlighter-rouge">discard(self, element)</code>: 移除集合中的指定元素，若该元素不存，则不任何事</li>
+    <li><code class="highlighter-rouge">intersection(self, s)</code>: 记录两个集合的交集，组成新的集合并返回（简单来说，新的集合中元素是两个集合中都有的元素）。</li>
+    <li><code class="highlighter-rouge">intersection_update(self,  s)</code>: 将该集合和另一个集合的交集更新到该集合中。</li>
+    <li><code class="highlighter-rouge">isdisjoint(self, s)</code>: 若两个集合没有交集，返回<code class="highlighter-rouge">True</code>。</li>
+    <li><code class="highlighter-rouge">issubset(self ,s)</code>: 报告另一个集合是否包含该集合，若包含，返回<code class="highlighter-rouge">True</code>；若不包含，返回<code class="highlighter-rouge">False</code>。</li>
+    <li><code class="highlighter-rouge">issuperset(self, s)</code>: 报告这个集合是否包含另一个集合，若包含，返回<code class="highlighter-rouge">True</code>；若不包含，返回<code class="highlighter-rouge">False</code>。</li>
+    <li><code class="highlighter-rouge">pop(self)</code>: 移除并返回这个该集合中随意一个元素，若集合为空，抛出<code class="highlighter-rouge">KeyError</code></li>
+    <li><code class="highlighter-rouge">remove(self ,element)</code>: 移除集合中指定的元素，若指定元素不存在，抛出<code class="highlighter-rouge">KeyError</code></li>
+    <li><code class="highlighter-rouge">symmetric_difference(self,  s)</code>: 记录两个集合的均匀区别，组成新的集合并返回（简单来说，新的集合中元素只存在于其中一个集合中）。</li>
+    <li><code class="highlighter-rouge">symmetric_difference_update(self,  s)</code>: 将两个集合的均匀区别更新到该集合中。</li>
+    <li><code class="highlighter-rouge">union(self, s)</code>: 记录两个集合之间的并集，组成新的集合并返回（简单来说，两个集合中所有元素）。</li>
+    <li><code class="highlighter-rouge">update(self,  s)</code>: 将两个集合之间的并集更新到该集合中。</li>
+  </ul>
+</blockquote>
+
+</article>
+
+
+	<div class="tags">
+	<img src="/images/tag.png" />
+	
+		<a href="/tag/python">python</a>
+	
+	</div>
+
+
+
+
+
+
+	<div class="categories">
+	<img src="/images/category.png" />
+	
+	  <a href="/category/知识总结">知识总结</a>
+	
+	</div>
+
+
+
+
+<div class="pagination">
+    上一篇：
+    
+      <a href="/learning-python-04" class="previous">
+        <img src="/images/previous.png" />
+      </a>
+    
+  
+    | 下一篇：
+    
+      <a href="/learning_python_02" class="next">
+        <img src="/images/next.png" />
+      </a>
+    
+  </div>
+
+
+      </section>
+    </div>
+  </div>
+
+  
+
+  <div align="center" id="qecode_img">
+  <hr />
+  <p>欢迎关注，我们一起进行认知迭代！</p>
+  <img src="/images/qrcode_for_gh_5efb2780ab44_258.jpg" /><br />
+  痛点就是起点
+</div>
+
+<footer>
+  <!-- <a href="https://blogs.yhw-miracle.cn">
+    <span>
+        <b>yhw-miracle</b>
+    </span>
+    
+    <span>© 2016 - 2019</span>
+  </a> -->
+</footer>
+
+<div align="center" style="font-size: 13px;">
+  <hr />
+  <span>&copy; 2016 - 2019</span>基于
+  <a href="https://jekyllrb.com">jekyll</a> | 
+  <a href="https://github.com">Github Pags</a> | 
+  By <a href="blogs.yhw-miracle.cn">yhw-miracle</a>
+</div>
+
+
+  <!--  -->
+</body>
+</html>

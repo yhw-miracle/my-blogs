@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>协程</title>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>协程 | yhw-miracle’s Blog</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="协程" />
+<meta name="author" content="yhw-miracle" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="协程(coroutine)，又称微线程，纤程，是一种用户级的轻量级线程。协程拥有自己的寄存器上下文和栈。协程调度切换时，将寄存器上下文和栈保存到其他地方，在切回来的时候，恢复先前保存的寄存器上下文和栈。因此协程能保留上一次调用时的状态，每次过程重入时，就相当于进入上一次调用的状态。在并发编程中，协程与线程类似，每个协程表示一个执行单元，有自己的本地数据，与其他协程共享全局数据和其他资源。" />
+<meta property="og:description" content="协程(coroutine)，又称微线程，纤程，是一种用户级的轻量级线程。协程拥有自己的寄存器上下文和栈。协程调度切换时，将寄存器上下文和栈保存到其他地方，在切回来的时候，恢复先前保存的寄存器上下文和栈。因此协程能保留上一次调用时的状态，每次过程重入时，就相当于进入上一次调用的状态。在并发编程中，协程与线程类似，每个协程表示一个执行单元，有自己的本地数据，与其他协程共享全局数据和其他资源。" />
+<link rel="canonical" href="http://localhost:4000/%E5%8D%8F%E7%A8%8B" />
+<meta property="og:url" content="http://localhost:4000/%E5%8D%8F%E7%A8%8B" />
+<meta property="og:site_name" content="yhw-miracle’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-08-02T00:00:00+08:00" />
+<script type="application/ld+json">
+{"description":"协程(coroutine)，又称微线程，纤程，是一种用户级的轻量级线程。协程拥有自己的寄存器上下文和栈。协程调度切换时，将寄存器上下文和栈保存到其他地方，在切回来的时候，恢复先前保存的寄存器上下文和栈。因此协程能保留上一次调用时的状态，每次过程重入时，就相当于进入上一次调用的状态。在并发编程中，协程与线程类似，每个协程表示一个执行单元，有自己的本地数据，与其他协程共享全局数据和其他资源。","author":{"@type":"Person","name":"yhw-miracle"},"@type":"BlogPosting","url":"http://localhost:4000/%E5%8D%8F%E7%A8%8B","headline":"协程","dateModified":"2018-08-02T00:00:00+08:00","datePublished":"2018-08-02T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/%E5%8D%8F%E7%A8%8B"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>YHW-MIRACLE</h1>
+    </a>
+    <div class="header-links">
+      <a href="/all_posts">
+    <h2 class="header-link">All_Posts | </h2>
+</a>
+<a href="/about">
+    <h2 class="header-link">About | </h2>
+</a>
+<a href="/categories">
+    <h2 class="header-link">Categories | </h2>
+</a>
+<a href="/tags">
+    <h2 class="header-link">Tags</h2>
+</a>
+<!--<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>-->
+
+    </div>
+  </div>
+</header>
+
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2 align="center">协程</h2>
+  <img src="/images/authorize.png" />
+  <center>
+    yhw-miracle writed in <time datetime="2018-08-02T00:00:00+08:00" class="by-line">August 2nd, 2018</time>
+  </center>
+  <p>协程(coroutine)，又称微线程，纤程，是一种用户级的轻量级线程。协程拥有自己的寄存器上下文和栈。协程调度切换时，将寄存器上下文和栈保存到其他地方，在切回来的时候，恢复先前保存的寄存器上下文和栈。因此协程能保留上一次调用时的状态，每次过程重入时，就相当于进入上一次调用的状态。在并发编程中，协程与线程类似，每个协程表示一个执行单元，有自己的本地数据，与其他协程共享全局数据和其他资源。</p>
+
+<p>协程需要用户自己编写调度逻辑，对于 CPU 来说，协程其实是单线程，CPU 不需要考虑怎么去调度、切换上下文，这样就省去了 CPU 的切换开销，因此协程在一定程度上有好于多线程。</p>
+
+<h3 id="1-python-实现协程">1. python 实现协程</h3>
+<p>第三方库　gevent 提供了比较完善的协程支持，gevent 是一个基于协程的 python 网络数据库，使用 greenlet 在　libev 事件循环顶部提供了一个有高级别并发性的　API。主要特性有以下几点。</p>
+
+<blockquote>
+  <ol>
+    <li>基于　libev 的快速事件循环，Linux　上是　epoll 机制。</li>
+    <li>基于　greenlet 的轻量级执行单元。</li>
+    <li>API 复用了 python 标准库里的内容。</li>
+    <li>支持 SSL 的协作式　sockets。</li>
+    <li>可通过线程池或　c-ares 实现 DNS 查询。</li>
+    <li>通过　monkey patching 功能使得第三方模块变成协作式。</li>
+  </ol>
+</blockquote>
+
+<p>gevent 对协程的支持，本质上是　greenlet 在实现切换工作。greenlet 工作流程如下：假如进行访问网络的　IO 操作，出现阻塞，greenlet 就显式切换到另一段没有阻塞的代码段执行，直到原先的阻塞状况消失以后，再自动切换回原来的代码段继续处理。因此，greenlet 是一种合理安排的串行方式。</p>
+
+<p>由于 IO 操作非常耗时，经常使程序处于等待状态，有了　greenlet 自动切换协程，保证总有　greenlet 在运行，而不是等待　IO，这就是协程一般比多线程效率高的原因。由于切换在　IO 操作时自动完成，所以　gevent 需要修改　python 自带的一些标准库，将一些常见的阻塞，如　socket、select 等地方实现协程跳转，这一过程在启动时通过　monkey patch 完成。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">gevent</span> <span class="kn">import</span> <span class="n">monkey</span><span class="p">;</span> <span class="n">monkey</span><span class="o">.</span><span class="n">patch_all</span><span class="p">()</span>
+<span class="kn">import</span> <span class="nn">gevent</span><span class="p">,</span> <span class="n">urllib2</span>
+
+
+<span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'visit ---&gt; </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">url</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="si">%</span><span class="s">d bytes received from </span><span class="si">%</span><span class="s">s.'</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">url</span><span class="p">))</span>
+    <span class="k">except</span> <span class="nb">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">e</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">'http://github.com'</span><span class="p">,</span> <span class="s">'https://www.python.org'</span><span class="p">,</span> <span class="s">'http://yhw-miracle.win'</span><span class="p">]</span>
+    <span class="n">greenLets</span> <span class="o">=</span> <span class="p">[</span><span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">run_task</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">]</span>
+    <span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">(</span><span class="n">greenLets</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/images/2018/August/Screenshot%20from%202018-08-02%2013-12-37.png" alt="" /></p>
+
+<p>以上程序主要使用　gevent 中的　spawn 方法和　joinall 方法。spawn 方法是用来形成协程，joinall 方法是添加这些协程任务，并且启动运行。从结果可以看出，3 个网络操作是并发执行的，运行结束顺序不同，但其实只有一个线程。</p>
+
+<h3 id="2-协程中池的实现">2. 协程中池的实现</h3>
+<p>gevent 中还提供了对池的支持。当拥有动态数量的 gevent 需要进行并发管理时，如限制并发数，可以使用池来实现，这在处理大量的网络和　IO 操作时是非常需要的。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib2</span>
+<span class="kn">from</span> <span class="nn">gevent.pool</span> <span class="kn">import</span> <span class="n">Pool</span>
+<span class="kn">from</span> <span class="nn">gevent</span> <span class="kn">import</span> <span class="n">monkey</span>
+<span class="n">monkey</span><span class="o">.</span><span class="n">patch_all</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'visit ---&gt; </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">url</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="si">%</span><span class="s">d bytes received from </span><span class="si">%</span><span class="s">s.'</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()),</span> <span class="n">url</span><span class="p">))</span>
+    <span class="k">except</span> <span class="nb">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">pool</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">'http://github.com'</span><span class="p">,</span> <span class="s">'https://www.python.org'</span><span class="p">,</span> <span class="s">'http://yhw-miracle.win'</span><span class="p">]</span>
+    <span class="n">pool</span><span class="o">.</span><span class="nb">map</span><span class="p">(</span><span class="n">run_task</span><span class="p">,</span> <span class="n">urls</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/images/2018/August/Screenshot%20from%202018-08-02%2013-27-30.png" alt="" /></p>
+
+<p>运行结果可看出，Pool 对象实现了对协程的并发数量管理，代码中规定协程中的池容量为 2，因此程序是先执行前两个任务，当其中一个任务完成是，才会执行第三个任务，达到了限制并发数的目的。</p>
+
+</article>
+
+
+	<div class="tags">
+	<img src="/images/tag.png" />
+	
+		<a href="/tag/python">python</a>
+	
+		<a href="/tag/协程">协程</a>
+	
+	</div>
+
+
+
+
+
+
+	<div class="categories">
+	<img src="/images/category.png" />
+	
+	  <a href="/category/知识总结">知识总结</a>
+	
+	</div>
+
+
+
+
+<div class="pagination">
+    上一篇：
+    
+      <a href="/%E5%88%86%E5%B8%83%E5%BC%8F%E8%BF%9B%E7%A8%8B" class="previous">
+        <img src="/images/previous.png" />
+      </a>
+    
+  
+    | 下一篇：
+    
+      <a href="/python%E4%B9%8B%E5%A4%9A%E7%BA%BF%E7%A8%8B" class="next">
+        <img src="/images/next.png" />
+      </a>
+    
+  </div>
+
+
+      </section>
+    </div>
+  </div>
+
+  
+
+  <div align="center" id="qecode_img">
+  <hr />
+  <p>欢迎关注，我们一起进行认知迭代！</p>
+  <img src="/images/qrcode_for_gh_5efb2780ab44_258.jpg" /><br />
+  痛点就是起点
+</div>
+
+<footer>
+  <!-- <a href="https://blogs.yhw-miracle.cn">
+    <span>
+        <b>yhw-miracle</b>
+    </span>
+    
+    <span>© 2016 - 2019</span>
+  </a> -->
+</footer>
+
+<div align="center" style="font-size: 13px;">
+  <hr />
+  <span>&copy; 2016 - 2019</span>基于
+  <a href="https://jekyllrb.com">jekyll</a> | 
+  <a href="https://github.com">Github Pags</a> | 
+  By <a href="blogs.yhw-miracle.cn">yhw-miracle</a>
+</div>
+
+
+  <!--  -->
+</body>
+</html>

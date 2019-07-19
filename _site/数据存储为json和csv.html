@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>数据存储为json和csv</title>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>数据存储为json和csv | yhw-miracle’s Blog</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="数据存储为json和csv" />
+<meta name="author" content="yhw-miracle" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="进行 python 爬虫时，我们需要将数据存储起来。对于小数据量，我们可以存储到 json 文件或 csv 文件。 json存储 Python 对 json 文件的操作是通过 JSON 模块实现的，分为编码和解码两个过程。 编码是指将 python 对象转换为 json 对象，常用的函数是 dump() 和 dumps()，区别是 dump() 将 python 对象转换为 json 对象，并将 json 对象通过文件流写入文件，dumps() 函数是返回字符串。 dumps(obj,skipkeys=False,ensure_ascii=True,check_circular=True,allow_nan=True,cls=None,indent=None,separators=None,encoding=&#39;utf-8&#39;,default=None,sort_keys=False,**kw) dumps(obj,skipkeys=False,ensure_ascii=True,check_circular=True,allow_nan=True,cls=None,indent=None,separators=None,encoding=&#39;utf-8&#39;,default=None,sort_keys=False,**kw) 解码是指将 json 对象转换为 python 对象，常用的函数为 load() 和loads()，区别是 load() 是将 json 对象转换为 python 对象，并将 python 对象写入到文件，而 loads() 是返回字符串。 load(fp,encoding=None,cls=None,object_hook=None,parse_float=None,parse_int=None,parse_constant=None,object_pairs_hook=None,**kw) loads(s,encoding=None,cls=None,object_hook=None,parse_float=None,parse_int=None,parse_constant=None,object_pairs_hook=None,**kw) csv存储 CSV(Comma-Separated Values，逗号分隔值，有时也称为字符分隔值)，其文件是以纯文本形式存储表格数据。CSV 文件由任意数目的记录组成，记录间以换行符分隔，每条记录由字段组成，字段间的分隔符是其他字符或字符串，最常见的是逗号和制表符。CSV 文件示例如下： ID,Username,Password,Age,Country 1001,yhw,123456,24,China 1002,Mary,654321,25,USA 1003,Jack,123567,22,English Python 通过 csv 库来读写 csv 文件。Python 写 csv 文件，需要用到 write 对象，然后按行写每一个记录； import csv header = (&quot;ID&quot;, &quot;Username&quot;, &quot;Password&quot;, &quot;Age&quot;, &quot;Country&quot;) rows = [(1001, &quot;yhw&quot;, &quot;123456&quot;, 24, &quot;China&quot;), (1002, &quot;Mary&quot;, &quot;654321&quot;, 25, &quot;USA&quot;), (1003, &quot;Jack&quot;, &quot;123567&quot;, 22, &quot;English&quot;)] with open(&quot;test3.csv&quot;, &quot;w&quot;) as fp: fp_csv = csv.writer(fp) fp_csv.writerow(header) fp_csv.writerows(rows) import csv rows = [{&quot;ID&quot;: 1001, &quot;Username&quot;: &quot;yhw&quot;, &quot;Password&quot;: &quot;123456&quot;, &quot;Age&quot;: 24, &quot;Country&quot;: &quot;China&quot;}, {&quot;ID&quot;: 1002, &quot;Username&quot;: &quot;Mary&quot;, &quot;Password&quot;: &quot;654321&quot;, &quot;Age&quot;: 25, &quot;Country&quot;: &quot;USA&quot;}, {&quot;ID&quot;: 1003, &quot;Username&quot;: &quot;Jack&quot;, &quot;Password&quot;: &quot;123567&quot;, &quot;Age&quot;: 22, &quot;Country&quot;: &quot;English&quot;}] with open(&quot;test3.csv&quot;, &quot;w&quot;) as fp: fp_csv = csv.DictWriter(fp, header) fp_csv.writeheader() fp_csv.writerows(rows) Python 读取 csv 文件需要用到 reader 对象，然后同样是按行读取每一条记录。要读取特定字段信息，python 可以利用索引、命名元祖、字典这三种方式访问。 import csv from collections import namedtuple with open(&quot;test3.csv&quot;, &quot;r&quot;) as fp: # 遍历记录 fp_csv = csv.reader(fp) for row in fp_csv: print row # 索引 fp_csv = csv.reader(fp) for row in fp_csv: print row[0] # 命名元组 fp_csv = csv.reader(fp) header = next(fp_csv) Row = namedtuple(&quot;Row&quot;, header) for r in fp_csv: row = Row(*r) print row.Username, row.Password print row # 字典 fp_csv = csv.DictReader(fp) for row in fp_csv: print row.get(&quot;Username&quot;)" />
+<meta property="og:description" content="进行 python 爬虫时，我们需要将数据存储起来。对于小数据量，我们可以存储到 json 文件或 csv 文件。 json存储 Python 对 json 文件的操作是通过 JSON 模块实现的，分为编码和解码两个过程。 编码是指将 python 对象转换为 json 对象，常用的函数是 dump() 和 dumps()，区别是 dump() 将 python 对象转换为 json 对象，并将 json 对象通过文件流写入文件，dumps() 函数是返回字符串。 dumps(obj,skipkeys=False,ensure_ascii=True,check_circular=True,allow_nan=True,cls=None,indent=None,separators=None,encoding=&#39;utf-8&#39;,default=None,sort_keys=False,**kw) dumps(obj,skipkeys=False,ensure_ascii=True,check_circular=True,allow_nan=True,cls=None,indent=None,separators=None,encoding=&#39;utf-8&#39;,default=None,sort_keys=False,**kw) 解码是指将 json 对象转换为 python 对象，常用的函数为 load() 和loads()，区别是 load() 是将 json 对象转换为 python 对象，并将 python 对象写入到文件，而 loads() 是返回字符串。 load(fp,encoding=None,cls=None,object_hook=None,parse_float=None,parse_int=None,parse_constant=None,object_pairs_hook=None,**kw) loads(s,encoding=None,cls=None,object_hook=None,parse_float=None,parse_int=None,parse_constant=None,object_pairs_hook=None,**kw) csv存储 CSV(Comma-Separated Values，逗号分隔值，有时也称为字符分隔值)，其文件是以纯文本形式存储表格数据。CSV 文件由任意数目的记录组成，记录间以换行符分隔，每条记录由字段组成，字段间的分隔符是其他字符或字符串，最常见的是逗号和制表符。CSV 文件示例如下： ID,Username,Password,Age,Country 1001,yhw,123456,24,China 1002,Mary,654321,25,USA 1003,Jack,123567,22,English Python 通过 csv 库来读写 csv 文件。Python 写 csv 文件，需要用到 write 对象，然后按行写每一个记录； import csv header = (&quot;ID&quot;, &quot;Username&quot;, &quot;Password&quot;, &quot;Age&quot;, &quot;Country&quot;) rows = [(1001, &quot;yhw&quot;, &quot;123456&quot;, 24, &quot;China&quot;), (1002, &quot;Mary&quot;, &quot;654321&quot;, 25, &quot;USA&quot;), (1003, &quot;Jack&quot;, &quot;123567&quot;, 22, &quot;English&quot;)] with open(&quot;test3.csv&quot;, &quot;w&quot;) as fp: fp_csv = csv.writer(fp) fp_csv.writerow(header) fp_csv.writerows(rows) import csv rows = [{&quot;ID&quot;: 1001, &quot;Username&quot;: &quot;yhw&quot;, &quot;Password&quot;: &quot;123456&quot;, &quot;Age&quot;: 24, &quot;Country&quot;: &quot;China&quot;}, {&quot;ID&quot;: 1002, &quot;Username&quot;: &quot;Mary&quot;, &quot;Password&quot;: &quot;654321&quot;, &quot;Age&quot;: 25, &quot;Country&quot;: &quot;USA&quot;}, {&quot;ID&quot;: 1003, &quot;Username&quot;: &quot;Jack&quot;, &quot;Password&quot;: &quot;123567&quot;, &quot;Age&quot;: 22, &quot;Country&quot;: &quot;English&quot;}] with open(&quot;test3.csv&quot;, &quot;w&quot;) as fp: fp_csv = csv.DictWriter(fp, header) fp_csv.writeheader() fp_csv.writerows(rows) Python 读取 csv 文件需要用到 reader 对象，然后同样是按行读取每一条记录。要读取特定字段信息，python 可以利用索引、命名元祖、字典这三种方式访问。 import csv from collections import namedtuple with open(&quot;test3.csv&quot;, &quot;r&quot;) as fp: # 遍历记录 fp_csv = csv.reader(fp) for row in fp_csv: print row # 索引 fp_csv = csv.reader(fp) for row in fp_csv: print row[0] # 命名元组 fp_csv = csv.reader(fp) header = next(fp_csv) Row = namedtuple(&quot;Row&quot;, header) for r in fp_csv: row = Row(*r) print row.Username, row.Password print row # 字典 fp_csv = csv.DictReader(fp) for row in fp_csv: print row.get(&quot;Username&quot;)" />
+<link rel="canonical" href="http://localhost:4000/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E4%B8%BAjson%E5%92%8Ccsv" />
+<meta property="og:url" content="http://localhost:4000/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E4%B8%BAjson%E5%92%8Ccsv" />
+<meta property="og:site_name" content="yhw-miracle’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-01-14T00:00:00+08:00" />
+<script type="application/ld+json">
+{"description":"进行 python 爬虫时，我们需要将数据存储起来。对于小数据量，我们可以存储到 json 文件或 csv 文件。 json存储 Python 对 json 文件的操作是通过 JSON 模块实现的，分为编码和解码两个过程。 编码是指将 python 对象转换为 json 对象，常用的函数是 dump() 和 dumps()，区别是 dump() 将 python 对象转换为 json 对象，并将 json 对象通过文件流写入文件，dumps() 函数是返回字符串。 dumps(obj,skipkeys=False,ensure_ascii=True,check_circular=True,allow_nan=True,cls=None,indent=None,separators=None,encoding=&#39;utf-8&#39;,default=None,sort_keys=False,**kw) dumps(obj,skipkeys=False,ensure_ascii=True,check_circular=True,allow_nan=True,cls=None,indent=None,separators=None,encoding=&#39;utf-8&#39;,default=None,sort_keys=False,**kw) 解码是指将 json 对象转换为 python 对象，常用的函数为 load() 和loads()，区别是 load() 是将 json 对象转换为 python 对象，并将 python 对象写入到文件，而 loads() 是返回字符串。 load(fp,encoding=None,cls=None,object_hook=None,parse_float=None,parse_int=None,parse_constant=None,object_pairs_hook=None,**kw) loads(s,encoding=None,cls=None,object_hook=None,parse_float=None,parse_int=None,parse_constant=None,object_pairs_hook=None,**kw) csv存储 CSV(Comma-Separated Values，逗号分隔值，有时也称为字符分隔值)，其文件是以纯文本形式存储表格数据。CSV 文件由任意数目的记录组成，记录间以换行符分隔，每条记录由字段组成，字段间的分隔符是其他字符或字符串，最常见的是逗号和制表符。CSV 文件示例如下： ID,Username,Password,Age,Country 1001,yhw,123456,24,China 1002,Mary,654321,25,USA 1003,Jack,123567,22,English Python 通过 csv 库来读写 csv 文件。Python 写 csv 文件，需要用到 write 对象，然后按行写每一个记录； import csv header = (&quot;ID&quot;, &quot;Username&quot;, &quot;Password&quot;, &quot;Age&quot;, &quot;Country&quot;) rows = [(1001, &quot;yhw&quot;, &quot;123456&quot;, 24, &quot;China&quot;), (1002, &quot;Mary&quot;, &quot;654321&quot;, 25, &quot;USA&quot;), (1003, &quot;Jack&quot;, &quot;123567&quot;, 22, &quot;English&quot;)] with open(&quot;test3.csv&quot;, &quot;w&quot;) as fp: fp_csv = csv.writer(fp) fp_csv.writerow(header) fp_csv.writerows(rows) import csv rows = [{&quot;ID&quot;: 1001, &quot;Username&quot;: &quot;yhw&quot;, &quot;Password&quot;: &quot;123456&quot;, &quot;Age&quot;: 24, &quot;Country&quot;: &quot;China&quot;}, {&quot;ID&quot;: 1002, &quot;Username&quot;: &quot;Mary&quot;, &quot;Password&quot;: &quot;654321&quot;, &quot;Age&quot;: 25, &quot;Country&quot;: &quot;USA&quot;}, {&quot;ID&quot;: 1003, &quot;Username&quot;: &quot;Jack&quot;, &quot;Password&quot;: &quot;123567&quot;, &quot;Age&quot;: 22, &quot;Country&quot;: &quot;English&quot;}] with open(&quot;test3.csv&quot;, &quot;w&quot;) as fp: fp_csv = csv.DictWriter(fp, header) fp_csv.writeheader() fp_csv.writerows(rows) Python 读取 csv 文件需要用到 reader 对象，然后同样是按行读取每一条记录。要读取特定字段信息，python 可以利用索引、命名元祖、字典这三种方式访问。 import csv from collections import namedtuple with open(&quot;test3.csv&quot;, &quot;r&quot;) as fp: # 遍历记录 fp_csv = csv.reader(fp) for row in fp_csv: print row # 索引 fp_csv = csv.reader(fp) for row in fp_csv: print row[0] # 命名元组 fp_csv = csv.reader(fp) header = next(fp_csv) Row = namedtuple(&quot;Row&quot;, header) for r in fp_csv: row = Row(*r) print row.Username, row.Password print row # 字典 fp_csv = csv.DictReader(fp) for row in fp_csv: print row.get(&quot;Username&quot;)","author":{"@type":"Person","name":"yhw-miracle"},"@type":"BlogPosting","url":"http://localhost:4000/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E4%B8%BAjson%E5%92%8Ccsv","headline":"数据存储为json和csv","dateModified":"2019-01-14T00:00:00+08:00","datePublished":"2019-01-14T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E4%B8%BAjson%E5%92%8Ccsv"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>YHW-MIRACLE</h1>
+    </a>
+    <div class="header-links">
+      <a href="/all_posts">
+    <h2 class="header-link">All_Posts | </h2>
+</a>
+<a href="/about">
+    <h2 class="header-link">About | </h2>
+</a>
+<a href="/categories">
+    <h2 class="header-link">Categories | </h2>
+</a>
+<a href="/tags">
+    <h2 class="header-link">Tags</h2>
+</a>
+<!--<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>-->
+
+    </div>
+  </div>
+</header>
+
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2 align="center">数据存储为json和csv</h2>
+  <img src="/images/authorize.png" />
+  <center>
+    yhw-miracle writed in <time datetime="2019-01-14T00:00:00+08:00" class="by-line">January 14th, 2019</time>
+  </center>
+  <p>进行 python 爬虫时，我们需要将数据存储起来。对于小数据量，我们可以存储到 json 文件或 csv 文件。</p>
+
+<h3 id="json存储">json存储</h3>
+<p>Python 对 json 文件的操作是通过 JSON 模块实现的，分为编码和解码两个过程。</p>
+
+<p>编码是指将 python 对象转换为 json 对象，常用的函数是 dump() 和 dumps()，区别是 dump() 将 python 对象转换为 json 对象，并将 json 对象通过文件流写入文件，dumps() 函数是返回字符串。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dumps</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="n">skipkeys</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">ensure_ascii</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">check_circular</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">allow_nan</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">cls</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">indent</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">separators</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8'</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">sort_keys</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+<span class="n">dumps</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="n">skipkeys</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">ensure_ascii</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">check_circular</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">allow_nan</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">cls</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">indent</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">separators</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8'</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">sort_keys</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>解码是指将 json 对象转换为 python 对象，常用的函数为 load() 和loads()，区别是 load() 是将 json 对象转换为 python 对象，并将 python 对象写入到文件，而 loads() 是返回字符串。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">cls</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">object_hook</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">parse_float</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">parse_int</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">parse_constant</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">object_pairs_hook</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+<span class="n">loads</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">cls</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">object_hook</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">parse_float</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">parse_int</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">parse_constant</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">object_pairs_hook</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="csv存储">csv存储</h3>
+<p>CSV(Comma-Separated Values，逗号分隔值，有时也称为字符分隔值)，其文件是以纯文本形式存储表格数据。CSV 文件由任意数目的记录组成，记录间以换行符分隔，每条记录由字段组成，字段间的分隔符是其他字符或字符串，最常见的是逗号和制表符。CSV 文件示例如下：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ID,Username,Password,Age,Country
+
+1001,yhw,123456,24,China
+
+1002,Mary,654321,25,USA
+
+1003,Jack,123567,22,English
+</code></pre></div></div>
+
+<p>Python 通过 csv 库来读写 csv 文件。Python 写 csv 文件，需要用到 write 对象，然后按行写每一个记录；</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="n">header</span> <span class="o">=</span> <span class="p">(</span><span class="s">"ID"</span><span class="p">,</span> <span class="s">"Username"</span><span class="p">,</span> <span class="s">"Password"</span><span class="p">,</span> <span class="s">"Age"</span><span class="p">,</span> <span class="s">"Country"</span><span class="p">)</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1001</span><span class="p">,</span> <span class="s">"yhw"</span><span class="p">,</span> <span class="s">"123456"</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="s">"China"</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">1002</span><span class="p">,</span> <span class="s">"Mary"</span><span class="p">,</span> <span class="s">"654321"</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s">"USA"</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">1003</span><span class="p">,</span> <span class="s">"Jack"</span><span class="p">,</span> <span class="s">"123567"</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="s">"English"</span><span class="p">)]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"test3.csv"</span><span class="p">,</span> <span class="s">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="n">fp_csv</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+    <span class="n">fp_csv</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+    <span class="n">fp_csv</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[{</span><span class="s">"ID"</span><span class="p">:</span> <span class="mi">1001</span><span class="p">,</span> <span class="s">"Username"</span><span class="p">:</span> <span class="s">"yhw"</span><span class="p">,</span> <span class="s">"Password"</span><span class="p">:</span> <span class="s">"123456"</span><span class="p">,</span> <span class="s">"Age"</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="s">"Country"</span><span class="p">:</span> <span class="s">"China"</span><span class="p">},</span>
+        <span class="p">{</span><span class="s">"ID"</span><span class="p">:</span> <span class="mi">1002</span><span class="p">,</span> <span class="s">"Username"</span><span class="p">:</span> <span class="s">"Mary"</span><span class="p">,</span> <span class="s">"Password"</span><span class="p">:</span> <span class="s">"654321"</span><span class="p">,</span> <span class="s">"Age"</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s">"Country"</span><span class="p">:</span> <span class="s">"USA"</span><span class="p">},</span>
+        <span class="p">{</span><span class="s">"ID"</span><span class="p">:</span> <span class="mi">1003</span><span class="p">,</span> <span class="s">"Username"</span><span class="p">:</span> <span class="s">"Jack"</span><span class="p">,</span> <span class="s">"Password"</span><span class="p">:</span> <span class="s">"123567"</span><span class="p">,</span> <span class="s">"Age"</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span> <span class="s">"Country"</span><span class="p">:</span> <span class="s">"English"</span><span class="p">}]</span>
+		
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"test3.csv"</span><span class="p">,</span> <span class="s">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+	<span class="n">fp_csv</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span>
+    <span class="n">fp_csv</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
+    <span class="n">fp_csv</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Python 读取 csv 文件需要用到 reader 对象，然后同样是按行读取每一条记录。要读取特定字段信息，python 可以利用索引、命名元祖、字典这三种方式访问。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"test3.csv"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="c1"># 遍历记录
+</span>    <span class="n">fp_csv</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">fp_csv</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">row</span>
+
+    <span class="c1"># 索引
+</span>    <span class="n">fp_csv</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">fp_csv</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># 命名元组
+</span>    <span class="n">fp_csv</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">fp_csv</span><span class="p">)</span>
+    <span class="n">Row</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">"Row"</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">fp_csv</span><span class="p">:</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">Row</span><span class="p">(</span><span class="o">*</span><span class="n">r</span><span class="p">)</span>
+        <span class="k">print</span> <span class="n">row</span><span class="o">.</span><span class="n">Username</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">Password</span>
+        <span class="k">print</span> <span class="n">row</span>
+
+    <span class="c1"># 字典
+</span>    <span class="n">fp_csv</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">fp_csv</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"Username"</span><span class="p">)</span>
+</code></pre></div></div>
+
+</article>
+
+
+	<div class="tags">
+	<img src="/images/tag.png" />
+	
+		<a href="/tag/json">json</a>
+	
+		<a href="/tag/csv">csv</a>
+	
+	</div>
+
+
+
+
+
+
+	<div class="categories">
+	<img src="/images/category.png" />
+	
+	  <a href="/category/知识总结">知识总结</a>
+	
+	</div>
+
+
+
+
+<div class="pagination">
+    上一篇：
+    
+      <a href="/%E6%8F%90%E5%8F%96%E5%A4%9A%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6" class="previous">
+        <img src="/images/previous.png" />
+      </a>
+    
+  
+    | 下一篇：
+    
+      <a href="/%E6%80%BB%E7%BB%93BeautifulSoup" class="next">
+        <img src="/images/next.png" />
+      </a>
+    
+  </div>
+
+
+      </section>
+    </div>
+  </div>
+
+  
+
+  <div align="center" id="qecode_img">
+  <hr />
+  <p>欢迎关注，我们一起进行认知迭代！</p>
+  <img src="/images/qrcode_for_gh_5efb2780ab44_258.jpg" /><br />
+  痛点就是起点
+</div>
+
+<footer>
+  <!-- <a href="https://blogs.yhw-miracle.cn">
+    <span>
+        <b>yhw-miracle</b>
+    </span>
+    
+    <span>© 2016 - 2019</span>
+  </a> -->
+</footer>
+
+<div align="center" style="font-size: 13px;">
+  <hr />
+  <span>&copy; 2016 - 2019</span>基于
+  <a href="https://jekyllrb.com">jekyll</a> | 
+  <a href="https://github.com">Github Pags</a> | 
+  By <a href="blogs.yhw-miracle.cn">yhw-miracle</a>
+</div>
+
+
+  <!--  -->
+</body>
+</html>

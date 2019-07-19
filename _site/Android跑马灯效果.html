@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>Android跑马灯效果</title>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Android跑马灯效果 | yhw-miracle’s Blog</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="Android跑马灯效果" />
+<meta name="author" content="yhw-miracle" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="用 Android 实现跑马灯效果，前提是显示的内容较长，超过屏幕的宽度，不然实现跑马灯没有意义。" />
+<meta property="og:description" content="用 Android 实现跑马灯效果，前提是显示的内容较长，超过屏幕的宽度，不然实现跑马灯没有意义。" />
+<link rel="canonical" href="http://localhost:4000/Android%E8%B7%91%E9%A9%AC%E7%81%AF%E6%95%88%E6%9E%9C" />
+<meta property="og:url" content="http://localhost:4000/Android%E8%B7%91%E9%A9%AC%E7%81%AF%E6%95%88%E6%9E%9C" />
+<meta property="og:site_name" content="yhw-miracle’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-09-13T00:00:00+08:00" />
+<script type="application/ld+json">
+{"description":"用 Android 实现跑马灯效果，前提是显示的内容较长，超过屏幕的宽度，不然实现跑马灯没有意义。","author":{"@type":"Person","name":"yhw-miracle"},"@type":"BlogPosting","url":"http://localhost:4000/Android%E8%B7%91%E9%A9%AC%E7%81%AF%E6%95%88%E6%9E%9C","headline":"Android跑马灯效果","dateModified":"2017-09-13T00:00:00+08:00","datePublished":"2017-09-13T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/Android%E8%B7%91%E9%A9%AC%E7%81%AF%E6%95%88%E6%9E%9C"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>YHW-MIRACLE</h1>
+    </a>
+    <div class="header-links">
+      <a href="/all_posts">
+    <h2 class="header-link">All_Posts | </h2>
+</a>
+<a href="/about">
+    <h2 class="header-link">About | </h2>
+</a>
+<a href="/categories">
+    <h2 class="header-link">Categories | </h2>
+</a>
+<a href="/tags">
+    <h2 class="header-link">Tags</h2>
+</a>
+<!--<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>-->
+
+    </div>
+  </div>
+</header>
+
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2 align="center">Android跑马灯效果</h2>
+  <img src="/images/authorize.png" />
+  <center>
+    yhw-miracle writed in <time datetime="2017-09-13T00:00:00+08:00" class="by-line">September 13th, 2017</time>
+  </center>
+  <p>用 Android 实现跑马灯效果，前提是显示的内容较长，超过屏幕的宽度，不然实现跑马灯没有意义。</p>
+
+<h4 id="11-一个-textview">1.1 一个 TextView</h4>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>android:singleLine="true"
+android:ellipsize="marquee"
+android:focusable="true"
+android:focusableInTouchMode="true"
+</code></pre></div></div>
+
+<p><img src="/images/2017/3aOJ8Df5RxTPF6jWQfEUYngP.png" alt="" /></p>
+
+<h4 id="12-多个-textview">1.2 多个 TextView</h4>
+
+<p><img src="/images/2017/jxAIieloK0Y7mzM6qtSPYyfD.png" alt="" /></p>
+
+<p>用继承 TextView 类来实现，isFocused 方法返回 true。</p>
+
+<p><img src="/images/2017/UfmVeJ-WLwJocTRGmHzQKRKX.png" alt="" /></p>
+
+<h4 id="13-效果">1.3 效果</h4>
+
+<p><img src="/images/2017/L2XSCvyI6Np7C395bpsOxNIi.png" alt="" /></p>
+
+</article>
+
+
+	<div class="tags">
+	<img src="/images/tag.png" />
+	
+		<a href="/tag/Android">Android</a>
+	
+		<a href="/tag/跑马灯">跑马灯</a>
+	
+	</div>
+
+
+
+
+
+
+	<div class="categories">
+	<img src="/images/category.png" />
+	
+	  <a href="/category/技术案例">技术案例</a>
+	
+	</div>
+
+
+
+
+<div class="pagination">
+    上一篇：
+    
+      <a href="/Android%E5%B8%83%E5%B1%80" class="previous">
+        <img src="/images/previous.png" />
+      </a>
+    
+  
+    | 下一篇：
+    
+      <a href="/Android%E6%8C%89%E9%92%AE%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%AE%9E%E7%8E%B0" class="next">
+        <img src="/images/next.png" />
+      </a>
+    
+  </div>
+
+
+      </section>
+    </div>
+  </div>
+
+  
+
+  <div align="center" id="qecode_img">
+  <hr />
+  <p>欢迎关注，我们一起进行认知迭代！</p>
+  <img src="/images/qrcode_for_gh_5efb2780ab44_258.jpg" /><br />
+  痛点就是起点
+</div>
+
+<footer>
+  <!-- <a href="https://blogs.yhw-miracle.cn">
+    <span>
+        <b>yhw-miracle</b>
+    </span>
+    
+    <span>© 2016 - 2019</span>
+  </a> -->
+</footer>
+
+<div align="center" style="font-size: 13px;">
+  <hr />
+  <span>&copy; 2016 - 2019</span>基于
+  <a href="https://jekyllrb.com">jekyll</a> | 
+  <a href="https://github.com">Github Pags</a> | 
+  By <a href="blogs.yhw-miracle.cn">yhw-miracle</a>
+</div>
+
+
+  <!--  -->
+</body>
+</html>
