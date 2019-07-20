@@ -1,4 +1,4 @@
-{% if page.categories %}
+{% if page.categories.size > 0 %}
 	<div class="categories">
 	<img src="/images/category.png" />
 	{% for category in page.categories %}
@@ -8,7 +8,7 @@
 	</div>
 {% endif %}
 
-{% if post.categories %}
+{% if post.categories.size > 0 %}
 	<div class="categories">
 	<img src="/images/category.png" />
 	{% for category in post.categories %}
