@@ -20,13 +20,14 @@ author: yhw-miracle
 * 变量名的命名规则是由数字、字母和下划线组成，不能以数字开头，不能是关键字，区分大小写。
 * 下划线连接，驼峰命名法
 * 关键字
+> ```python
+> import keyword
+> print(keyword.kwlist)
+> ```
+> ![](/images/2019/Apr/01.png)
 
-```python
-import keyword
-print(keyword.kwlist)
-```
 
-![](/images/2019/Apr/01.png)
+
 
 ### 标准输入输出
 * 输入：input()
