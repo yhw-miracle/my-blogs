@@ -11,9 +11,9 @@ author: yhw-miracle
 
 ### `python`介绍
 * 解释型编程语言
-* `python`单行注释`#`
-* `python`多行注释`"""`与`"""`
-* `# TODO`说明文字
+* python单行注释: `#`
+* python 多行注释: `"""`,`"""`
+* 说明文字: `# TODO`
 
 ### 变量、关键字
 * 变量用于描述计算机中的数据存储空间，作用是在计算机内存中保存数据。
@@ -88,7 +88,7 @@ print(keyword.kwlist)
 	> * 0 and False => 0
 	> * 1 or False => 1
 	> * 0 or False => False
-	> ___
+	> <hr />
 	> * True and 1 => 1
 	> * True and 0 => 0
 	> * True or 1 => True
