@@ -3,15 +3,17 @@ description: "Speaking as important as talking."
 author:
   name: "yhw-miracle"
   email: "yhw_software@qq.com"
-  url: ""
+  url: "https://blogs.yhw-miracle.cn"
 
-baseurl: /
+baseurl: 
 
 source: .
 destination: ./_site
 permalink: /:title
 paginate: 5
 paginate_path: /page/:num/
+
+markdown:  kramdown
 
 defaults:
   - scope:
@@ -25,8 +27,18 @@ plugins:
   - jekyll-seo-tag
   - jekyll-paginate
   - jekyll-sitemap
+  # - jekyll-archives
+
+# jekyll-archives:
+#   enabled: 
+#     - categories
+#     - tags
+#   layout: 
+#     - category: tag
+#     - tag: tag
+#   permalinks: 
+#     tag: '/tag/:name/'
+#     category: '/category/:name/'
 
 # Custom variables
 owner : "yhw-miracle"
-year : "2018"
-

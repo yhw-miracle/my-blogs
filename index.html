@@ -10,7 +10,7 @@ layout: default
           <div class="author">
             {{ post.author}} writed in 
             <time datetime="{{ post.date | date_to_xmlschema }}">
-              {{ post.date | date_to_long_string: "ordinal", "US" }}
+              {{ post.date | date: "%Y/%m/%d" }}
             </time>
           </div>
           {% include show_tags.html %}

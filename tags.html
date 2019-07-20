@@ -4,9 +4,15 @@ title: tags
 ---
 
 {% for tag in site.tags %}
+    <a style="display: inline-block; margin: 5px; background-color: #ff6a00;" href="#{{ tag[0] }}">{{ tag[0] }}({{ tag[1].size}})</a>
+{% endfor %}
+
+<hr />
+
+{% for tag in site.tags %}
     <ul>
-        <img src="/images/tag.png" style="margin: 5px 5px 5px 5px; float: left;" />
-        <li class="tags" style="display: inline-block; background-color: #ff6a00;">
+        <img src="/images/tag.png" style="margin: 5px; float: left;" />
+        <li class="tags" style="display: inline-block; background-color: #ff6a00;" id="{{tag[0]}}">
             {{ tag[0] }}({{ tag[1].size }})
         </li>
         {% for post in tag[1] %}

@@ -2,7 +2,8 @@
 	<div class="categories">
 	<img src="/images/category.png" />
 	{% for category in page.categories %}
-	  <a href="{{ site.baseurl }}category/{{ category }}">{{ category }}</a>
+		<span>{{ category }}</span>
+	  <!-- <a href="{{ site.baseurl }}category/{{ category }}">{{ category }}</a> -->
 	{% endfor%}
 	</div>
 {% endif %}
@@ -11,7 +12,8 @@
 	<div class="categories">
 	<img src="/images/category.png" />
 	{% for category in post.categories %}
-	  <a href="{{ site.baseurl }}category/{{ category }}">{{ category }}</a>
+		<span>{{ category }}</span>
+	  <!-- <a href="{{ site.baseurl }}category/{{ category }}">{{ category }}</a> -->
 	{% endfor%}
 	</div>
 {% endif %}

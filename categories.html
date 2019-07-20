@@ -4,9 +4,15 @@ title: categories
 ---
 
 {% for category in site.categories %}
+    <a style="display: inline-block; margin: 5px; background-color: #ff6a00;" href="#{{ category[0] }}">{{ category[0] }}({{ category[1].size}})</a>
+{% endfor %}
+
+<hr />
+
+{% for category in site.categories %}
     <ul>
         <img src="/images/category.png" style="margin: 5px 5px 5px 5px; float: left;" />
-        <li class="categories" style="display: inline-block;background-color: #ff6a00;">
+        <li class="categories" style="display: inline-block;background-color: #ff6a00;" id="{{category[0]}}">
             {{ category[0] }}({{ category[1].size }})
         </li>
         {% for post in category[1] %}
