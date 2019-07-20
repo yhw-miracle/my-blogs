@@ -24,10 +24,8 @@ author: yhw-miracle
 > import keyword
 > print(keyword.kwlist)
 > ```
-> ![](/images/2019/Apr/01.png)
 
-
-
+![](/images/2019/Apr/01.png)
 
 ### 标准输入输出
 * 输入：input()
