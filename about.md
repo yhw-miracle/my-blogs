@@ -3,15 +3,15 @@ layout: page
 title: About
 ---
 
-- what is the site?
-[yhw-miracle](https://blogs.yhw-miracle.cn)
+- the site: [yhw-miracle](https://blogs.yhw-miracle.cn)
+
+<hr />
 
 - learn more about me
   - Github: [https://github.com/yhw-miracle](https://github.com/yhw-miracle)
-  - E-mail: [yhw_software@qq.com](mailto:yhw_software@qq.com)
   - 公众号: 痛点就是起点 ---> <a href="#qecode_img">点此关注，我们一起进行认知迭代！</a>
 
-___
+<hr />
 
 - some authors
 
@@ -24,3 +24,6 @@ ___
 | <img src="/images/lee.jpeg" width="50" height="50" /> | Lee | <a href="http://liranran.xyz" target="_blank">http://liranran.xyz</a> | 落霞与孤鹜齐飞，秋水共长天一色。 |
 | <img src="/images/zkp.jpg" width="50" height="50" /> | mour | <a href="https://iami.xyz" target="_blank">https://iami.xyz</a> | 人生其实宽广的很 |
 
+<hr />
+
+- <a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=rtfG2fHdwcja2c-cy_7f34DNwcM">欢迎与我交流<img src="/images/minutemailer_16.png" /></a>
