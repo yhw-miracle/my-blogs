@@ -122,29 +122,30 @@ article h2 {
 }
 
 #main_content h1 {
-  font-size: 30px;
+  font-size: 28px;
 }
 
 #main_content h2 {
-  font-size: 24px;
+  font-size: 26px;
 }
 
 #main_content h3 {
-  font-size: 18px;
+  font-size: 24px;
+  text-align: center;
 }
 
 #main_content h4 {
-  font-size: 14px;
+  font-size: 22px;
 }
 
 #main_content h5 {
-  font-size: 12px;
+  font-size: 20px;
   text-transform: uppercase;
   margin: 0 0 5px 0;
 }
 
 #main_content h6 {
-  font-size: 12px;
+  font-size: 18px;
   text-transform: uppercase;
   color: #999;
   margin: 0 0 5px 0;
@@ -156,7 +157,14 @@ dt {
 }
 
 ul li {
-  list-style-image:url('/images/arrow-right-s.png');
+  list-style-image:url('/images/system/list1.png');
+}
+ul ul li {
+  list-style-image: url('/images/system/arrowrightdl.png');
+}
+
+ul ul ul li {
+  list-style-image: url('/images/system/arrow-right-s.png');
 }
 
 blockquote {
