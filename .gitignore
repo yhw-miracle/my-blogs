@@ -1,4 +1,6 @@
 _site
 .sass-cache
 _draft
-script
+script/__pycache__
+script/.idea
+script/demo
