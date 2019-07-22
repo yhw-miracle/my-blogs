@@ -4,7 +4,7 @@ title: 总结BeautifulSoup
 date: 2019-01-13 00:00:00 +0800
 tags: [python, BeautifulSoup]
 categories: 知识总结
-author: yhw-miracle
+author: 痛点就是起点
 ---
 1.BeautifulSoup4 支持 python 标准库(html.parser)、lxml、html5lib 这些解析器解析文档。
 

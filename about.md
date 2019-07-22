@@ -3,7 +3,11 @@ layout: page
 title: About
 ---
 
-- the site: [yhw-miracle](https://blogs.yhw-miracle.cn)
+- introduction
+    - **<font color="#FF6A00">爱思考</font>**，有时思考就发散，不可截住；
+    - **<font color="#FF6A00">爱读书</font>**，可是读的不是很多；
+    - 以前不喜欢写作，最近两年内突然**<font color="#FF6A00">爱写作</font>**，对写作感兴趣了，但是目前还是记录自己思考的短文阶段；
+    - **<font color="#FF6A00">爱编程</font>**，多语言开发者，学过 C，C++，JAVA，写过网页，Android APP，PC 桌面应用程序，目前正在用 python 编程。
 
 <hr />
 
@@ -26,4 +30,4 @@ title: About
 
 <hr />
 
-- <a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=rtfG2fHdwcja2c-cy_7f34DNwcM">欢迎与我交流<img src="/images/system/minutemailer_16.png" /></a>
+- <a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=rtfG2fHdwcja2c-cy_7f34DNwcM">点此，欢迎与我交流<img src="/images/system/minutemailer_16.png" /></a>

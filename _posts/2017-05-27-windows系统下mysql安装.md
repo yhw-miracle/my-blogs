@@ -4,7 +4,7 @@ title: windows系统下mysql安装
 date: 2017-05-27 00:00:00 +0800
 tags: [mysql, install]
 categories: 问题解决
-author: yhw-miracle
+author: 痛点就是起点
 ---
 ### 1 软件下载
 下载地址为：[https://downloads.mysql.com/archives/community/](https://downloads.mysql.com/archives/community/)

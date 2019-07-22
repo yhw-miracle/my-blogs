@@ -1,7 +1,3 @@
-/*
-   original: https://github.com/pages-themes/hacker 
-*/
-
 @import "rouge-base16-dark";
 @import "default_colors";
 
@@ -18,7 +14,7 @@ body {
   color: #FFFFFF;
   font-size: 18px;
   line-height: 1.5;
-  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+  font-family: Consolas, "Bitstream Vera Sans Mono", "Lucida Console", Terminal,monospace;
 }
 
 /* let iamges center in post  */
@@ -157,14 +153,14 @@ dt {
 }
 
 ul li {
-  list-style-image:url('/images/system/list1.png');
+  list-style-image:url('/images/system/arrow-right-1.png');
 }
 ul ul li {
-  list-style-image: url('/images/system/arrowrightdl.png');
+  list-style-image: url('/images/system/arrow-right-2.png');
 }
 
 ul ul ul li {
-  list-style-image: url('/images/system/arrow-right-s.png');
+  list-style-image: url('/images/system/arrow-right-3.png');
 }
 
 blockquote {
@@ -253,7 +249,7 @@ hr {
 
 .btn-github .icon {
   opacity: 0.6;
-  background: url("../images/blacktocat.png") 0 0 no-repeat;
+  // background: url("../images/blacktocat.png") 0 0 no-repeat;
 }
 
 /* Clearfix */

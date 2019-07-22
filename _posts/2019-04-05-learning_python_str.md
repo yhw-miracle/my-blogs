@@ -4,11 +4,11 @@ title: learning_python_str
 date: 2019-04-05 20:59:41 +0800
 tags: [python, str]
 categories: 知识总结
-author: yhw-miracle
+author: 痛点就是起点
 published: false
 ---
 
-> 本文为`yhw-miracle`原创文章，可以随意转载，但需注明出处。
+> 本文为`痛点就是起点`原创文章，可以随意转载，但需注明出处。
 
 ### 字符串
 * 字符串是一个包含若干个字符并按照一定顺序排列成整体的容器，支持`索引`操作，字符串定义可以是`"xxxx"`,`'xxx'`,`"""xxx"""`,`'''xxx'''`。

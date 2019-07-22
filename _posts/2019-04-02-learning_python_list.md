@@ -4,10 +4,10 @@ title: learning_python_list
 date: 2019-04-02 20:26:20 +0800
 tags: [python, list]
 categories: 知识总结
-author: yhw-miracle
+author: 痛点就是起点
 ---
 
-> 本文为`yhw-miracle`原创文章，可以随意转载，但需注明出处。
+> 本文为`痛点就是起点`原创文章，可以随意转载，但需注明出处。
 
 ### 数据结构
 * python 中的数据结构

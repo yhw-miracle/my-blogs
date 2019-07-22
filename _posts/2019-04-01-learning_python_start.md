@@ -4,10 +4,10 @@ title: learning_python_start
 date: 2019-04-01 19:28:14 +0800
 tags: [python,]
 categories: 知识总结
-author: yhw-miracle
+author: 痛点就是起点
 ---
 
-> 本文为`yhw-miracle`原创文章，可以随意转载，但需注明出处。
+> 本文为`痛点就是起点`原创文章，可以随意转载，但需注明出处。
 
 ### 初识 Python
 * python 是解释型编程语言。
@@ -68,8 +68,8 @@ author: yhw-miracle
 	* `**=`，次方后赋值
 
 * 比较运算符
-	* `\>`，大于
-	* `\>=`，大于等于
+	* `>`，大于
+	* `>=`，大于等于
 	* `<`，小于
 	* `<=`，小于等于
 	* `!=`，不低于

@@ -4,11 +4,11 @@ title: learning_python_dict
 date: 2019-04-04 20:59:41 +0800
 tags: [python, dict]
 categories: 知识总结
-author: yhw-miracle
+author: 痛点就是起点
 published: false
 ---
 
-> 本文为`yhw-miracle`原创文章，可以随意转载，但需注明出处。
+> 本文为`痛点就是起点`原创文章，可以随意转载，但需注明出处。
 
 ### 字典
 * 字典（dict）（`{xx: xx,...}`）是一种使用“键值对结构”存储数据的存储模型，没有索引概念，利用键（键是**唯一**的）来索引，可以根据键对字典数据进行增、删、改、查操作。

@@ -4,7 +4,7 @@ title: Python实现HTTP请求
 date: 2018-08-06 00:00:00 +0800
 tags: [python, HTTP, request, response]
 categories: 知识总结
-author: yhw-miracle
+author: 痛点就是起点
 ---
 python　中实现 HTTP 请求有三种方式，分别为 urllib2/urllib、httplib/urllib 和 Requests。
 

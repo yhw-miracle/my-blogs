@@ -4,10 +4,10 @@ title: CentOs安装python3及配置Python虚拟环境
 date: 2019-07-07 10:48:16 +0800
 tags: [CentOS, Python3, virtualenv]
 categories: 问题解决
-author: yhw-miracle
+author: 痛点就是起点
 ---
 
-> 本文为`yhw-miracle`原创文章，可以随意转载，但需注明出处。
+> 本文为`痛点就是起点`原创文章，可以随意转载，但需注明出处。
 
 本篇文章介绍`CentOS7`系统源码编译安装`Python3.6.9`，并配置虚拟环境，其他系统和`Python`版本可以类似参考。
 

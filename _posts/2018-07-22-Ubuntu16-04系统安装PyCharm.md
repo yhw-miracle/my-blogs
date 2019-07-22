@@ -4,7 +4,7 @@ title: Ubuntu16.04系统安装PyCharm
 date: 2018-07-22 00:00:00 +0800
 tags: [ubuntu, pycharm]
 categories: 问题解决
-author: yhw-miracle
+author: 痛点就是起点
 ---
 随着人工智能的发展，python 越来越流行。作为年轻一代的互联网技术人员，学习 python 就变得十分必要。俗话说，“工欲善其事必先利其器”，在学习 python 之前，一个好的 IDE 将会使编程效率得到大幅度提高。本人在进行 python 开发时，强烈建议 pycharm 编辑器。
 

@@ -4,7 +4,7 @@ title: 初识BeautifulSoup
 date: 2018-08-09 00:00:00 +0800
 tags: [python, BeautifulSoup]
 categories: 知识总结
-author: yhw-miracle
+author: 痛点就是起点
 ---
 BeautifulSoup 是一个可以从 HTML 或 XML 文件中提取数据的 python 库，它能通过解析器实现文档的查找提取和修改等功能。
 

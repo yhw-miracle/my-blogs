@@ -4,11 +4,11 @@ title: learning_python_tuple&set
 date: 2019-04-03 20:50:32 +0800
 tags: [python, tuple, set]
 categories: 知识总结
-author: yhw-miracle
-published: false
+author: 痛点就是起点
+published: true
 ---
 
-> 本文为`yhw-miracle`原创文章，可以随意转载，但需注明出处。
+> 本文为`痛点就是起点`原创文章，可以随意转载，但需注明出处。
 
 ### 元组
 * 元组（tuple）（`()`）是一种存储固定数据的存储模型，元组中的数据通过索引修改。
