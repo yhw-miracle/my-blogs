@@ -1,7 +1,6 @@
 ### all posts
 
 * 2019-07-21 --- [性能杂谈](http://yhw-miracle.cn/性能杂谈)
-
 * 2019-07-07 --- [CentOs安装python3及配置Python虚拟环境](http://yhw-miracle.cn/CentOs安装python3及配置Python虚拟环境)
 * 2019-07-03 --- [搭建一台可以永久使用的编程机器](http://yhw-miracle.cn/搭建一台可以永久使用的编程机器)
 * 2019-05-01 --- [搭建本地git服务器](http://yhw-miracle.cn/搭建本地 git 服务器)
