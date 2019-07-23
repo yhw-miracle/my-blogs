@@ -6,19 +6,7 @@
 # @Software: PyCharm
 import os
 import re
-
-
-def is_post_file(file_name):
-    """
-    判断是否为文章源文件
-    :param file_name: 文件名
-    :return: True or False
-    """
-    result = re.match(r'^\d{4}-\d{2}-\d{2}-.+\.md$', file_name)
-    if result is not None:
-        return True
-    else:
-        return False
+from utils.is_post_file import  is_post_file
 
 
 def get_posts_title():
@@ -43,7 +31,8 @@ def get_posts_title():
                     if post_file_line.find("title") != -1:
                         post_title = post_file_line[7:-1]
 
-            post_info_to_readme = "  * {} --- [{}]({}/{})".format(post_date, post_title, "http://yhw-miracle.cn", post_title)
+            post_info_to_readme = "* {} --- [{}]({}/{})"\
+                .format(post_date, post_title, "http://yhw-miracle.cn", post_title)
             print(post_info_to_readme)
             write_readme(post_info_to_readme)
 
