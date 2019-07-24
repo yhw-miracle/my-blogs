@@ -10,13 +10,18 @@ import os
 from utils.is_post_file import is_post_file
 
 
-def is_valid_post_title(post_title):
+def is_valid_post_title(post_title, post_type):
     """
     判断文章标题是否有效
     :param post_title: 文章标题，不能是数字开头，不能含有空格和下划线，不能重复
+    :param post_type: 文章类型【post、draft】
     :return: 数字开头或含有空格和横线返回 -1，重复标题返回 -2，有效返回 0
     """
-    post_path = "../_posts/"
+    if post_type == "post":
+        post_path = "../_posts/"
+    if post_type == "draft":
+        post_path = "../_draft/"
+
     if re.match(r'^\d.+$', post_title) is None and post_title.find(" ") == -1 and post_title.find("-") == -1:
         for file_name in reversed(os.listdir(post_path)):
             if is_post_file(file_name):
@@ -30,17 +35,21 @@ def is_valid_post_title(post_title):
         return -1
 
 
-def create_new_post(post_title, categories = None, tags = None):
+def create_new_post(post_title, post_type = None, categories = None, tags = None):
     """
     创建新文章
     :param post_title: 文章标题
+    :param post_type: 文章类型【post、draft】
     :param categories: 文章标签，不指定为 None
     :param tags: 文章所属分类【问题解决、知识总结、技术案例、生活感悟，技术翻译、他山之石】，不指定为 None
     :return:
     """
-    post_path = "../_posts/"
-
-    post_title_status = is_valid_post_title(post_title)
+    if post_type is None or post_type == "post":
+        post_path = "../_posts/"
+    if post_type == "draft":
+        post_path = "../_draft/"
+    
+    post_title_status = is_valid_post_title(post_title, post_type)
     if post_title_status == 0:
         now_date = datetime.now()
         post_title_date = "{:04d}-{:02d}-{:02d}-".format(now_date.year, now_date.month, now_date.day)
@@ -69,4 +78,4 @@ def create_new_post(post_title, categories = None, tags = None):
 
 
 if __name__ == '__main__':
-    create_new_post(post_title = input("输入文章标题，不能是数字开头，不能含有横线和空格："))
+    create_new_post(post_title = input("输入文章标题，不能是数字开头，不能含有横线和空格："), post_type = input("选择文章类型【post or draft】"))
