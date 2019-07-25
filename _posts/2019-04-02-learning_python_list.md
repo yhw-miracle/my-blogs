@@ -41,7 +41,6 @@ author: 痛点就是起点
     * append(self, object): Append object to the end of the list.
     * insert(self, index, object): Insert object before index.
     * extend(self, iterable): Extend list by appending elements from the iterable.
-    <hr />
     > * 翻译：
     > * append(self, object): 在列表的末尾添加元素。
     > * insert(self, index, object): 在指定位置之前插入元素。
@@ -51,7 +50,6 @@ author: 痛点就是起点
     * remove(self, object): Remove first occurrence of value.Raises ValueError if the value is not present.
     * pop(self, index): Remove and return item at index (default last).Raises IndexError  if list is empty or index is out of range.
     * clear(self): Remove all items from list.
-    <hr />
     > * 翻译：
     > * remove(self, object): 移除列表中第一个指定数据，若指定数据不存在，抛出ValueError。
     > * pop(self, index): 移除并返回列表中指定位置的数据（默认为最后一个），若列表为空或者指定位置超过范围，抛出IndexError。
@@ -65,7 +63,6 @@ author: 痛点就是起点
     * copy(self): Return a shallow copy of the list.
     * reverse(self): Reverse *IN PLACE*.
     * sort(self, key, reverse): Stable sort *IN PLACE*.
-    <hr />
     > * 翻译
     > * count(self, object): 返回指定数据在列表中的个数。
     > * index(self, object, start, stop): 返回指定数据在列表中第一个位置，若指定数据不存在，抛出ValueError。
