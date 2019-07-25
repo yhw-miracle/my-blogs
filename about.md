@@ -27,7 +27,7 @@ title: About
 | <img src="/images/authors/jqq.jpg" width="50" height="50" /> | qiracle | <a href="http://qiracle.cn" target="_blank">http://qiracle.cn</a> | no pains,no gains. |
 | <img src="/images/authors/lee.jpeg" width="50" height="50" /> | Lee | <a href="http://liranran.xyz" target="_blank">http://liranran.xyz</a> | 落霞与孤鹜齐飞，秋水共长天一色。 |
 | <img src="/images/authors/zkp.jpg" width="50" height="50" /> | mour | <a href="https://iami.xyz" target="_blank">https://iami.xyz</a> | 人生其实宽广的很 |
-| <img src="/images/authors/zwl.jpg" width="50" height="50" /> | 秒西 | <a href="https://slycmiaoxi.github.io" target="_blank">https://slycmiaoxi.github.io/</a> | https://slycmiaoxi.github.io | 
+| <img src="/images/authors/zwl.jpg" width="50" height="50" /> | 秒西 | <a href="https://slycmiaoxi.github.io" target="_blank">https://slycmiaoxi.github.io/</a> | I believe my dream will come true. | 
 
 <hr />
 
