@@ -10,6 +10,32 @@ author: 痛点就是起点
 > 本文为`痛点就是起点`原创文章，可以随意转载，但需注明出处。
 
 ### 初识 Python
+* 在 python 控制台键入`import this`看 python 告诉我们的话：
+
+```text
+The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!
+```
+
 * python 是解释型编程语言。
 * python 中单行注释: `#`。
 * python 中多行注释: 一对三引号，即`"""`和`"""`。
