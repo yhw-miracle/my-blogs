@@ -6,10 +6,13 @@ tags: [python, HTTP, request, response]
 categories: 知识总结
 author: 痛点就是起点
 ---
+
+> 本文为`痛点就是起点`原创文章，可以随意转载，但需注明出处。
+
 python　中实现 HTTP 请求有三种方式，分别为 urllib2/urllib、httplib/urllib 和 Requests。
 
-### 1. urllib2/urllib
-#### 1.1 基本请求和响应模型
+### urllib2/urllib
+#### 基本请求和响应模型
 urllib2 和 urllib 是 Python 中的两个内置模块，实现 HTTP 请求时，以 urllib2 为主，urllib　为辅。urllib2 模块提供了 urliopen() 方法，可以向指定的 URL 发出请求来获取数据。
 
 ```python
@@ -26,7 +29,7 @@ response = urllib2.urlopen(request)
 print response.read()
 ```
 
-#### 1.2 请求头 headers 处理
+#### 请求头 headers 处理
 请求头信息可以直接与 URL 一起放到 Requset() 方法里，也可以使用 add_header() 方法添加请求头信息。
 
 ```python
@@ -51,7 +54,7 @@ response = urllib2.urlopen(request)
 print response.read()
 ```
 
-#### 1.3 Cookie 处理
+#### Cookie 处理
 urllib2 对 Cookie 的处理是自动的，使用 CookieJar 函数进行 Cookie 的管理。我们也可以通过设置请求头中的 Cookie 域来自定义添加 Cookie 的内容。
 
 ```python
@@ -82,7 +85,7 @@ print response.headers
 print response.read()
 ```
 
-#### 1.4 设置超时处理的三种方法
+#### 设置超时处理的三种方法
 在 python2.6 之前的版本，urllib2 的 API 并没有 Timeout 的设置，要设置 Timeout 值，只能通过设置 Socket 的全局 Timeout 值实现。而在 python2.6 及新的版本中，urlopen() 函数提供了对 Timeout 的设置。
 
 ```python
@@ -103,7 +106,7 @@ response = urllib2.urlopen(request, timeout=2)
 print response.read()
 ```
 
-#### 1.5 获取 HTTP 响应码
+#### 获取 HTTP 响应码
 对于 200 OK 来说，urlopen() 方法返回的 response 对象的 getcode() 方法可以得到该 HTTP 响应码，但是对于其他类型的响应码，urlopen() 方法会抛出异常，这样需要通过异常对象来获取响应码。
 
 ```python
@@ -122,7 +125,7 @@ except urllib2.HTTPError as e:
         print 'Error code:', e.code
 ```
 
-#### 1.6 重定向
+#### 重定向
 urllib2 默认情况下会针对 HTTP 3XX 返回码自动进行重定向动作。要检测是否发生了重定向动作，只要检查一些 Response 的 URL 和 Resquest 的 URL 是否一致就可以了。
 
 ```python
@@ -158,7 +161,7 @@ opener = urllib2.build_opener(RedirectHandler)
 opener.open('http://www.zhihu.com')
 ```
 
-#### 1.7 Proxy 代理
+#### Proxy 代理
 urllib2 默认使用环境变量 http_proxy 来设置 HTTP Proxy；也可以使用 ProxyHandler 在程序中动态设置代理。
 
 ```python
@@ -186,7 +189,7 @@ response = opener.open('http://www.zhihu.com')
 print response.read()
 ```
 
-### 2. httplib/urllib
+### httplib/urllib
 httplib 模块是一个底层基础模块，可以了解建立 HTTP 请求的每一步，正常情况下开发用的很少。
 
 | 功能 | API |
@@ -203,14 +206,14 @@ httplib 模块是一个底层基础模块，可以了解建立 HTTP 请求的每
 | 获取返回状态码 | HTTPResponse.status |
 | 获取返回说明 | HTTPResponse.reason |
 
-### 3. Requests
-#### 3.1 Requests 安装
+### Requests
+#### Requests 安装
 Python 中 Requests 模块实现 HTTP　请求的方式非常简单，操作更加人性化。Requests 库是第三方模块，需要额外安装，其源码开源，位于 [Github](https://github.com/requests/requests) 上。安装 requests 方式有两种：
 
 > 1. 直接在 Terminal 上输入命令 pip install requests
 > 2. 下载 [requests 源码](https://github.com/requests/requests/releases)，然后解压，在 Terminal 中进入解压后的目录，运行 setup.py 文件即可。
 
-#### 3.2 基本请求和响应模型
+#### 基本请求和响应模型
 
 ```python
 # coding:utf-8
@@ -233,7 +236,7 @@ req = requests.get('https://zzk.cnblogs.com/s/blogpost', params=payload)
 print(req.url)
 ```
 
-#### 3.3 响应码 code 和请求头 headers 处理
+#### 响应码 code 和请求头 headers 处理
 ```python
 import requests
 
@@ -247,7 +250,7 @@ else:
     req.raise_for_status()
 ```
 
-#### 3.4 Cookie 处理
+#### Cookie 处理
 ```python
 import requests
 
@@ -273,7 +276,7 @@ req = s.post(loginUrl, data=datas, allow_redirects=True)
 print(req.text)
 ```
 
-#### 3.5 重定向与历史信息
+#### 重定向与历史信息
 ```python
 import requests
 
@@ -285,14 +288,14 @@ print(req.status_code)
 print(req.history)
 ```
 
-#### 3.6 超时设置
+#### 超时设置
 ```python
 import requests
 
 print(requests.get('http://www.google.com', timeout=5).content)
 ```
 
-#### 3.7 代理设置
+#### 代理设置
 ```python
 import requests
 
