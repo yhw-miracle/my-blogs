@@ -6,15 +6,18 @@ tags: [python, BeautifulSoup]
 categories: 知识总结
 author: 痛点就是起点
 ---
+
+> 本文为`痛点就是起点`原创文章，可以随意转载，但需注明出处。
+
 BeautifulSoup 是一个可以从 HTML 或 XML 文件中提取数据的 python 库，它能通过解析器实现文档的查找提取和修改等功能。
 
-### 1. BeautifulSoup 的安装
+### BeautifulSoup 的安装
 对于 BeautifulSoup，目前推荐使用的是 BeautifulSoup 4，BeautifulSoup 3　已经停止开发了。安装 BeautifulSoup 4 有四种方式。
 
-> 1. 最新版的 Debain 或 Ubuntu 系统可以通过系统的软件包管理来安装，sudo apt-get install Python-bs4。
-> 2. BeautifulSoup 4 通过 PyPi 发布，可以通过 easy_install 或 pip 来安装，easy_install beautifulsoup4　或 pip install beautifulsoup4。
-> 3. 通过源码安装，BeautifulSoup 4 的源码地址为[https://pypi.python.org/pypi/beautifulsoup4/](https://pypi.python.org/pypi/beautifulsoup4/)，下载源码，解压后，运行命令 python setup.py install 即可完成安装。
-> 4. 通过 PyCharm　里 Project Interpreter 安装 BeautifulSoup 4。
+> * 最新版的 Debain 或 Ubuntu 系统可以通过系统的软件包管理来安装，sudo apt-get install Python-bs4。
+> * BeautifulSoup 4 通过 PyPi 发布，可以通过 easy_install 或 pip 来安装，easy_install beautifulsoup4　或 pip install beautifulsoup4。
+> * 通过源码安装，BeautifulSoup 4 的源码地址为[https://pypi.python.org/pypi/beautifulsoup4/](https://pypi.python.org/pypi/beautifulsoup4/)，下载源码，解压后，运行命令 python setup.py install 即可完成安装。
+> * 通过 PyCharm　里 Project Interpreter 安装 BeautifulSoup 4。
 
 ![](/images/2018/August/Screenshot%20from%202018-08-09%2012-55-42.png)
 
@@ -27,7 +30,7 @@ BeautifulSoup 支持 Python 标准库中的 HTML 解析器，还支持一些第�
 | lxml xml 解析器 | 速度快，唯一支持 xml 的解析器 | 需要安装 c　语言库 |
 | html5lib | 最好的容错性，以浏览器方式解析文档，生成 HTML5 格式的文档 | 速度慢，不依赖外部扩展 |
 
-### 2. BeautifulSoup 的使用
+### BeautifulSoup 的使用
 BeautifulSoup 将复杂的 HTML 文档转换成一个复杂的树形结构，每个节点是 python 对象，这些对象可以归纳为 Tag、NavigableString、BeautifulSoup、Comment。
 
 ```html
@@ -43,7 +46,7 @@ hello,world</p>
 <p class="story">...</p>
 ```
 
-#### 1. Tag 对象
+#### Tag 对象
 Tag 对象可以直接以标签名获取标签内容，Tag 对象还有两个属性 name 和 attr，分别表示获取到标签的名称和标签属性内容（以字典的形式返回）。
 
 ```python
@@ -60,7 +63,7 @@ print(soup.a.attrs)
 
 ![](/images/2018/August/Screenshot%20from%202018-08-10%2014-18-03.png)
 
-#### 2. NavigableString 对象
+#### NavigableString 对象
 NavigableString 对象用来获取标签内部字符串，利用属性 string 来获取。
 
 ```python
@@ -76,7 +79,7 @@ print(type(soup.p.string))
 
 ![](/images/2018/August/Screenshot%20from%202018-08-10%2014-24-18.png)
 
-#### 3. BeautifulSoup 对象
+#### BeautifulSoup 对象
 BeautifulSoup 对象表示一个文档的全部内容，可以理解为特殊的 Tag 对象。
 
 ```python
@@ -92,7 +95,7 @@ print(type(soup.name))
 
 ![](/images/2018/August/Screenshot%20from%202018-08-10%2014-29-25.png)
 
-#### 4. Comment 对象
+#### Comment 对象
 Commnet 对象用来获取文档中注释的内容。
 
 ```python
@@ -108,7 +111,7 @@ print(type(soup.a.string))
 
 ![](/images/2018/August/Screenshot%20from%202018-08-10%2014-32-08.png)
 
-#### 5. BeautifulSoup 支持文档树遍历，可以根据子节点、父节点、兄弟节点和前后节点进行遍历。
+#### BeautifulSoup 支持文档树遍历，可以根据子节点、父节点、兄弟节点和前后节点进行遍历。
 
 | 遍历方面 | 属性描述 |
 | ------ | ------ |
