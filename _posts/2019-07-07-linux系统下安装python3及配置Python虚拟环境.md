@@ -43,9 +43,9 @@ author: 痛点就是起点
 	make install
 	```
 
-	* ![CentOS 7 系统中成功安装](/images/2019/Jul/39.png)
+![CentOS 7 系统中成功安装](/images/2019/Jul/39.png)
 
-	* Ubuntu 16.04 Server 系统使用 `--enable-optimizations` 参数可能会出错，可以不加该参数。
+> Ubuntu 16.04 Server 系统使用 `--enable-optimizations` 参数可能会出错，可以不加该参数。
 
 * 5.创建`python3`和`pip3`命令；
 	```bash
