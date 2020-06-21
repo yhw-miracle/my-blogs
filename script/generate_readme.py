@@ -32,7 +32,7 @@ def get_posts_title():
                         post_title = post_file_line[7:-1]
 
             post_info_to_readme = "* {} --- [{}]({}/{})"\
-                .format(post_date, post_title, "http://yhw-miracle.cn", post_title)
+                .format(post_date, post_title, "https://yhw-miracle.github.io/blog", post_title)
             print(post_info_to_readme)
             write_readme(post_info_to_readme)
 
