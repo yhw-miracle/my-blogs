@@ -11,7 +11,7 @@ title: categories
 
 {% for category in site.categories %}
     <ul>
-        <img src="/images/system/book.png" style="margin: 5px 5px 5px 5px; float: left;" />
+        <img src="{{ site.baseurl }}/images/system/book.png" style="margin: 5px 5px 5px 5px; float: left;" />
         <li class="categories" style="display: inline-block;background-color: #ff6a00;" id="{{category[0]}}">
             {{ category[0] }}({{ category[1].size }})
         </li>

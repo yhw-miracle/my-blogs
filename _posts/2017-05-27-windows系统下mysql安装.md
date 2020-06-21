@@ -26,9 +26,9 @@ datadir = D:\MySQL\mysql-5.7.17-winx64\data（mysql 的目录\data）
 
 如果 mysql 目录下没有 data 目录，自行在在 mysql 目录下新建 data 文件夹。
 
-![](/images/2017/qt0SrHtVggeA0ncYHTYoISs6.png)
+![](images/2017/qt0SrHtVggeA0ncYHTYoISs6.png)
 
-![](/images/2017/sSfgZ0WAahadPJaDTflA0TPy.png)
+![](images/2017/sSfgZ0WAahadPJaDTflA0TPy.png)
 
 * 初始化 mysql 服务
 在 Windows PowerShell 或 CMD 里切换到 mysql 目录下的 bin 目录，执行下面的命令。
@@ -53,7 +53,7 @@ mysqld --install mysql --defaults-file=d:\MySQL\mysql-5.7.17-winx64\my-default.i
 net start mysql
 ```
 
-![](/images/2017/C3OfsPgYjHKQUqBv_78wTtGX.png)
+![](images/2017/C3OfsPgYjHKQUqBv_78wTtGX.png)
 
 * 修改 root 登录密码
 解压版安装时，初始情况 mysql 登录是没有密码，需要先登录数据库，再修改 root 登录密码。登录 mysql 数据库的命令是：

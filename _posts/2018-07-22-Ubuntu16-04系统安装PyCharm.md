@@ -21,7 +21,7 @@ pycharm 安装十分简单，windows 系统下只需要简单的一路“next”
 sudo add-apt-repository ppa:mystic-mirage/pycharm
 ```
 
-![](/images/2018/XR6zLENFy4WAZlVAFkwFV3zs.png)
+![](images/2018/XR6zLENFy4WAZlVAFkwFV3zs.png)
 
 
 ```bash
@@ -39,9 +39,9 @@ sudo apt-get install pycharm-community
 sudo tar -zxvf pycharm-community-2018.1.4.tar.gz -C /usr/local/
 ```
 
-![](/images/2018/Db_FgbgW3ailrm2teuaryPNr.png)
+![](images/2018/Db_FgbgW3ailrm2teuaryPNr.png)
 
-![](/images/2018/zn8Nlp40rVrJz_opjSBIM4Nw.png)
+![](images/2018/zn8Nlp40rVrJz_opjSBIM4Nw.png)
 
 
 * 进入到 /usr/local/pycharm-community-2018.1.4/bin/ 目录下，运行 pycharm.sh 文件即可打开 pycharm 查询，首次运行会弹出初始设置界面，只要进行相应的设置即可。相应的 linux 命令为：
@@ -51,9 +51,9 @@ cd /usr/local/pycharm-community-2018.1.4/bin/
 ./pycharm.sh
 ```
 
-![](/images/2018/8e9jpPJWpDD2oPHIjE8vc9dS.png)
+![](images/2018/8e9jpPJWpDD2oPHIjE8vc9dS.png)
 
-![](/images/2018/veNihRw8WdrlX_33KfW2Tw0J.png)
+![](images/2018/veNihRw8WdrlX_33KfW2Tw0J.png)
 
 
 * 以上过程完成后，恭喜你，你已经完成 pycharm 在 Ubuntu 16.04 系统下的安装，可以使用 pycharm 编辑器了。但是，以上步骤有一个问题，就是每次启动 pycharm 时都需要在 Terminal 运行 ./pycharm.sh 命令，有没有可以直接点击桌面图标，像 windows 系统那样便捷启动方式？答案是有的。这需要在 /usr/share/applications/ 下创建 pycharm 的快捷方式 pycharm.desktop（姑且这么理解吧），然后在 pycharm.desktop 文件下键入以下内容，启动 pycarm 时，右键将其锁定在桌面上。创建快捷方式的命令是：
@@ -62,9 +62,9 @@ cd /usr/local/pycharm-community-2018.1.4/bin/
 sudo gedit /usr/share/applications/pycharm.desktop
 ```
 
-![](/images/2018/Y0YSUQcPIsaeHBNBj9pHlbJ0.png)
+![](images/2018/Y0YSUQcPIsaeHBNBj9pHlbJ0.png)
 
-![](/images/2018/WeijxqZPKha2rOoCtuNFxGIf.png)
+![](images/2018/WeijxqZPKha2rOoCtuNFxGIf.png)
 
 
 现在，你可以在 Ubuntu 16.04 系统下尽情享受 pycharm 编辑器了。

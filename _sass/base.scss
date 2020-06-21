@@ -153,14 +153,14 @@ dt {
 }
 
 ul li {
-  list-style-image:url('/images/system/arrow-right-1.png');
+  list-style-image:url('/blog/images/system/arrow-right-1.png');
 }
 ul ul li {
-  list-style-image: url('/images/system/arrow-right-2.png');
+  list-style-image: url('/blog/images/system/arrow-right-2.png');
 }
 
 ul ul ul li {
-  list-style-image: url('/images/system/arrow-right-3.png');
+  list-style-image: url('/blog/images/system/arrow-right-3.png');
 }
 
 blockquote {
@@ -254,7 +254,7 @@ hr {
 
 .btn-github .icon {
   opacity: 0.6;
-  // background: url("../images/blacktocat.png") 0 0 no-repeat;
+  // background: url("images/blacktocat.png") 0 0 no-repeat;
 }
 
 /* Clearfix */

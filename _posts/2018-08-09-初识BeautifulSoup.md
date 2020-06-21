@@ -19,7 +19,7 @@ BeautifulSoup 是一个可以从 HTML 或 XML 文件中提取数据的 python �
 > * 通过源码安装，BeautifulSoup 4 的源码地址为[https://pypi.python.org/pypi/beautifulsoup4/](https://pypi.python.org/pypi/beautifulsoup4/)，下载源码，解压后，运行命令 python setup.py install 即可完成安装。
 > * 通过 PyCharm　里 Project Interpreter 安装 BeautifulSoup 4。
 
-![](/images/2018/August/Screenshot%20from%202018-08-09%2012-55-42.png)
+![](images/2018/August/Screenshot%20from%202018-08-09%2012-55-42.png)
 
 BeautifulSoup 支持 Python 标准库中的 HTML 解析器，还支持一些第三方解析器，如，lxml，html5lib 等，安装这些解析器方法与安装 BeautifulSoup 4 类似。
 
@@ -61,7 +61,7 @@ print(soup.a.name)
 print(soup.a.attrs)
 ```
 
-![](/images/2018/August/Screenshot%20from%202018-08-10%2014-18-03.png)
+![](images/2018/August/Screenshot%20from%202018-08-10%2014-18-03.png)
 
 #### NavigableString 对象
 NavigableString 对象用来获取标签内部字符串，利用属性 string 来获取。
@@ -77,7 +77,7 @@ print(soup.p.string)
 print(type(soup.p.string))
 ```
 
-![](/images/2018/August/Screenshot%20from%202018-08-10%2014-24-18.png)
+![](images/2018/August/Screenshot%20from%202018-08-10%2014-24-18.png)
 
 #### BeautifulSoup 对象
 BeautifulSoup 对象表示一个文档的全部内容，可以理解为特殊的 Tag 对象。
@@ -93,7 +93,7 @@ print(soup.name)
 print(type(soup.name))
 ```
 
-![](/images/2018/August/Screenshot%20from%202018-08-10%2014-29-25.png)
+![](images/2018/August/Screenshot%20from%202018-08-10%2014-29-25.png)
 
 #### Comment 对象
 Commnet 对象用来获取文档中注释的内容。
@@ -109,7 +109,7 @@ print(soup.a.string)
 print(type(soup.a.string))
 ```
 
-![](/images/2018/August/Screenshot%20from%202018-08-10%2014-32-08.png)
+![](images/2018/August/Screenshot%20from%202018-08-10%2014-32-08.png)
 
 #### BeautifulSoup 支持文档树遍历，可以根据子节点、父节点、兄弟节点和前后节点进行遍历。
 

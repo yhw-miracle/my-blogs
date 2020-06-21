@@ -43,7 +43,7 @@ author: 痛点就是起点
 	make install
 	```
 
-![CentOS 7 系统中成功安装](/images/2019/Jul/39.png)
+![CentOS 7 系统中成功安装](images/2019/Jul/39.png)
 
 > Ubuntu 16.04 Server 系统使用 `--enable-optimizations` 参数可能会出错，可以不加该参数。
 
@@ -63,7 +63,7 @@ author: 痛点就是起点
 > sudo rm /usr/bin/lsb_release
 > ```
 
-![lsb_release_error](/images/2019/Jul/40.png)
+![lsb_release_error](images/2019/Jul/40.png)
 
 ### 配置虚拟环境
 

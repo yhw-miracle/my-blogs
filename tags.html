@@ -11,7 +11,7 @@ title: tags
 
 {% for tag in site.tags %}
     <ul>
-        <img src="/images/system/tag.png" style="margin: 5px; float: left;" />
+        <img src="{{ site.baseurl }}/images/system/tag.png" style="margin: 5px; float: left;" />
         <li class="tags" style="display: inline-block; background-color: #ff6a00;" id="{{tag[0]}}">
             {{ tag[0] }}({{ tag[1].size }})
         </li>
