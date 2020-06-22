@@ -27,13 +27,10 @@ title: About
 
 | image | nick_name | link | belief |
 | ------ | ------ | ------ | ------ |
-| <img src="images/authors/djg.jpg" width="50" height="50" /> | giracle | <a href="http://giracle.cn" target="_blank">http://giracle.cn</a> | &nbsp;&nbsp;&nbsp; |
-| <img src="images/authors/dy.jpg" width="50" height="50" /> | windywinter | <a href="http://windywinter.cn/" target="_blank">http://windywinter.cn</a> | stay hungry, staty young. |
-| <img src="images/authors/hdp.jpg" width="50" height="50" /> | whark | <a href="http://whark.cn" target="_blank">http://whark.cn</a> | 除了一个小秘密，我只是一个极其平凡的人。 |
-| <img src="images/authors/jqq.jpg" width="50" height="50" /> | qiracle | <a href="http://qiracle.cn" target="_blank">http://qiracle.cn</a> | no pains,no gains. |
-| <img src="images/authors/lee.jpeg" width="50" height="50" /> | Lee | <a href="http://liranran.xyz" target="_blank">http://liranran.xyz</a> | 落霞与孤鹜齐飞，秋水共长天一色。 |
-| <img src="images/authors/zkp.jpg" width="50" height="50" /> | mour | <a href="https://iami.xyz" target="_blank">https://iami.xyz</a> | 人生其实宽广的很 |
-| <img src="images/authors/zwl.jpg" width="50" height="50" /> | 秒西 | <a href="https://slycmiaoxi.github.io" target="_blank">https://slycmiaoxi.github.io/</a> | I believe my dream will come true. | 
+| <img src="images/authors/hdp.jpg" width="50" height="50" /> | whark | <a href="http://whark.cn" target="_blank"><img src="images/system/友情链接.svg" width="40" height="40" /></a> | 除了一个小秘密，我只是一个极其平凡的人。 |
+| <img src="images/authors/jqq.jpg" width="50" height="50" /> | qiracle | <a href="http://qiracle.cn" target="_blank"><img src="images/system/友情链接.svg" width="40" height="40" /></a> | no pains,no gains. |
+| <img src="images/authors/zkp.jpg" width="50" height="50" /> | mour | <a href="https://iami.xyz" target="_blank"><img src="images/system/友情链接.svg" width="40" height="40" /></a> | 人生其实宽广的很 |
+| <img src="images/authors/zwl.jpg" width="50" height="50" /> | slycmiaoxi | <a href="https://slycmiaoxi.github.io" target="_blank"><img src="images/system/友情链接.svg" width="40" height="40" /></a> <a href="http://slycmiaoxi.cn/" target="_blank"><img src="images/system/友情链接.svg" width="40" height="40" /></a> | I believe my dream will come true. | 
 
 <hr />
 
